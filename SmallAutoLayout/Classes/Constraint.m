@@ -7,7 +7,6 @@
 //
 
 #import "Constraint.h"
-@import ObjectiveC;
 #import "Layout.h"
 #import "Constraint.h"
 

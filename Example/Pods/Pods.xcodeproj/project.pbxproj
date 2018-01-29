@@ -73,12 +73,12 @@
 		111E2F58BA5DCF213E4586C734444499 /* NSLayoutConstraint+AliasName.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+AliasName.m"; path = "SmallAutoLayout/Classes/NSLayoutConstraint+AliasName.m"; sourceTree = "<group>"; };
 		1374B79237CAC07693E99442FBED1F15 /* FBSnapshotTestController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestController.h; path = FBSnapshotTestCase/FBSnapshotTestController.h; sourceTree = "<group>"; };
 		1E3B92B4B51E7CA958BE536C9888EB99 /* Pods-SmallAutoLayout_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SmallAutoLayout_Example-umbrella.h"; sourceTree = "<group>"; };
-		1EA30C608B13827299E3C031676615D9 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FBSnapshotTestCase.framework; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EA30C608B13827299E3C031676615D9 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		24E4EE8ACDDB260E5F98BBFA8E28F48A /* Layout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Layout.m; path = SmallAutoLayout/Classes/Layout.m; sourceTree = "<group>"; };
-		27B49F98893F1682EF9A398BBF73BE87 /* Pods-SmallAutoLayout_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-SmallAutoLayout_Tests.modulemap"; sourceTree = "<group>"; };
+		27B49F98893F1682EF9A398BBF73BE87 /* Pods-SmallAutoLayout_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SmallAutoLayout_Tests.modulemap"; sourceTree = "<group>"; };
 		28BCB08A1827EF0C91D474A90B1D425F /* Pods-SmallAutoLayout_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SmallAutoLayout_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		2EECE81A9AEC1ED1057A9C3C88DBCEBE /* UIApplication+StrictKeyWindow.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+StrictKeyWindow.m"; path = "FBSnapshotTestCase/Categories/UIApplication+StrictKeyWindow.m"; sourceTree = "<group>"; };
-		3220B8696D431D8915D4F7E708403A29 /* SmallAutoLayout.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SmallAutoLayout.modulemap; sourceTree = "<group>"; };
+		3220B8696D431D8915D4F7E708403A29 /* SmallAutoLayout.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SmallAutoLayout.modulemap; sourceTree = "<group>"; };
 		38C4C8E61537BBBC0EAA7E77720D0D10 /* Pods-SmallAutoLayout_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SmallAutoLayout_Example-frameworks.sh"; sourceTree = "<group>"; };
 		39577E2B806B8B2D019998DE60728F63 /* FBSnapshotTestCase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestCase.m; path = FBSnapshotTestCase/FBSnapshotTestCase.m; sourceTree = "<group>"; };
 		3A8F339250A1C3C5C5C5364254007103 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -87,7 +87,7 @@
 		432938111B6FF0189EFFEDF2F845B308 /* UIImage+Compare.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+Compare.h"; path = "FBSnapshotTestCase/Categories/UIImage+Compare.h"; sourceTree = "<group>"; };
 		45F321E7D91E266C03F9428E05345E7F /* SmallAutoLayout-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SmallAutoLayout-prefix.pch"; sourceTree = "<group>"; };
 		4962DC50E4242BE53A91D8720FA107D7 /* UIViewController+Layout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Layout.m"; path = "SmallAutoLayout/Classes/UIViewController+Layout.m"; sourceTree = "<group>"; };
-		5071AA1EE35868C5FB524EA2CA7F75C2 /* Pods_SmallAutoLayout_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SmallAutoLayout_Tests.framework; path = "Pods-SmallAutoLayout_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5071AA1EE35868C5FB524EA2CA7F75C2 /* Pods_SmallAutoLayout_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmallAutoLayout_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51427D946B06329D58944028A8072629 /* Pods-SmallAutoLayout_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SmallAutoLayout_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		52C18C0EB1FED5EB5CE3B0E768AC510F /* FBSnapshotTestCase-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FBSnapshotTestCase-dummy.m"; sourceTree = "<group>"; };
 		544E120447A99971A82E8A14954C58BF /* Pods-SmallAutoLayout_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SmallAutoLayout_Example-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -101,11 +101,11 @@
 		73D037B3C804B9E1BB70538E342E5104 /* FBSnapshotTestCase-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FBSnapshotTestCase-umbrella.h"; sourceTree = "<group>"; };
 		7E3DB4D092B985E76E227F7F313C6981 /* FBSnapshotTestCasePlatform.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestCasePlatform.h; path = FBSnapshotTestCase/FBSnapshotTestCasePlatform.h; sourceTree = "<group>"; };
 		7FE57F7BE63F09696B0D9EBB2F9FAABA /* Pods-SmallAutoLayout_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SmallAutoLayout_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		82307B8B96BEF470A8765DE5D3D14533 /* Pods_SmallAutoLayout_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SmallAutoLayout_Example.framework; path = "Pods-SmallAutoLayout_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		823558E8AC8EB39D028DB5FBBEA227A3 /* FBSnapshotTestCase.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = FBSnapshotTestCase.modulemap; sourceTree = "<group>"; };
+		82307B8B96BEF470A8765DE5D3D14533 /* Pods_SmallAutoLayout_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmallAutoLayout_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		823558E8AC8EB39D028DB5FBBEA227A3 /* FBSnapshotTestCase.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = FBSnapshotTestCase.modulemap; sourceTree = "<group>"; };
 		85E250EF19C5B5671AEC10BEB508D087 /* UIImage+Diff.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+Diff.h"; path = "FBSnapshotTestCase/Categories/UIImage+Diff.h"; sourceTree = "<group>"; };
 		8F89B65CE59EA7230400A95E06227038 /* Pods-SmallAutoLayout_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SmallAutoLayout_Example-resources.sh"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		958C9766C9A362A98394D4704DA4B304 /* UIView+Layout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+Layout.h"; path = "SmallAutoLayout/Classes/UIView+Layout.h"; sourceTree = "<group>"; };
 		9C5C2D6461DB05DA0398C92C094D8845 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DBC4D3DBEBA2B7DAD4C64DD850C991E /* UIViewController+Layout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Layout.h"; path = "SmallAutoLayout/Classes/UIViewController+Layout.h"; sourceTree = "<group>"; };
@@ -131,9 +131,9 @@
 		E37899BD4B349060AA147E2A3721D3A2 /* FBSnapshotTestCase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestCase.h; path = FBSnapshotTestCase/FBSnapshotTestCase.h; sourceTree = "<group>"; };
 		E5A6AEA0123DB25249EE8D39B4C76B07 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5F6FC40952E7568942B9B6707B6901B /* UIView+Layout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+Layout.m"; path = "SmallAutoLayout/Classes/UIView+Layout.m"; sourceTree = "<group>"; };
-		EA4EA8592A40BADF5109614BF08B916F /* SmallAutoLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SmallAutoLayout.framework; path = SmallAutoLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA4EA8592A40BADF5109614BF08B916F /* SmallAutoLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SmallAutoLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0F69A13C25E55A330E29FC0D6CF8F86 /* Pods-SmallAutoLayout_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SmallAutoLayout_Example-dummy.m"; sourceTree = "<group>"; };
-		F23804231332D62B5B9A9DFF66E0C774 /* Pods-SmallAutoLayout_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-SmallAutoLayout_Example.modulemap"; sourceTree = "<group>"; };
+		F23804231332D62B5B9A9DFF66E0C774 /* Pods-SmallAutoLayout_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SmallAutoLayout_Example.modulemap"; sourceTree = "<group>"; };
 		F340B0D128CDE346233F96DCCC15385E /* Pods-SmallAutoLayout_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SmallAutoLayout_Tests-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -238,7 +238,6 @@
 				1549F91FCD089822594C1F5DB8AB9E8F /* Support Files */,
 				99E46DD4AB2256791F111C718CB0EEF8 /* SwiftSupport */,
 			);
-			name = FBSnapshotTestCase;
 			path = FBSnapshotTestCase;
 			sourceTree = "<group>";
 		};
@@ -495,7 +494,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0910;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -630,7 +629,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -645,6 +644,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28BCB08A1827EF0C91D474A90B1D425F /* Pods-SmallAutoLayout_Tests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -750,11 +750,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
@@ -763,6 +764,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BBB8FE315CAFDB620B687BC4109C07F7 /* Pods-SmallAutoLayout_Tests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
