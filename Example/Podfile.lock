@@ -4,7 +4,7 @@ PODS:
   - FBSnapshotTestCase/Core (2.1.4)
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
-  - SmallAutoLayout (0.1.0)
+  - SmallAutoLayout (0.0.1)
 
 DEPENDENCIES:
   - FBSnapshotTestCase
@@ -16,7 +16,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  SmallAutoLayout: b5d5e37a14696ae8bb41e729fdb33b14f2f90778
+  SmallAutoLayout: 075805711a1e60045a370105b8deda17a414d69f
 
 PODFILE CHECKSUM: c7d63f7d0d75042efa03e29789fe4fe1fde3a85a
 

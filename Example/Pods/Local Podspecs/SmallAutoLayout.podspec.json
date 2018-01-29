@@ -1,8 +1,8 @@
 {
   "name": "SmallAutoLayout",
-  "version": "0.1.0",
-  "summary": "A short description of SmallAutoLayout.",
-  "description": "TODO: Add long description of the pod here.",
+  "version": "0.0.1",
+  "summary": "Description of SmallAutoLayout.",
+  "description": "Easy to use Auto",
   "homepage": "https://github.com/BetrayalPromise/SmallAutoLayout",
   "license": {
     "type": "MIT",
@@ -13,10 +13,11 @@
   },
   "source": {
     "git": "https://github.com/BetrayalPromise/SmallAutoLayout.git",
-    "tag": "0.1.0"
+    "tag": "0.0.1"
   },
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "SmallAutoLayout/Classes/**/*"
+  "source_files": "SmallAutoLayout/Classes/**/*",
+  "public_header_files": "Pod/Classes/**/*.h"
 }
