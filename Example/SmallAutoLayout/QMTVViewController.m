@@ -10,6 +10,8 @@
 #import "QMTVViewController.h"
 #import <SmallAutoLayout/SmallAutoLayout.h>
 #import "Test0ViewController.h"
+#import "Example0ViewController.h"
+#import "Example1ViewController.h"
 
 @interface QMTVViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -55,7 +57,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.navigationController pushViewController:[Test0ViewController new] animated:YES];
+    if (indexPath.row == 0) {
+        [self.navigationController pushViewController:[Test0ViewController new] animated:YES];
+    } else if (indexPath.row == 1) {
+        [self.navigationController pushViewController:[Example0ViewController new] animated:YES];
+    } else if (indexPath.row == 2) {
+        [self.navigationController pushViewController:[Example1ViewController new] animated:YES];
+    }
 }
 
 @end

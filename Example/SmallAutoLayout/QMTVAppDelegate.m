@@ -15,7 +15,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    self.window.rootViewController= [[UINavigationController alloc] initWithRootViewController:[QMTVViewController new]];
+    UITabBarController * tc = [[UITabBarController alloc] init];
+    [tc addChildViewController:[[UINavigationController alloc] initWithRootViewController:[QMTVViewController new]]];
+    self.window.rootViewController = tc;
     return YES;
 }
 
