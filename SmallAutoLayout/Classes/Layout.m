@@ -98,7 +98,7 @@
 - (Constraint *)centerY {
     _currentConstraint = NSLayoutAttributeCenterY;
     if (_centerY) {
-        return _right;
+        return _centerY;
     } else {
         _centerY = [Constraint new];
         _centerY.useLayout = self;

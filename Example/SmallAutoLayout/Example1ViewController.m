@@ -38,7 +38,7 @@
     [v1.layout.width equalTo:nil offset:100];
     [v1.layout.height equalTo:nil offset:100];
     [v1.layout.centerY equalTo:v0.layout.centerY];
-    [v0.layout.left equalTo:v1.layout.right];
+    [v0.layout.left equalTo:v1.layout.right offset:10];
 }
 
 - (void)didReceiveMemoryWarning {

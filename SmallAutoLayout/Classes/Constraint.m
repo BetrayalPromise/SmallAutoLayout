@@ -56,7 +56,12 @@
             }
         }
     } else {
-        NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutView attribute:(self.useLayout.currentConstraint) relatedBy:(NSLayoutRelationEqual) toItem:(nil) attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiply constant:offset];
+        NSLog(@"%@", self.useLayout);
+        NSLog(@"%@", self.useLayout.layoutView);
+        NSLog(@"%@", c.useLayout);
+        NSLog(@"%@", c.useLayout.layoutView);
+
+        NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutView attribute:(self.useLayout.currentConstraint) relatedBy:(NSLayoutRelationEqual) toItem:(nil) attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:offset];
         layoutConstraint.active = YES;
         return layoutConstraint;
     }
