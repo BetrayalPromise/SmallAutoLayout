@@ -1,0 +1,6 @@
+framework module SmallAutoLayout {
+  umbrella header "SmallAutoLayout-umbrella.h"
+
+  export *
+  module * { export * }
+}

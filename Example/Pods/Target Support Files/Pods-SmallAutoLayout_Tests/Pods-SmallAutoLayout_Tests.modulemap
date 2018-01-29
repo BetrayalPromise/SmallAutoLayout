@@ -1,0 +1,6 @@
+framework module Pods_SmallAutoLayout_Tests {
+  umbrella header "Pods-SmallAutoLayout_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
