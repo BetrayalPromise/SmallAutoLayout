@@ -14,7 +14,7 @@
 
 @property (nonatomic, weak  ) UIView * _Nullable layoutView;
 @property (nonatomic, weak  ) UIViewController * _Nullable layoutViewController;
-@property (nonatomic, assign) NSLayoutAttribute currentConstraint;
+@property (nonatomic, assign) NSLayoutAttribute currentAttribute;
 @property (nonatomic, strong) Constraint * _Nullable top;
 @property (nonatomic, strong) Constraint * _Nullable left;
 @property (nonatomic, strong) Constraint * _Nullable bottom;

@@ -36,7 +36,7 @@
 @implementation Layout
 
 - (Constraint *)top {
-    _currentConstraint = NSLayoutAttributeTop;
+    _currentAttribute = NSLayoutAttributeTop;
     if (_topFlag) {
         return _top;
     } else {
@@ -48,7 +48,7 @@
 }
 
 - (Constraint *)left {
-    _currentConstraint = NSLayoutAttributeLeft;
+    _currentAttribute = NSLayoutAttributeLeft;
     if (_leftFlag) {
         return _left;
     } else {
@@ -60,7 +60,7 @@
 }
 
 - (Constraint *)bottom {
-    _currentConstraint = NSLayoutAttributeBottom;
+    _currentAttribute = NSLayoutAttributeBottom;
     if (_bottomFlag) {
         return _bottom;
     } else {
@@ -72,7 +72,7 @@
 }
 
 - (Constraint *)right {
-    _currentConstraint = NSLayoutAttributeRight;
+    _currentAttribute = NSLayoutAttributeRight;
     if (_rightFlag) {
         return _right;
     } else {
@@ -84,7 +84,7 @@
 }
 
 - (Constraint *)centerX {
-    _currentConstraint = NSLayoutAttributeCenterX;
+    _currentAttribute = NSLayoutAttributeCenterX;
     if (_centerX) {
         return _centerX;
     } else {
@@ -96,7 +96,7 @@
 }
 
 - (Constraint *)centerY {
-    _currentConstraint = NSLayoutAttributeCenterY;
+    _currentAttribute = NSLayoutAttributeCenterY;
     if (_centerY) {
         return _centerY;
     } else {
@@ -108,7 +108,7 @@
 }
 
 - (Constraint *)width {
-    _currentConstraint = NSLayoutAttributeWidth;
+    _currentAttribute = NSLayoutAttributeWidth;
     if (_width) {
         return _width;
     } else {
@@ -120,7 +120,7 @@
 }
 
 - (Constraint *)height {
-    _currentConstraint = NSLayoutAttributeHeight;
+    _currentAttribute = NSLayoutAttributeHeight;
     if (_height) {
         return _height;
     } else {
@@ -132,7 +132,7 @@
 }
 
 - (Constraint *)firstBaseline {
-    _currentConstraint = NSLayoutAttributeFirstBaseline;
+    _currentAttribute = NSLayoutAttributeFirstBaseline;
     if (_firstBaseline) {
         return _firstBaseline;
     } else {
@@ -144,7 +144,7 @@
 }
 
 - (Constraint *)lastBaseline {
-    _currentConstraint = NSLayoutAttributeLastBaseline;
+    _currentAttribute = NSLayoutAttributeLastBaseline;
     if (_lastBaseline) {
         return _lastBaseline;
     } else {
