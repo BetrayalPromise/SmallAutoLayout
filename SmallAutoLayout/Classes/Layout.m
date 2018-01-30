@@ -11,18 +11,18 @@
 
 @interface Layout ()
 
-@property (nonatomic, assign) BOOL topFlag;
-@property (nonatomic, assign) BOOL leftFlag;
-@property (nonatomic, assign) BOOL bottomFlag;
-@property (nonatomic, assign) BOOL rightFlag;
-@property (nonatomic, assign) BOOL centerXFlag;
-@property (nonatomic, assign) BOOL centerYFlag;
-@property (nonatomic, assign) BOOL widthFlag;
-@property (nonatomic, assign) BOOL heightFlag;
-@property (nonatomic, assign) BOOL leadingFlag;
-@property (nonatomic, assign) BOOL trailingFlag;
-@property (nonatomic, assign) BOOL firstBaselineFlag;
-@property (nonatomic, assign) BOOL lastBaselineFlag;
+//@property (nonatomic, assign) BOOL topFlag;
+//@property (nonatomic, assign) BOOL leftFlag;
+//@property (nonatomic, assign) BOOL bottomFlag;
+//@property (nonatomic, assign) BOOL rightFlag;
+//@property (nonatomic, assign) BOOL centerXFlag;
+//@property (nonatomic, assign) BOOL centerYFlag;
+//@property (nonatomic, assign) BOOL widthFlag;
+//@property (nonatomic, assign) BOOL heightFlag;
+//@property (nonatomic, assign) BOOL leadingFlag;
+//@property (nonatomic, assign) BOOL trailingFlag;
+//@property (nonatomic, assign) BOOL firstBaselineFlag;
+//@property (nonatomic, assign) BOOL lastBaselineFlag;
 @property (nonatomic, assign) BOOL sameFlag;
 
 @end
@@ -31,48 +31,44 @@
 
 - (Constraint *)top {
     _currentAttribute = NSLayoutAttributeTop;
-    if (_topFlag) {
+    if (_top) {
         return _top;
     } else {
         _top = [Constraint new];
         _top.useLayout = self;
-        _topFlag = YES;
         return _top;
     }
 }
 
 - (Constraint *)left {
     _currentAttribute = NSLayoutAttributeLeft;
-    if (_leftFlag) {
+    if (_left) {
         return _left;
     } else {
         _left = [Constraint new];
         _left.useLayout = self;
-        _leftFlag = YES;
         return _left;
     }
 }
 
 - (Constraint *)bottom {
     _currentAttribute = NSLayoutAttributeBottom;
-    if (_bottomFlag) {
+    if (_bottom) {
         return _bottom;
     } else {
         _bottom = [Constraint new];
         _bottom.useLayout = self;
-        _bottomFlag = YES;
         return _bottom;
     }
 }
 
 - (Constraint *)right {
     _currentAttribute = NSLayoutAttributeRight;
-    if (_rightFlag) {
+    if (_right) {
         return _right;
     } else {
         _right = [Constraint new];
         _right.useLayout = self;
-        _rightFlag = YES;
         return _right;
     }
 }
@@ -84,7 +80,6 @@
     } else {
         _centerX = [Constraint new];
         _centerX.useLayout = self;
-        _centerXFlag = YES;
         return _centerX;
     }
 }
@@ -96,7 +91,6 @@
     } else {
         _centerY = [Constraint new];
         _centerY.useLayout = self;
-        _centerYFlag = YES;
         return _centerY;
     }
 }
@@ -108,7 +102,6 @@
     } else {
         _width = [Constraint new];
         _width.useLayout = self;
-        _widthFlag = YES;
         return _width;
     }
 }
@@ -120,7 +113,6 @@
     } else {
         _height = [Constraint new];
         _height.useLayout = self;
-        _heightFlag = YES;
         return _height;
     }
 }
@@ -132,7 +124,6 @@
     } else {
         _firstBaseline = [Constraint new];
         _firstBaseline.useLayout = self;
-        _firstBaselineFlag = YES;
         return _firstBaseline;
     }
 }
@@ -144,7 +135,6 @@
     } else {
         _lastBaseline = [Constraint new];
         _lastBaseline.useLayout = self;
-        _lastBaselineFlag = YES;
         return _lastBaseline;
     }
 }
@@ -156,7 +146,6 @@
     } else {
         _leading = [Constraint new];
         _leading.useLayout = self;
-        _leadingFlag = YES;
         return _leading;
     }
 }
@@ -167,7 +156,6 @@
     } else {
         _trailing = [Constraint new];
         _trailing.useLayout = self;
-        _trailingFlag = YES;
         return _trailing;
     }
 }
