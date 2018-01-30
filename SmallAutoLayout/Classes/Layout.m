@@ -19,16 +19,10 @@
 @property (nonatomic, assign) BOOL centerYFlag;
 @property (nonatomic, assign) BOOL widthFlag;
 @property (nonatomic, assign) BOOL heightFlag;
+@property (nonatomic, assign) BOOL leadingFlag;
+@property (nonatomic, assign) BOOL trailingFlag;
 @property (nonatomic, assign) BOOL firstBaselineFlag;
 @property (nonatomic, assign) BOOL lastBaselineFlag;
-
-
-
-//@property (nonatomic, assign) BOOL safeAreaTopFlag;
-//@property (nonatomic, assign) BOOL safeAreaLeftFlag;
-//@property (nonatomic, assign) BOOL safeAreaBottomFlag;
-//@property (nonatomic, assign) BOOL safeAreaRightFlag;
-
 @property (nonatomic, assign) BOOL sameFlag;
 
 @end
@@ -152,6 +146,29 @@
         _lastBaseline.useLayout = self;
         _lastBaselineFlag = YES;
         return _lastBaseline;
+    }
+}
+
+- (Constraint *)leading {
+    _currentAttribute = NSLayoutAttributeLeading;
+    if (_leading) {
+        return _leading;
+    } else {
+        _leading = [Constraint new];
+        _leading.useLayout = self;
+        _leadingFlag = YES;
+        return _leading;
+    }
+}
+
+- (Constraint *)trailing {
+    if (_trailing) {
+        return _trailing;
+    } else {
+        _trailing = [Constraint new];
+        _trailing.useLayout = self;
+        _trailingFlag = YES;
+        return _trailing;
     }
 }
 

@@ -25,6 +25,8 @@
 @property (nonatomic, strong) Constraint * _Nullable lastBaseline;
 @property (nonatomic, strong) Constraint * _Nullable width;
 @property (nonatomic, strong) Constraint * _Nullable height;
+@property (nonatomic, strong) Constraint * _Nullable leading;
+@property (nonatomic, strong) Constraint * _Nullable trailing;
 
 /// 仅支持top bottom两个属性
 @property (nonatomic, strong) Layout * _Nullable topLayoutGuide NS_DEPRECATED_IOS(7.0,11.0);
