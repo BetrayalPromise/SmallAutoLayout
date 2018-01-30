@@ -25,8 +25,8 @@
     v0.backgroundColor = [UIColor redColor];
     [v0.layout.centerX equalTo:self.view.layout.centerX];
     [v0.layout.centerY equalTo:self.view.layout.centerY];
-    [v0.layout.width equalTo:nil offset:100];
-    [v0.layout.height equalTo:nil offset:100];
+    [v0.layout.width equalTo:nil trim:100];
+    [v0.layout.height equalTo:nil trim:100];
     NSLog(@"%@", v0.layout);
 
     id a = v0.layout;
@@ -35,10 +35,10 @@
     [self.view addSubview:v1];
     v1.translatesAutoresizingMaskIntoConstraints = NO;
     v1.backgroundColor = [UIColor redColor];
-    [v1.layout.width equalTo:nil offset:100];
-    [v1.layout.height equalTo:nil offset:100];
+    [v1.layout.width equalTo:nil trim:100];
+    [v1.layout.height equalTo:nil trim:100];
     [v1.layout.centerY equalTo:v0.layout.centerY];
-    [v0.layout.left equalTo:v1.layout.right offset:10];
+    [v0.layout.left equalTo:v1.layout.right trim:10];
 }
 
 - (void)didReceiveMemoryWarning {

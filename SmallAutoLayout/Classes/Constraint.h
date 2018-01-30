@@ -16,17 +16,17 @@
 
 - (NSLayoutConstraint * _Nullable)equalTo:(Constraint * _Nullable)c;
 - (NSLayoutConstraint * _Nullable)equalTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply;
-- (NSLayoutConstraint * _Nullable)equalTo:(Constraint * _Nullable)c offset:(CGFloat)offset;
-- (NSLayoutConstraint * _Nullable)equalTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply offset:(CGFloat)offset;
+- (NSLayoutConstraint * _Nullable)equalTo:(Constraint * _Nullable)c trim:(CGFloat)trim;
+- (NSLayoutConstraint * _Nullable)equalTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply trim:(CGFloat)trim;
 
 - (NSLayoutConstraint * _Nullable)lessEqualTo:(Constraint * _Nullable)c;
 - (NSLayoutConstraint * _Nullable)lessEqualTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply;
-- (NSLayoutConstraint * _Nullable)lessEqualTo:(Constraint * _Nullable)c offset:(CGFloat)offset;
-- (NSLayoutConstraint * _Nullable)lessEqualTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply offset:(CGFloat)offset;
+- (NSLayoutConstraint * _Nullable)lessEqualTo:(Constraint * _Nullable)c trim:(CGFloat)trim;
+- (NSLayoutConstraint * _Nullable)lessEqualTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply trim:(CGFloat)trim;
 
 - (NSLayoutConstraint * _Nullable)greaterEqualTo:(Constraint * _Nullable)c;
 - (NSLayoutConstraint * _Nullable)greaterEqualTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply;
-- (NSLayoutConstraint * _Nullable)greaterEqualTo:(Constraint * _Nullable)c offset:(CGFloat)offset;
-- (NSLayoutConstraint * _Nullable)greaterEqualTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply offset:(CGFloat)offset;
+- (NSLayoutConstraint * _Nullable)greaterEqualTo:(Constraint * _Nullable)c trim:(CGFloat)trim;
+- (NSLayoutConstraint * _Nullable)greaterEqualTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply trim:(CGFloat)trim;
 
 @end

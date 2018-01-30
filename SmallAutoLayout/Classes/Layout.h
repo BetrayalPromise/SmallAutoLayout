@@ -26,8 +26,10 @@
 @property (nonatomic, strong) Constraint * _Nullable width;
 @property (nonatomic, strong) Constraint * _Nullable height;
 
+/// 仅支持top bottom两个属性
 @property (nonatomic, strong) Layout * _Nullable topLayoutGuide NS_DEPRECATED_IOS(7.0,11.0);
 @property (nonatomic, assign, readonly) BOOL topLayoutGuideFlag;
+/// 仅支持top bottom两个属性
 @property (nonatomic, strong) Layout * _Nullable bottomLayoutGuide NS_DEPRECATED_IOS(7.0,11.0);
 @property (nonatomic, assign, readonly) BOOL bottomLayoutGuideFlag;
 
