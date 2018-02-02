@@ -11,26 +11,12 @@
 
 @interface Layout ()
 
-//@property (nonatomic, assign) BOOL topFlag;
-//@property (nonatomic, assign) BOOL leftFlag;
-//@property (nonatomic, assign) BOOL bottomFlag;
-//@property (nonatomic, assign) BOOL rightFlag;
-//@property (nonatomic, assign) BOOL centerXFlag;
-//@property (nonatomic, assign) BOOL centerYFlag;
-//@property (nonatomic, assign) BOOL widthFlag;
-//@property (nonatomic, assign) BOOL heightFlag;
-//@property (nonatomic, assign) BOOL leadingFlag;
-//@property (nonatomic, assign) BOOL trailingFlag;
-//@property (nonatomic, assign) BOOL firstBaselineFlag;
-//@property (nonatomic, assign) BOOL lastBaselineFlag;
-@property (nonatomic, assign) BOOL sameFlag;
-
 @end
 
 @implementation Layout
 
 - (Constraint *)top {
-    _currentAttribute = NSLayoutAttributeTop;
+    _currentAttribute0 = NSLayoutAttributeTop;
     if (_top) {
         return _top;
     } else {
@@ -41,7 +27,7 @@
 }
 
 - (Constraint *)left {
-    _currentAttribute = NSLayoutAttributeLeft;
+    _currentAttribute0 = NSLayoutAttributeLeft;
     if (_left) {
         return _left;
     } else {
@@ -52,7 +38,7 @@
 }
 
 - (Constraint *)bottom {
-    _currentAttribute = NSLayoutAttributeBottom;
+    _currentAttribute0 = NSLayoutAttributeBottom;
     if (_bottom) {
         return _bottom;
     } else {
@@ -63,7 +49,7 @@
 }
 
 - (Constraint *)right {
-    _currentAttribute = NSLayoutAttributeRight;
+    _currentAttribute0 = NSLayoutAttributeRight;
     if (_right) {
         return _right;
     } else {
@@ -74,7 +60,7 @@
 }
 
 - (Constraint *)centerX {
-    _currentAttribute = NSLayoutAttributeCenterX;
+    _currentAttribute0 = NSLayoutAttributeCenterX;
     if (_centerX) {
         return _centerX;
     } else {
@@ -85,7 +71,7 @@
 }
 
 - (Constraint *)centerY {
-    _currentAttribute = NSLayoutAttributeCenterY;
+    _currentAttribute0 = NSLayoutAttributeCenterY;
     if (_centerY) {
         return _centerY;
     } else {
@@ -96,7 +82,7 @@
 }
 
 - (Constraint *)width {
-    _currentAttribute = NSLayoutAttributeWidth;
+    _currentAttribute0 = NSLayoutAttributeWidth;
     if (_width) {
         return _width;
     } else {
@@ -107,7 +93,7 @@
 }
 
 - (Constraint *)height {
-    _currentAttribute = NSLayoutAttributeHeight;
+    _currentAttribute0 = NSLayoutAttributeHeight;
     if (_height) {
         return _height;
     } else {
@@ -118,7 +104,7 @@
 }
 
 - (Constraint *)firstBaseline {
-    _currentAttribute = NSLayoutAttributeFirstBaseline;
+    _currentAttribute0 = NSLayoutAttributeFirstBaseline;
     if (_firstBaseline) {
         return _firstBaseline;
     } else {
@@ -129,7 +115,7 @@
 }
 
 - (Constraint *)lastBaseline {
-    _currentAttribute = NSLayoutAttributeLastBaseline;
+    _currentAttribute0 = NSLayoutAttributeLastBaseline;
     if (_lastBaseline) {
         return _lastBaseline;
     } else {
@@ -140,7 +126,7 @@
 }
 
 - (Constraint *)leading {
-    _currentAttribute = NSLayoutAttributeLeading;
+    _currentAttribute0 = NSLayoutAttributeLeading;
     if (_leading) {
         return _leading;
     } else {
@@ -176,5 +162,20 @@
     _safeAreaLayoutGuideFlag = YES;
     return self;
 }
+
+- (Constraint *)same {
+    if (_same) {
+        return _same;
+    } else {
+        _same = [Constraint new];
+        _same.useLayout = self;
+        return _same;
+    }
+}
+
+@end
+
+
+@interface OperationManage
 
 @end

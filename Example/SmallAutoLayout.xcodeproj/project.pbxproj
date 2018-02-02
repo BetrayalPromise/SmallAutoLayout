@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		11A4A534201F14F1007D3B96 /* Test0ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A4A533201F14F1007D3B96 /* Test0ViewController.m */; };
 		11A4A537201F1F72007D3B96 /* QMTVShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A4A536201F1F72007D3B96 /* QMTVShowCell.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -24,6 +23,8 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		6F3F4608201F5D9300B64003 /* Example0ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F4607201F5D9300B64003 /* Example0ViewController.m */; };
 		6F3F460B201F630300B64003 /* Example1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F460A201F630300B64003 /* Example1ViewController.m */; };
+		6F3F460E2020BD9900B64003 /* Example2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F460D2020BD9900B64003 /* Example2ViewController.m */; };
+		6F3F46392023592B00B64003 /* NSObject+FunctionExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F46372023592B00B64003 /* NSObject+FunctionExtension.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		A3801DC7AA9931A3A0A1CE78 /* Pods_SmallAutoLayout_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15252C6AF19D61626BF5680F /* Pods_SmallAutoLayout_Example.framework */; };
 		CD7ED483B828C5F5B0152ACE /* Pods_SmallAutoLayout_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E34EB419FB3FD894AF6B191E /* Pods_SmallAutoLayout_Tests.framework */; };
@@ -40,8 +41,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		11A4A532201F14F1007D3B96 /* Test0ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test0ViewController.h; sourceTree = "<group>"; };
-		11A4A533201F14F1007D3B96 /* Test0ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test0ViewController.m; sourceTree = "<group>"; };
 		11A4A535201F1F72007D3B96 /* QMTVShowCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QMTVShowCell.h; sourceTree = "<group>"; };
 		11A4A536201F1F72007D3B96 /* QMTVShowCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QMTVShowCell.m; sourceTree = "<group>"; };
 		15252C6AF19D61626BF5680F /* Pods_SmallAutoLayout_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmallAutoLayout_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +70,10 @@
 		6F3F4607201F5D9300B64003 /* Example0ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Example0ViewController.m; sourceTree = "<group>"; };
 		6F3F4609201F630300B64003 /* Example1ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Example1ViewController.h; sourceTree = "<group>"; };
 		6F3F460A201F630300B64003 /* Example1ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Example1ViewController.m; sourceTree = "<group>"; };
+		6F3F460C2020BD9900B64003 /* Example2ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Example2ViewController.h; sourceTree = "<group>"; };
+		6F3F460D2020BD9900B64003 /* Example2ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Example2ViewController.m; sourceTree = "<group>"; };
+		6F3F46372023592B00B64003 /* NSObject+FunctionExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+FunctionExtension.m"; sourceTree = "<group>"; };
+		6F3F46382023592B00B64003 /* NSObject+FunctionExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+FunctionExtension.h"; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A44F12BA8DC21859A65BCADE /* Pods-SmallAutoLayout_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmallAutoLayout_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmallAutoLayout_Tests/Pods-SmallAutoLayout_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D0292C337E2A0E9E1647705D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -157,8 +160,8 @@
 				6003F59D195388D20070C39A /* QMTVAppDelegate.m */,
 				6003F5A5195388D20070C39A /* QMTVViewController.h */,
 				6003F5A6195388D20070C39A /* QMTVViewController.m */,
-				11A4A532201F14F1007D3B96 /* Test0ViewController.h */,
-				11A4A533201F14F1007D3B96 /* Test0ViewController.m */,
+				6F3F46382023592B00B64003 /* NSObject+FunctionExtension.h */,
+				6F3F46372023592B00B64003 /* NSObject+FunctionExtension.m */,
 				11A4A535201F1F72007D3B96 /* QMTVShowCell.h */,
 				11A4A536201F1F72007D3B96 /* QMTVShowCell.m */,
 				6F3F4605201F5B1C00B64003 /* Example */,
@@ -217,6 +220,8 @@
 				6F3F4607201F5D9300B64003 /* Example0ViewController.m */,
 				6F3F4609201F630300B64003 /* Example1ViewController.h */,
 				6F3F460A201F630300B64003 /* Example1ViewController.m */,
+				6F3F460C2020BD9900B64003 /* Example2ViewController.h */,
+				6F3F460D2020BD9900B64003 /* Example2ViewController.m */,
 			);
 			name = Example;
 			sourceTree = "<group>";
@@ -430,11 +435,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F3F460E2020BD9900B64003 /* Example2ViewController.m in Sources */,
 				6003F59E195388D20070C39A /* QMTVAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* QMTVViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
-				11A4A534201F14F1007D3B96 /* Test0ViewController.m in Sources */,
 				6F3F460B201F630300B64003 /* Example1ViewController.m in Sources */,
+				6F3F46392023592B00B64003 /* NSObject+FunctionExtension.m in Sources */,
 				6F3F4608201F5D9300B64003 /* Example0ViewController.m in Sources */,
 				11A4A537201F1F72007D3B96 /* QMTVShowCell.m in Sources */,
 			);

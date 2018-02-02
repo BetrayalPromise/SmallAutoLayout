@@ -9,9 +9,10 @@
 
 #import "QMTVViewController.h"
 #import <SmallAutoLayout/SmallAutoLayout.h>
-#import "Test0ViewController.h"
 #import "Example0ViewController.h"
 #import "Example1ViewController.h"
+#import "Example2ViewController.h"
+#import "NSObject+FunctionExtension.h"
 
 @interface QMTVViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -58,11 +59,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
-        [self.navigationController pushViewController:[Test0ViewController new] animated:YES];
+        [self.navigationController pushViewController:[[Example0ViewController new] objcetThen:^(Example0ViewController *  _Nonnull source) {
+            source.title = @"safeArea 适配";
+        }] animated:YES];
     } else if (indexPath.row == 1) {
-        [self.navigationController pushViewController:[Example0ViewController new] animated:YES];
+        [self.navigationController pushViewController:[[Example1ViewController new] objcetThen:^(Example0ViewController *  _Nonnull source) {
+            source.title = @"layoutGuide 适配";
+        }] animated:YES];
     } else if (indexPath.row == 2) {
-        [self.navigationController pushViewController:[Example1ViewController new] animated:YES];
+        [self.navigationController pushViewController:[Example2ViewController new] animated:YES];
     }
 }
 
