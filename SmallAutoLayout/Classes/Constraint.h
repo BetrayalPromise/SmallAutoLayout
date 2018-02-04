@@ -13,6 +13,7 @@
 @interface Constraint : NSObject
 
 @property (nonatomic, weak) Layout * _Nullable useLayout;
+@property (nonatomic, assign) NSLayoutAttribute attribute;
 
 - (NSLayoutConstraint * _Nullable)equalTo:(Constraint * _Nullable)c;
 - (NSLayoutConstraint * _Nullable)equalTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply;

@@ -18,8 +18,7 @@
 
 @property (nonatomic, weak  ) UIView * _Nullable layoutView;
 @property (nonatomic, weak  ) UIViewController * _Nullable layoutViewController;
-@property (nonatomic, assign) NSLayoutAttribute currentAttribute0;
-//@property (nonatomic, assign) NSLayoutAttribute currentAttribute;
+
 @property (nonatomic, strong) Constraint * _Nullable top;
 @property (nonatomic, strong) Constraint * _Nullable left;
 @property (nonatomic, strong) Constraint * _Nullable bottom;
@@ -43,17 +42,9 @@
 @property (nonatomic, strong) Layout * _Nullable safeAreaLayoutGuide;
 @property (nonatomic, assign) BOOL safeAreaLayoutGuideFlag;
 
-@property (nonatomic, strong) Constraint * _Nullable same;
-@property (nonatomic, strong) Constraint * _Nullable insert;
-@property (nonatomic, strong) Constraint * _Nullable size;
+//@property (nonatomic, strong) Constraint * _Nullable same;
+//@property (nonatomic, strong) Constraint * _Nullable insert;
+//@property (nonatomic, strong) Constraint * _Nullable size;
 
 @end
 
-@interface OperationManage
-
-@property (nonatomic, assign) BOOL flag0;
-@property (nonatomic, assign) NSLayoutAttribute currentAttribute0;
-@property (nonatomic, assign) BOOL flag1;
-@property (nonatomic, assign) NSLayoutAttribute currentAttribute1;
-
-@end

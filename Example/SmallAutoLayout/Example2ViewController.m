@@ -18,6 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.view.backgroundColor = [UIColor whiteColor];
+
 //    self.view.translatesAutoresizingMaskIntoConstraints = NO;
 
     UIView * v0 = [UIView new];

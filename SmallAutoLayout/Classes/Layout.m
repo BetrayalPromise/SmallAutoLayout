@@ -16,122 +16,122 @@
 @implementation Layout
 
 - (Constraint *)top {
-    _currentAttribute0 = NSLayoutAttributeTop;
     if (_top) {
         return _top;
     } else {
         _top = [Constraint new];
         _top.useLayout = self;
+        _top.attribute = NSLayoutAttributeTop;
         return _top;
     }
 }
 
 - (Constraint *)left {
-    _currentAttribute0 = NSLayoutAttributeLeft;
     if (_left) {
         return _left;
     } else {
         _left = [Constraint new];
         _left.useLayout = self;
+        _left.attribute = NSLayoutAttributeLeft;
         return _left;
     }
 }
 
 - (Constraint *)bottom {
-    _currentAttribute0 = NSLayoutAttributeBottom;
     if (_bottom) {
         return _bottom;
     } else {
         _bottom = [Constraint new];
         _bottom.useLayout = self;
+        _bottom.attribute = NSLayoutAttributeBottom;
         return _bottom;
     }
 }
 
 - (Constraint *)right {
-    _currentAttribute0 = NSLayoutAttributeRight;
     if (_right) {
         return _right;
     } else {
         _right = [Constraint new];
         _right.useLayout = self;
+        _right.attribute = NSLayoutAttributeRight;
         return _right;
     }
 }
 
 - (Constraint *)centerX {
-    _currentAttribute0 = NSLayoutAttributeCenterX;
     if (_centerX) {
         return _centerX;
     } else {
         _centerX = [Constraint new];
         _centerX.useLayout = self;
+        _centerX.attribute = NSLayoutAttributeCenterX;
         return _centerX;
     }
 }
 
 - (Constraint *)centerY {
-    _currentAttribute0 = NSLayoutAttributeCenterY;
     if (_centerY) {
         return _centerY;
     } else {
         _centerY = [Constraint new];
         _centerY.useLayout = self;
+        _centerY.attribute = NSLayoutAttributeCenterY;
         return _centerY;
     }
 }
 
 - (Constraint *)width {
-    _currentAttribute0 = NSLayoutAttributeWidth;
     if (_width) {
         return _width;
     } else {
         _width = [Constraint new];
         _width.useLayout = self;
+        _width.attribute = NSLayoutAttributeWidth;
         return _width;
     }
 }
 
 - (Constraint *)height {
-    _currentAttribute0 = NSLayoutAttributeHeight;
     if (_height) {
         return _height;
     } else {
         _height = [Constraint new];
         _height.useLayout = self;
+        _height.attribute = NSLayoutAttributeHeight;
         return _height;
     }
 }
 
 - (Constraint *)firstBaseline {
-    _currentAttribute0 = NSLayoutAttributeFirstBaseline;
     if (_firstBaseline) {
         return _firstBaseline;
     } else {
         _firstBaseline = [Constraint new];
         _firstBaseline.useLayout = self;
+        _firstBaseline.attribute = NSLayoutAttributeFirstBaseline;
         return _firstBaseline;
     }
 }
 
 - (Constraint *)lastBaseline {
-    _currentAttribute0 = NSLayoutAttributeLastBaseline;
     if (_lastBaseline) {
         return _lastBaseline;
     } else {
         _lastBaseline = [Constraint new];
         _lastBaseline.useLayout = self;
+        _lastBaseline.attribute = NSLayoutAttributeLastBaseline;
         return _lastBaseline;
     }
 }
 
 - (Constraint *)leading {
-    _currentAttribute0 = NSLayoutAttributeLeading;
     if (_leading) {
         return _leading;
     } else {
         _leading = [Constraint new];
         _leading.useLayout = self;
+        _leading.attribute = NSLayoutAttributeLeading;
         return _leading;
     }
 }
@@ -142,6 +142,7 @@
     } else {
         _trailing = [Constraint new];
         _trailing.useLayout = self;
+        _trailing.attribute = NSLayoutAttributeTrailing;
         return _trailing;
     }
 }
@@ -163,19 +164,15 @@
     return self;
 }
 
-- (Constraint *)same {
-    if (_same) {
-        return _same;
-    } else {
-        _same = [Constraint new];
-        _same.useLayout = self;
-        return _same;
-    }
-}
+//- (Constraint *)same {
+//    if (_same) {
+//        return _same;
+//    } else {
+//        _same = [Constraint new];
+//        _same.useLayout = self;
+//        return _same;
+//    }
+//}
 
 @end
 
-
-@interface OperationManage
-
-@end

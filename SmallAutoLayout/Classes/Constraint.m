@@ -28,24 +28,24 @@
     BOOL related = c != nil ? YES : NO;
     if (related) {
         if (self.useLayout.topLayoutGuideFlag) {
-            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutViewController.topLayoutGuide attribute:(self.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationEqual) toItem:c.useLayout.layoutView attribute:(c.useLayout.currentAttribute0) multiplier:multiply constant:trim];
+            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutViewController.topLayoutGuide attribute:(self.attribute) relatedBy:(NSLayoutRelationEqual) toItem:c.useLayout.layoutView attribute:(c.attribute) multiplier:multiply constant:trim];
             layoutConstraint.active = YES;
             return layoutConstraint;
         } else if (self.useLayout.bottomLayoutGuideFlag) {
-            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutViewController.bottomLayoutGuide attribute:(self.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationEqual) toItem:c.useLayout.layoutView attribute:(c.useLayout.currentAttribute0) multiplier:multiply constant:trim];
+            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutViewController.bottomLayoutGuide attribute:(self.attribute) relatedBy:(NSLayoutRelationEqual) toItem:c.useLayout.layoutView attribute:(c.attribute) multiplier:multiply constant:trim];
             layoutConstraint.active = YES;
             return layoutConstraint;
         } else if (c.useLayout.topLayoutGuideFlag) {
-            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:c.useLayout.layoutViewController.topLayoutGuide attribute:(c.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationEqual) toItem:self.useLayout.layoutView attribute:(self.useLayout.currentAttribute0) multiplier:multiply constant:trim];
+            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:c.useLayout.layoutViewController.topLayoutGuide attribute:(c.attribute) relatedBy:(NSLayoutRelationEqual) toItem:self.useLayout.layoutView attribute:(self.attribute) multiplier:multiply constant:trim];
             layoutConstraint.active = YES;
             return layoutConstraint;
         } else if (c.useLayout.bottomLayoutGuideFlag) {
-            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:c.useLayout.layoutViewController.bottomLayoutGuide attribute:(c.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationEqual) toItem:self.useLayout.layoutView attribute:(self.useLayout.currentAttribute0) multiplier:multiply constant:trim];
+            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:c.useLayout.layoutViewController.bottomLayoutGuide attribute:(c.attribute) relatedBy:(NSLayoutRelationEqual) toItem:self.useLayout.layoutView attribute:(self.attribute) multiplier:multiply constant:trim];
             layoutConstraint.active = YES;
             return layoutConstraint;
         } else {
             if (@available(iOS 11.0, *)) {
-                NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:(self.useLayout.safeAreaLayoutGuideFlag == YES ? self.useLayout.layoutView.safeAreaLayoutGuide : self.useLayout.layoutView) attribute:(self.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationEqual) toItem:(c.useLayout.safeAreaLayoutGuideFlag == YES ? c.useLayout.layoutView.safeAreaLayoutGuide : c.useLayout.layoutView) attribute:(c.useLayout.currentAttribute0) multiplier:multiply constant:trim];
+                NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:(self.useLayout.safeAreaLayoutGuideFlag == YES ? self.useLayout.layoutView.safeAreaLayoutGuide : self.useLayout.layoutView) attribute:(self.attribute) relatedBy:(NSLayoutRelationEqual) toItem:(c.useLayout.safeAreaLayoutGuideFlag == YES ? c.useLayout.layoutView.safeAreaLayoutGuide : c.useLayout.layoutView) attribute:(c.attribute) multiplier:multiply constant:trim];
                 layoutConstraint.active = YES;
                 self.useLayout.safeAreaLayoutGuideFlag = NO;
                 c.useLayout.safeAreaLayoutGuideFlag = NO;
@@ -56,7 +56,7 @@
             }
         }
     } else {
-        NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutView attribute:(self.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationEqual) toItem:(nil) attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiply constant:trim];
+        NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutView attribute:(self.attribute) relatedBy:(NSLayoutRelationEqual) toItem:(nil) attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiply constant:trim];
         layoutConstraint.active = YES;
         return layoutConstraint;
     }
@@ -78,24 +78,24 @@
     BOOL related = c != nil ? YES : NO;
     if (related) {
         if (self.useLayout.topLayoutGuideFlag) {
-            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutViewController.topLayoutGuide attribute:(self.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationLessThanOrEqual) toItem:c.useLayout.layoutView attribute:(c.useLayout.currentAttribute0) multiplier:multiply constant:trim];
+            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutViewController.topLayoutGuide attribute:(self.attribute) relatedBy:(NSLayoutRelationLessThanOrEqual) toItem:c.useLayout.layoutView attribute:(c.attribute) multiplier:multiply constant:trim];
             layoutConstraint.active = YES;
             return layoutConstraint;
         } else if (self.useLayout.bottomLayoutGuideFlag) {
-            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutViewController.bottomLayoutGuide attribute:(self.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationLessThanOrEqual) toItem:c.useLayout.layoutView attribute:(c.useLayout.currentAttribute0) multiplier:multiply constant:trim];
+            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutViewController.bottomLayoutGuide attribute:(self.attribute) relatedBy:(NSLayoutRelationLessThanOrEqual) toItem:c.useLayout.layoutView attribute:(c.attribute) multiplier:multiply constant:trim];
             layoutConstraint.active = YES;
             return layoutConstraint;
         } else if (c.useLayout.topLayoutGuideFlag) {
-            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:c.useLayout.layoutViewController.topLayoutGuide attribute:(c.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationLessThanOrEqual) toItem:self.useLayout.layoutView attribute:(self.useLayout.currentAttribute0) multiplier:multiply constant:trim];
+            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:c.useLayout.layoutViewController.topLayoutGuide attribute:(c.attribute) relatedBy:(NSLayoutRelationLessThanOrEqual) toItem:self.useLayout.layoutView attribute:(self.attribute) multiplier:multiply constant:trim];
             layoutConstraint.active = YES;
             return layoutConstraint;
         } else if (c.useLayout.bottomLayoutGuideFlag) {
-            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:c.useLayout.layoutViewController.bottomLayoutGuide attribute:(c.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationLessThanOrEqual) toItem:self.useLayout.layoutView attribute:(self.useLayout.currentAttribute0) multiplier:multiply constant:trim];
+            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:c.useLayout.layoutViewController.bottomLayoutGuide attribute:(c.attribute) relatedBy:(NSLayoutRelationLessThanOrEqual) toItem:self.useLayout.layoutView attribute:(self.attribute) multiplier:multiply constant:trim];
             layoutConstraint.active = YES;
             return layoutConstraint;
         } else {
             if (@available(iOS 11.0, *)) {
-                NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:(self.useLayout.safeAreaLayoutGuideFlag == YES ? self.useLayout.layoutView.safeAreaLayoutGuide : self.useLayout.layoutView) attribute:(self.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationLessThanOrEqual) toItem:(c.useLayout.safeAreaLayoutGuideFlag == YES ? c.useLayout.layoutView.safeAreaLayoutGuide : c.useLayout.layoutView) attribute:(c.useLayout.currentAttribute0) multiplier:multiply constant:trim];
+                NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:(self.useLayout.safeAreaLayoutGuideFlag == YES ? self.useLayout.layoutView.safeAreaLayoutGuide : self.useLayout.layoutView) attribute:(self.attribute) relatedBy:(NSLayoutRelationLessThanOrEqual) toItem:(c.useLayout.safeAreaLayoutGuideFlag == YES ? c.useLayout.layoutView.safeAreaLayoutGuide : c.useLayout.layoutView) attribute:(c.attribute) multiplier:multiply constant:trim];
                 layoutConstraint.active = YES;
                 self.useLayout.safeAreaLayoutGuideFlag = NO;
                 c.useLayout.safeAreaLayoutGuideFlag = NO;
@@ -106,7 +106,7 @@
             }
         }
     } else {
-        NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutView attribute:(self.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationLessThanOrEqual) toItem:(nil) attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiply constant:trim];
+        NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutView attribute:(self.attribute) relatedBy:(NSLayoutRelationLessThanOrEqual) toItem:(nil) attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiply constant:trim];
         layoutConstraint.active = YES;
         return layoutConstraint;
     }
@@ -127,24 +127,24 @@
     BOOL related = c != nil ? YES : NO;
     if (related) {
         if (self.useLayout.topLayoutGuideFlag) {
-            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutViewController.topLayoutGuide attribute:(self.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationGreaterThanOrEqual) toItem:c.useLayout.layoutView attribute:(c.useLayout.currentAttribute0) multiplier:multiply constant:trim];
+            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutViewController.topLayoutGuide attribute:(self.attribute) relatedBy:(NSLayoutRelationGreaterThanOrEqual) toItem:c.useLayout.layoutView attribute:(c.attribute) multiplier:multiply constant:trim];
             layoutConstraint.active = YES;
             return layoutConstraint;
         } else if (self.useLayout.bottomLayoutGuideFlag) {
-            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutViewController.bottomLayoutGuide attribute:(self.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationGreaterThanOrEqual) toItem:c.useLayout.layoutView attribute:(c.useLayout.currentAttribute0) multiplier:multiply constant:trim];
+            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutViewController.bottomLayoutGuide attribute:(self.attribute) relatedBy:(NSLayoutRelationGreaterThanOrEqual) toItem:c.useLayout.layoutView attribute:(c.attribute) multiplier:multiply constant:trim];
             layoutConstraint.active = YES;
             return layoutConstraint;
         } else if (c.useLayout.topLayoutGuideFlag) {
-            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:c.useLayout.layoutViewController.topLayoutGuide attribute:(c.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationGreaterThanOrEqual) toItem:self.useLayout.layoutView attribute:(self.useLayout.currentAttribute0) multiplier:multiply constant:trim];
+            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:c.useLayout.layoutViewController.topLayoutGuide attribute:(c.attribute) relatedBy:(NSLayoutRelationGreaterThanOrEqual) toItem:self.useLayout.layoutView attribute:(self.attribute) multiplier:multiply constant:trim];
             layoutConstraint.active = YES;
             return layoutConstraint;
         } else if (c.useLayout.bottomLayoutGuideFlag) {
-            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:c.useLayout.layoutViewController.bottomLayoutGuide attribute:(c.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationGreaterThanOrEqual) toItem:self.useLayout.layoutView attribute:(self.useLayout.currentAttribute0) multiplier:multiply constant:trim];
+            NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:c.useLayout.layoutViewController.bottomLayoutGuide attribute:(c.attribute) relatedBy:(NSLayoutRelationGreaterThanOrEqual) toItem:self.useLayout.layoutView attribute:(self.attribute) multiplier:multiply constant:trim];
             layoutConstraint.active = YES;
             return layoutConstraint;
         } else {
             if (@available(iOS 11.0, *)) {
-                NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:(self.useLayout.safeAreaLayoutGuideFlag == YES ? self.useLayout.layoutView.safeAreaLayoutGuide : self.useLayout.layoutView) attribute:(self.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationGreaterThanOrEqual) toItem:(c.useLayout.safeAreaLayoutGuideFlag == YES ? c.useLayout.layoutView.safeAreaLayoutGuide : c.useLayout.layoutView) attribute:(c.useLayout.currentAttribute0) multiplier:multiply constant:trim];
+                NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:(self.useLayout.safeAreaLayoutGuideFlag == YES ? self.useLayout.layoutView.safeAreaLayoutGuide : self.useLayout.layoutView) attribute:(self.attribute) relatedBy:(NSLayoutRelationGreaterThanOrEqual) toItem:(c.useLayout.safeAreaLayoutGuideFlag == YES ? c.useLayout.layoutView.safeAreaLayoutGuide : c.useLayout.layoutView) attribute:(c.attribute) multiplier:multiply constant:trim];
                 layoutConstraint.active = YES;
                 self.useLayout.safeAreaLayoutGuideFlag = NO;
                 c.useLayout.safeAreaLayoutGuideFlag = NO;
@@ -155,7 +155,7 @@
             }
         }
     } else {
-        NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutView attribute:(self.useLayout.currentAttribute0) relatedBy:(NSLayoutRelationGreaterThanOrEqual) toItem:(nil) attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiply constant:trim];
+        NSLayoutConstraint * layoutConstraint = [NSLayoutConstraint constraintWithItem:self.useLayout.layoutView attribute:(self.attribute) relatedBy:(NSLayoutRelationGreaterThanOrEqual) toItem:(nil) attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiply constant:trim];
         layoutConstraint.active = YES;
         return layoutConstraint;
     }
