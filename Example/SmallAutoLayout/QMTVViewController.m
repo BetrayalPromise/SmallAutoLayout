@@ -12,6 +12,7 @@
 #import "Example0ViewController.h"
 #import "Example1ViewController.h"
 #import "Example2ViewController.h"
+#import "Example3ViewController.h"
 #import "NSObject+FunctionExtension.h"
 
 @interface QMTVViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -68,6 +69,10 @@
         }] animated:YES];
     } else if (indexPath.row == 2) {
         [self.navigationController pushViewController:[Example2ViewController new] animated:YES];
+    } else if (indexPath.row == 3) {
+        [self.navigationController pushViewController:[[Example3ViewController new] objcetThen:^(Example3ViewController * _Nonnull source) {
+            source.title = @"UICollectionView";
+        }] animated:YES];
     }
 }
 
