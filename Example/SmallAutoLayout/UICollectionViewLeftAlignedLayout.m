@@ -80,7 +80,6 @@
         [currentItemAttributes leftAlignFrameWithSectionInset:sectionInset];
         return currentItemAttributes;
     }
-
     CGRect frame                = currentItemAttributes.frame;
     frame.origin.x              = previousFrameRightPoint + [self evaluatedMinimumInteritemSpacingForSectionAtIndex:indexPath.section];
     currentItemAttributes.frame = frame;
@@ -99,7 +98,6 @@
 - (UIEdgeInsets)evaluatedSectionInsetForItemAtIndex:(NSInteger)index {
     if ([self.collectionView.delegate respondsToSelector:@selector(collectionView:layout:insetForSectionAtIndex:)]) {
         id<UICollectionViewDelegateLeftAlignedLayout> delegate = (id<UICollectionViewDelegateLeftAlignedLayout>) self.collectionView.delegate;
-
         return [delegate collectionView:self.collectionView layout:self insetForSectionAtIndex:index];
     } else {
         return self.sectionInset;

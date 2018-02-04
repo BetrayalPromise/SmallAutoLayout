@@ -27,7 +27,7 @@
 		6F3F460E2020BD9900B64003 /* Example2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F460D2020BD9900B64003 /* Example2ViewController.m */; };
 		6F3F46392023592B00B64003 /* NSObject+FunctionExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F46372023592B00B64003 /* NSObject+FunctionExtension.m */; };
 		6F5B97B12026B63A00D033E4 /* Example3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5B97B02026B63A00D033E4 /* Example3ViewController.m */; };
-		6F5B97B42026C26900D033E4 /* QMFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5B97B32026C26900D033E4 /* QMFlowLayout.m */; };
+		6F5B97B42026C26900D033E4 /* QMTVFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5B97B32026C26900D033E4 /* QMTVFlowLayout.m */; };
 		6F5B97B72026D5BE00D033E4 /* UICollectionViewLeftAlignedLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5B97B52026D5BE00D033E4 /* UICollectionViewLeftAlignedLayout.m */; };
 		6F5B97BA2026E93200D033E4 /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5B97B92026E93200D033E4 /* ExampleCell.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
@@ -83,8 +83,8 @@
 		6F3F46382023592B00B64003 /* NSObject+FunctionExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+FunctionExtension.h"; sourceTree = "<group>"; };
 		6F5B97AF2026B63A00D033E4 /* Example3ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Example3ViewController.h; sourceTree = "<group>"; };
 		6F5B97B02026B63A00D033E4 /* Example3ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Example3ViewController.m; sourceTree = "<group>"; };
-		6F5B97B22026C26900D033E4 /* QMFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QMFlowLayout.h; sourceTree = "<group>"; };
-		6F5B97B32026C26900D033E4 /* QMFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QMFlowLayout.m; sourceTree = "<group>"; };
+		6F5B97B22026C26900D033E4 /* QMTVFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QMTVFlowLayout.h; sourceTree = "<group>"; };
+		6F5B97B32026C26900D033E4 /* QMTVFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QMTVFlowLayout.m; sourceTree = "<group>"; };
 		6F5B97B52026D5BE00D033E4 /* UICollectionViewLeftAlignedLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewLeftAlignedLayout.m; sourceTree = "<group>"; };
 		6F5B97B62026D5BE00D033E4 /* UICollectionViewLeftAlignedLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLeftAlignedLayout.h; sourceTree = "<group>"; };
 		6F5B97B82026E93200D033E4 /* ExampleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleCell.h; sourceTree = "<group>"; };
@@ -243,8 +243,8 @@
 				6F5B97B92026E93200D033E4 /* ExampleCell.m */,
 				6F5B97B62026D5BE00D033E4 /* UICollectionViewLeftAlignedLayout.h */,
 				6F5B97B52026D5BE00D033E4 /* UICollectionViewLeftAlignedLayout.m */,
-				6F5B97B22026C26900D033E4 /* QMFlowLayout.h */,
-				6F5B97B32026C26900D033E4 /* QMFlowLayout.m */,
+				6F5B97B22026C26900D033E4 /* QMTVFlowLayout.h */,
+				6F5B97B32026C26900D033E4 /* QMTVFlowLayout.m */,
 				6F0803882026F51B007C015B /* HoverReusableView.h */,
 				6F0803892026F51B007C015B /* HoverReusableView.m */,
 			);
@@ -464,7 +464,7 @@
 				6F08038A2026F51B007C015B /* HoverReusableView.m in Sources */,
 				6003F59E195388D20070C39A /* QMTVAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* QMTVViewController.m in Sources */,
-				6F5B97B42026C26900D033E4 /* QMFlowLayout.m in Sources */,
+				6F5B97B42026C26900D033E4 /* QMTVFlowLayout.m in Sources */,
 				6F5B97B12026B63A00D033E4 /* Example3ViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				6F5B97B72026D5BE00D033E4 /* UICollectionViewLeftAlignedLayout.m in Sources */,

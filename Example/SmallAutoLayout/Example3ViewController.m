@@ -11,7 +11,7 @@
 #import "UICollectionViewLeftAlignedLayout.h"
 #import "ExampleCell.h"
 #import "HoverReusableView.h"
-#import "QMFlowLayout.h"
+#import "QMTVFlowLayout.h"
 #import "NSObject+FunctionExtension.h"
 
 @interface Example3ViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -22,10 +22,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UICollectionView * collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[UICollectionViewLeftAlignedLayout new]];
-//    UICollectionView * collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[[QMFlowLayout new] objcetThen:^(QMFlowLayout * _Nonnull source) {
-//        source.navHeight = 0;
-//    }]];
+//    UICollectionView * collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[UICollectionViewLeftAlignedLayout new]];
+    UICollectionView * collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[[QMFlowLayout new] objcetThen:^(QMFlowLayout * _Nonnull source) {
+        source.navigationHeight = 0;
+    }]];
+//    UICollectionView * collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[QMTVHoverFlowLayout new]];
     collectionView.translatesAutoresizingMaskIntoConstraints = NO;
     [collectionView registerClass:[ExampleCell class] forCellWithReuseIdentifier:NSStringFromClass([ExampleCell class])];
     [collectionView registerClass:[HoverReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([HoverReusableView class])];
@@ -81,8 +82,8 @@
     return CGSizeMake(collectionView.frame.size.width - 20, 50);
 }
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(10, 10, 10, 10);
-}
+//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+//    return UIEdgeInsetsMake(10, 10, 10, 10);
+//}
 
 @end

@@ -6,14 +6,14 @@
 //  Copyright © 2018 BetrayalPromise. All rights reserved.
 //
 
-#import "QMFlowLayout.h"
+#import "QMTVFlowLayout.h"
 
 @implementation QMFlowLayout
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.navHeight = 64;
+        _navigationHeight = 64;
     }
     return self;
 }
@@ -44,22 +44,18 @@
 
     //遍历当前屏幕中没有header的section数组
     [noneHeaderSections enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * stop) {
-
         //取到当前section中第一个item的indexPath
         NSIndexPath * indexPath = [NSIndexPath indexPathForItem:0 inSection:idx];
         //获取当前section在正常情况下已经离开屏幕的header结构信息
         UICollectionViewLayoutAttributes * attributes = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader atIndexPath:indexPath];
-
         //如果当前分区确实有因为离开屏幕而被系统回收的header
         if (attributes) {
             //将该header结构信息重新加入到superArray中去
             [superArray addObject:attributes];
         }
     }];
-
     //遍历superArray，改变header结构信息中的参数，使它可以在当前section还没完全离开屏幕的时候一直显示
     for (UICollectionViewLayoutAttributes * attributes in superArray) {
-
         //如果当前item是header
         if ([attributes.representedElementKind isEqualToString:UICollectionElementKindSectionHeader]) {
             //得到当前header所在分区的cell的数量
@@ -88,7 +84,7 @@
             CGRect rect = attributes.frame;
 
             //当前的滑动距离 + 因为导航栏产生的偏移量，默认为64（如果app需求不同，需自己设置）
-            CGFloat offset = self.collectionView.contentOffset.y + self.navHeight;
+            CGFloat offset = self.collectionView.contentOffset.y + _navigationHeight;
             //第一个cell的y值 - 当前header的高度 - 可能存在的sectionInset的top
             CGFloat headerY = firstItemAttributes.frame.origin.y - rect.size.height - self.sectionInset.top;
 
@@ -107,7 +103,7 @@
 
             //如果按照正常情况下,header离开屏幕被系统回收，而header的层次关系又与cell相等，如果不去理会，会出现cell在header上面的情况
             //通过打印可以知道cell的层次关系zIndex数值为0，我们可以将header的zIndex设置成1，如果不放心，也可以将它设置成非常大，这里随便填了个7
-            attributes.zIndex = 7;
+            attributes.zIndex = 500;
         }
     }
     //转换回不可变数组，并返回

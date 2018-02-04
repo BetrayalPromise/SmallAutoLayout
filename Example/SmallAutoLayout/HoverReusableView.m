@@ -14,6 +14,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor blueColor];
+        [self performSelectorOnMainThread:@selector(buildSubviews) withObject:nil waitUntilDone:YES];
     }
     return self;
 }

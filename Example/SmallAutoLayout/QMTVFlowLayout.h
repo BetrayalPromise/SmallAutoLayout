@@ -11,6 +11,6 @@
 @interface QMFlowLayout : UICollectionViewFlowLayout
 
 //默认为64.0, default is 64.0
-@property (nonatomic, assign) CGFloat navHeight;
+@property (nonatomic, assign) CGFloat navigationHeight;
 
 @end
