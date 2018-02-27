@@ -17,7 +17,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     self.view.backgroundColor = [UIColor whiteColor];
 
     UIView * v0 = [UIView new];
@@ -25,12 +24,10 @@
     v0.translatesAutoresizingMaskIntoConstraints = NO;
     v0.backgroundColor = [UIColor redColor];
 
-    
-
-    [v0.layout.top equalTo:self.view.layout.safeAreaLayoutGuide.top];
-    [v0.layout.left equalTo:self.view.layout.safeAreaLayoutGuide.left];
     [v0.layout.width equalTo:nil trim:100];
     [v0.layout.height equalTo:nil trim:100];
+    [v0.layout.top equalTo:self.view.layout.safeAreaLayoutGuide.top];
+    [v0.layout.left equalTo:self.view.layout.safeAreaLayoutGuide.left];
 
     UIView * v1 = [UIView new];
     [self.view addSubview:v1];
@@ -41,6 +38,7 @@
     [v1.layout.width equalTo:nil trim:100];
     [v1.layout.height equalTo:nil trim:100];
 
+
     UIView * v2 = [UIView new];
     [self.view addSubview:v2];
     v2.translatesAutoresizingMaskIntoConstraints = NO;
@@ -49,6 +47,7 @@
     [self.view.layout.safeAreaLayoutGuide.left equalTo:v2.layout.left];
     [v2.layout.width equalTo:nil trim:100];
     [v2.layout.height equalTo:nil trim:100];
+
 
     UIView * v3 = [UIView new];
     [self.view addSubview:v3];

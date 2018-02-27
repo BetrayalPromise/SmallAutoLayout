@@ -28,14 +28,19 @@
 //@property (nonatomic, strong) Constraint * _Nullable insert;
 
 /// 仅支持top bottom两个属性
-@property (nonatomic, weak) id _Nullable layoutItem;
-@property (nonatomic, strong) Layout * _Nullable topLayoutGuide NS_DEPRECATED_IOS(7.0,11.0);
-@property (nonatomic, assign, readonly) BOOL topLayoutGuideFlag;
+@property (nonatomic, strong) Layout * _Nullable topLayoutGuide;
 /// 仅支持top bottom两个属性
-@property (nonatomic, strong) Layout * _Nullable bottomLayoutGuide NS_DEPRECATED_IOS(7.0,11.0);
-@property (nonatomic, assign, readonly) BOOL bottomLayoutGuideFlag;
+@property (nonatomic, strong) Layout * _Nullable bottomLayoutGuide;
 
 @property (nonatomic, strong) Layout * _Nullable safeAreaLayoutGuide;
+
+/// 外界不需设置 布局内部使用
+@property (nonatomic, weak) id _Nullable layoutItem;
+/// 外界不需设置 布局内部使用
+@property (nonatomic, assign, readonly) BOOL topLayoutGuideFlag;
+/// 外界不需设置 布局内部使用
+@property (nonatomic, assign, readonly) BOOL bottomLayoutGuideFlag;
+/// 外界不需设置 布局内部使用
 @property (nonatomic, assign) BOOL safeAreaLayoutGuideFlag;
 
 @end

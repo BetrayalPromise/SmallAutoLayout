@@ -11,6 +11,7 @@
 
 @interface UIView (Layout)
 
+/// 布局管理
 @property (nonatomic, strong, readonly) Layout * _Nullable layout;
 
 @end
