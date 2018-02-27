@@ -7,17 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 @class Constraint;
 
-
-
-
-
 @interface Layout : NSObject
-
-@property (nonatomic, weak  ) UIView * _Nullable layoutView;
-@property (nonatomic, weak  ) UIViewController * _Nullable layoutViewController;
 
 @property (nonatomic, strong) Constraint * _Nullable top;
 @property (nonatomic, strong) Constraint * _Nullable left;
@@ -32,7 +24,11 @@
 @property (nonatomic, strong) Constraint * _Nullable leading;
 @property (nonatomic, strong) Constraint * _Nullable trailing;
 
+//@property (nonatomic, strong) Constraint * _Nullable size;
+//@property (nonatomic, strong) Constraint * _Nullable insert;
+
 /// 仅支持top bottom两个属性
+@property (nonatomic, weak) id _Nullable layoutItem;
 @property (nonatomic, strong) Layout * _Nullable topLayoutGuide NS_DEPRECATED_IOS(7.0,11.0);
 @property (nonatomic, assign, readonly) BOOL topLayoutGuideFlag;
 /// 仅支持top bottom两个属性
@@ -41,10 +37,6 @@
 
 @property (nonatomic, strong) Layout * _Nullable safeAreaLayoutGuide;
 @property (nonatomic, assign) BOOL safeAreaLayoutGuideFlag;
-
-//@property (nonatomic, strong) Constraint * _Nullable same;
-//@property (nonatomic, strong) Constraint * _Nullable insert;
-//@property (nonatomic, strong) Constraint * _Nullable size;
 
 @end
 

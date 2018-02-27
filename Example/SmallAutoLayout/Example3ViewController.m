@@ -43,6 +43,9 @@
     [collectionView.layout.left equalTo:self.view.layout.safeAreaLayoutGuide.left];
     [collectionView.layout.bottom equalTo:self.view.layout.safeAreaLayoutGuide.bottom];
     [collectionView.layout.right equalTo:self.view.layout.safeAreaLayoutGuide.right];
+
+
+//    UITextAlignment
 }
 
 - (void)didReceiveMemoryWarning {

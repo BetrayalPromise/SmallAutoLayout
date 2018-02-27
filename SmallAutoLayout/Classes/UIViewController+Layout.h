@@ -11,6 +11,6 @@
 
 @interface UIViewController (Layout)
 
-@property (nonatomic, strong, readonly) Layout * _Nullable layout NS_DEPRECATED_IOS(7.0,11.0);
+@property (nonatomic, strong, readonly) Layout * _Nullable layout __attribute__((deprecated("deprecated on iOS 11.0 recommand use view.safeLayoutGudie")));
 
 @end

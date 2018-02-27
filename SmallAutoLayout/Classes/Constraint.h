@@ -12,18 +12,22 @@
 
 @interface Constraint : NSObject
 
-@property (nonatomic, weak) Layout * _Nullable useLayout;
 @property (nonatomic, assign) NSLayoutAttribute attribute;
+@property (nonatomic, weak) id _Nullable layoutItem;
+@property (nonatomic, assign) BOOL safeAreaLayoutGuideFlag;
 
-- (NSLayoutConstraint * _Nullable)equalTo:(Constraint * _Nullable)c;
-- (NSLayoutConstraint * _Nullable)equalTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply;
-- (NSLayoutConstraint * _Nullable)equalTo:(Constraint * _Nullable)c trim:(CGFloat)trim;
-- (NSLayoutConstraint * _Nullable)equalTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply trim:(CGFloat)trim;
+@property (nonatomic, assign) BOOL topLayoutGuideFlag;
+@property (nonatomic, assign) BOOL bottomLayoutGuideFlag;
 
 - (NSLayoutConstraint * _Nullable)lessEqualTo:(Constraint * _Nullable)c;
 - (NSLayoutConstraint * _Nullable)lessEqualTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply;
 - (NSLayoutConstraint * _Nullable)lessEqualTo:(Constraint * _Nullable)c trim:(CGFloat)trim;
 - (NSLayoutConstraint * _Nullable)lessEqualTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply trim:(CGFloat)trim;
+
+- (NSLayoutConstraint * _Nullable)equalTo:(Constraint * _Nullable)c;
+- (NSLayoutConstraint * _Nullable)equalTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply;
+- (NSLayoutConstraint * _Nullable)equalTo:(Constraint * _Nullable)c trim:(CGFloat)trim;
+- (NSLayoutConstraint * _Nullable)equalTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply trim:(CGFloat)trim;
 
 - (NSLayoutConstraint * _Nullable)greaterEqualTo:(Constraint * _Nullable)c;
 - (NSLayoutConstraint * _Nullable)greaterEqualTo:(Constraint * _Nullable)c multiply:(CGFloat)multiply;

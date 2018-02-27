@@ -7,7 +7,7 @@
 //
 
 #import "UIView+Layout.h"
-@import ObjectiveC;
+#import <objc/runtime.h>
 #import "Layout.h"
 
 @interface UIView ()
@@ -27,9 +27,10 @@
         return objc_getAssociatedObject(self, _cmd);
     } else {
         Layout * layout = [Layout new];
-        layout.layoutView = self;
+        layout.layoutItem = self;
         self.layout = layout;
         self.layoutFlag = YES;
+
         return layout;
     }
 }

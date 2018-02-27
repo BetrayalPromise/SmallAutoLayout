@@ -20,8 +20,6 @@
 
     self.view.backgroundColor = [UIColor whiteColor];
 
-//    self.view.translatesAutoresizingMaskIntoConstraints = NO;
-
     UIView * v0 = [UIView new];
     [self.view addSubview:v0];
     v0.translatesAutoresizingMaskIntoConstraints = NO;
@@ -29,16 +27,9 @@
     [v0.layout.centerX equalTo:self.view.layout.centerX];
     [self.view.layout.centerY equalTo:v0.layout.centerY];
     [v0.layout.width equalTo:nil trim:100];
-    
     [v0.layout.height equalTo:v0.layout.width];
 
-    NSLog(@"%@", v0.layout.height);
-    NSLog(@"%@", v0.layout.width);
 
-//    [NSLayoutConstraint withItem:v0 attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) constant:100].active = YES;
-//    [NSLayoutConstraint withItem:v0 attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:v0 attribute:(NSLayoutAttributeWidth)].active = YES;
-//    [NSLayoutConstraint withItem:v0 attribute:(NSLayoutAttributeCenterX) relatedBy:(NSLayoutRelationEqual) toItem:self.view attribute:(NSLayoutAttributeCenterX)].active = YES;
-//    [NSLayoutConstraint withItem:v0 attribute:(NSLayoutAttributeCenterY) relatedBy:(NSLayoutRelationEqual) toItem:self.view attribute:(NSLayoutAttributeCenterY)].active = YES;
 }
 
 - (void)didReceiveMemoryWarning {

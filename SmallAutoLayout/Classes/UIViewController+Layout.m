@@ -27,7 +27,7 @@
         return objc_getAssociatedObject(self, _cmd);
     } else {
         Layout * layout = [Layout new];
-        layout.layoutViewController = self;
+        layout.layoutItem = self;
         self.layout = layout;
         self.layoutFlag = YES;
         return layout;
