@@ -11,4 +11,4 @@
 #import "UIView+Layout.h"
 #import "UIViewController+Layout.h"
 #import "NSLayoutConstraint+AliasName.h"
-
+#import "CommonAdaptive.h"

@@ -4,7 +4,11 @@ PODS:
   - FBSnapshotTestCase/Core (2.1.4)
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
-  - SmallAutoLayout (0.0.1)
+  - SmallAutoLayout (1.0.1):
+    - SmallAutoLayout/Adaptive (= 1.0.1)
+    - SmallAutoLayout/Layout (= 1.0.1)
+  - SmallAutoLayout/Adaptive (1.0.1)
+  - SmallAutoLayout/Layout (1.0.1)
 
 DEPENDENCIES:
   - FBSnapshotTestCase
@@ -16,8 +20,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  SmallAutoLayout: 075805711a1e60045a370105b8deda17a414d69f
+  SmallAutoLayout: f6b0a6fefbed602e616bf7aa4a6784db53607389
 
 PODFILE CHECKSUM: c7d63f7d0d75042efa03e29789fe4fe1fde3a85a
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0

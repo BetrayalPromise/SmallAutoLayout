@@ -26,7 +26,10 @@
     v1.backgroundColor = [UIColor redColor];
     [self.view.layout.safeAreaLayoutGuide.top equalTo:v1];
     [self.view.layout.safeAreaLayoutGuide.right equalTo:v1];
-    [v1.layout.width equalTo:nil trim:100];
+    [v1.layout.width equalTo:nil trim:[CommonAdaptive widgetCustomAdaptive:^(DeviceSize * _Nonnull size) {
+        size.inch35 = size.inch40 = 10;
+
+    }]];
     [v1.layout.height equalTo:nil trim:100];
 }
 

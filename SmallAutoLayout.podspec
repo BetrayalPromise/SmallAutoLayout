@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SmallAutoLayout'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'Description of SmallAutoLayout.'
 
 # This description is used to generate tags and improve search results.
@@ -31,11 +31,17 @@ Easy to use Auto
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'SmallAutoLayout/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'SmallAutoLayout' => ['SmallAutoLayout/Assets/*.png']
-  # }
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.source_files = 'SmallAutoLayout/SmallAutoLayout.h'
+  s.public_header_files = 'SmallAutoLayout/SmallAutoLayout.h'
+
+
+  s.subspec 'Layout' do |ss|
+    ss.source_files = 'SmallAutoLayout/Layout/*.{h,m}'
+    ss.public_header_files = 'SmallAutoLayout/Layout/*.{h}'
+  end
+
+  s.subspec 'Adaptive' do |ss|
+    ss.source_files = 'SmallAutoLayout/Adaptive/*.{h,m}'
+    ss.public_header_files = 'SmallAutoLayout/Adaptive/*.{h}'
+  end
 end
