@@ -5,23 +5,27 @@ PODS:
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
   - SmallAutoLayout (1.0.1):
-    - SmallAutoLayout/Adaptive (= 1.0.1)
+    - SmallAutoLayout/Convenience (= 1.0.1)
     - SmallAutoLayout/Layout (= 1.0.1)
-  - SmallAutoLayout/Adaptive (1.0.1)
+  - SmallAutoLayout/Convenience (1.0.1)
   - SmallAutoLayout/Layout (1.0.1)
 
 DEPENDENCIES:
   - FBSnapshotTestCase
   - SmallAutoLayout (from `../`)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - FBSnapshotTestCase
+
 EXTERNAL SOURCES:
   SmallAutoLayout:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  SmallAutoLayout: f6b0a6fefbed602e616bf7aa4a6784db53607389
+  SmallAutoLayout: 78c5eec8d99eb85063ad7179f0f87d5d2cb93ed0
 
 PODFILE CHECKSUM: c7d63f7d0d75042efa03e29789fe4fe1fde3a85a
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

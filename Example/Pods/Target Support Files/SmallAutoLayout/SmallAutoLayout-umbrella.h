@@ -11,10 +11,9 @@
 #endif
 
 #import "SmallAutoLayout.h"
-#import "CommonAdaptive.h"
+#import "NSLayoutConstraint+Convenience.h"
 #import "Constraint.h"
 #import "Layout.h"
-#import "NSLayoutConstraint+AliasName.h"
 #import "UIView+Layout.h"
 #import "UIViewController+Layout.h"
 

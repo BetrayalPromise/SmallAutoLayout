@@ -43,6 +43,7 @@
     [tableView.layout.left equalTo:self.view.layout.safeAreaLayoutGuide.left];
     [tableView.layout.bottom equalTo:self.view.layout.safeAreaLayoutGuide.bottom];
     [tableView.layout.right equalTo:self.view.layout.safeAreaLayoutGuide.right];
+    [tableView.layout.right equalTo:self.view.layout.safeAreaLayoutGuide.right];
 }
 
 - (void)didReceiveMemoryWarning {

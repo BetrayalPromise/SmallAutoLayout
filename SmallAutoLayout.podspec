@@ -40,8 +40,8 @@ Easy to use Auto
     ss.public_header_files = 'SmallAutoLayout/Layout/*.{h}'
   end
 
-  s.subspec 'Adaptive' do |ss|
-    ss.source_files = 'SmallAutoLayout/Adaptive/*.{h,m}'
-    ss.public_header_files = 'SmallAutoLayout/Adaptive/*.{h}'
+  s.subspec 'Convenience' do |ss|
+    ss.source_files = 'SmallAutoLayout/Convenience/*.{h,m}'
+    ss.public_header_files = 'SmallAutoLayout/Convenience/*.{h}'
   end
 end

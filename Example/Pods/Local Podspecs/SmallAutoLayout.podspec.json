@@ -27,9 +27,9 @@
       "public_header_files": "SmallAutoLayout/Layout/*.{h}"
     },
     {
-      "name": "Adaptive",
-      "source_files": "SmallAutoLayout/Adaptive/*.{h,m}",
-      "public_header_files": "SmallAutoLayout/Adaptive/*.{h}"
+      "name": "Convenience",
+      "source_files": "SmallAutoLayout/Convenience/*.{h,m}",
+      "public_header_files": "SmallAutoLayout/Convenience/*.{h}"
     }
   ]
 }
