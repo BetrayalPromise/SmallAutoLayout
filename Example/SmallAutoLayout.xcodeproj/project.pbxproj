@@ -51,7 +51,7 @@
 		11A4A535201F1F72007D3B96 /* QMTVShowCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QMTVShowCell.h; sourceTree = "<group>"; };
 		11A4A536201F1F72007D3B96 /* QMTVShowCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QMTVShowCell.m; sourceTree = "<group>"; };
 		15252C6AF19D61626BF5680F /* Pods_SmallAutoLayout_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmallAutoLayout_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3703C468640228C903A9164B /* SmallAutoLayout.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SmallAutoLayout.podspec; path = ../SmallAutoLayout.podspec; sourceTree = "<group>"; };
+		3703C468640228C903A9164B /* SmallAutoLayout.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SmallAutoLayout.podspec; path = ../SmallAutoLayout.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		3EDA80EB74F50DE036CC14CA /* Pods-SmallAutoLayout_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmallAutoLayout_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmallAutoLayout_Example/Pods-SmallAutoLayout_Example.release.xcconfig"; sourceTree = "<group>"; };
 		472B7A78473C75B0C663C960 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* SmallAutoLayout_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmallAutoLayout_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -310,7 +310,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = QMTV;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = BetrayalPromise;
 				TargetAttributes = {
 					6003F5AD195388D20070C39A = {
@@ -514,12 +514,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -565,12 +567,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

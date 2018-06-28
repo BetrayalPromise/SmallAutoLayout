@@ -1,9 +1,9 @@
 //
 //  UIViewController+Layout.h
-//  Constraint
+//  ABCD
 //
-//  Created by LiChunYang on 29/1/2018.
-//  Copyright © 2018 BetrayalPromise. All rights reserved.
+//  Created by LiChunYang on 27/6/2018.
+//  Copyright © 2018 com.qmtv. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,7 +11,9 @@
 
 @interface UIViewController (Layout)
 
-/// 布局管理 废弃属性推荐使用 view.safeLayoutGudie
-@property (nonatomic, strong, readonly) Layout * _Nullable layout __attribute__((deprecated("deprecated on iOS 11.0 recommand use view.safeLayoutGudie")));
+/// 只支持 Top Bottom 两个属性
+@property (nonatomic, weak, readonly) Layout * TopGuide;
+/// 只支持 Top Bottom 两个属性
+@property (nonatomic, weak, readonly) Layout * BottomGuide;
 
 @end

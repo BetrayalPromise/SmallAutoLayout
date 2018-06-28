@@ -24,10 +24,11 @@
     [self.view addSubview:v1];
     v1.translatesAutoresizingMaskIntoConstraints = NO;
     v1.backgroundColor = [UIColor redColor];
-    [self.view.layout.safeAreaLayoutGuide.top equalTo:v1];
-    [self.view.layout.safeAreaLayoutGuide.right equalTo:v1];
-    [v1.layout.width equalTo:nil trim:100];
-    [v1.layout.height equalTo:nil trim:100];
+
+    [v1.SafeAreaGuide.Top equalTo:self.view];
+    [v1.SafeAreaGuide.Left equalTo:self.view];
+    [v1.SafeAreaGuide.Bottom equalTo:self.view];
+    [v1.SafeAreaGuide.Right equalTo:self.view];
 }
 
 - (void)didReceiveMemoryWarning {

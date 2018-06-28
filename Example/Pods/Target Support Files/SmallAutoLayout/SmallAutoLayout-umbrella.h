@@ -12,7 +12,6 @@
 
 #import "SmallAutoLayout.h"
 #import "NSLayoutConstraint+Convenience.h"
-#import "Constraint.h"
 #import "Layout.h"
 #import "UIView+Layout.h"
 #import "UIViewController+Layout.h"

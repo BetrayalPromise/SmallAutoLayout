@@ -1,46 +1,104 @@
 //
-//  UIView+AliasName.m
-//  Constraint
+//  UIView+Layout.m
+//  ABCD
 //
-//  Created by 李阳 on 28/1/2018.
-//  Copyright © 2018 BetrayalPromise. All rights reserved.
+//  Created by LiChunYang on 27/6/2018.
+//  Copyright © 2018 com.qmtv. All rights reserved.
 //
 
 #import "UIView+Layout.h"
-#import <objc/runtime.h>
 #import "Layout.h"
-
-@interface UIView ()
-
-@property (nonatomic, assign, readonly) BOOL layoutFlag;
-
-@end
 
 @implementation UIView (Layout)
 
-- (void)setLayout:(Layout * _Nullable)layout {
-    objc_setAssociatedObject(self, @selector(layout), layout, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (Layout *)Left {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout * _Nullable)layout {
-    if (self.layoutFlag) {
-        return objc_getAssociatedObject(self, _cmd);
-    } else {
-        Layout * layout = [Layout new];
-        layout.layoutItem = self;
-        self.layout = layout;
-        self.layoutFlag = YES;
-
-        return layout;
-    }
+- (Layout *)Right {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (void)setLayoutFlag:(BOOL)layoutFlag {
-    objc_setAssociatedObject(self, @selector(layoutFlag), @(layoutFlag), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (Layout *)Top {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (BOOL)layoutFlag {
-    return objc_getAssociatedObject(self, _cmd) != nil ? [objc_getAssociatedObject(self, _cmd) boolValue] : NO;
+- (Layout *)Bottom {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)Leading {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)Trailing {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)Width {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)Height {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)CenterX {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)CenterY {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)LastBaseline {
+     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)Baseline {
+     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)FirstBaseline {
+     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)LeftMargin {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)RightMargin {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)TopMargin {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)BottomMargin {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)LeadingMargin {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)TrailingMargin {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)CenterXMargin {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)CenterYMargin {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)SafeAreaGuide {
+    Layout * layout = [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+    layout.safeAreaGuideFlag = YES;
+    return layout;
 }
 
 @end

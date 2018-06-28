@@ -39,10 +39,10 @@
     }
     collectionView.delegate = self;
     collectionView.dataSource = self;
-    [collectionView.layout.top equalTo:self.view.layout.safeAreaLayoutGuide.top];
-    [collectionView.layout.left equalTo:self.view.layout.safeAreaLayoutGuide.left];
-    [collectionView.layout.bottom equalTo:self.view.layout.safeAreaLayoutGuide.bottom];
-    [collectionView.layout.right equalTo:self.view.layout.safeAreaLayoutGuide.right];
+    [collectionView.Top equalTo:self.view.SafeAreaGuide.Top];
+    [collectionView.Left equalTo:self.view.SafeAreaGuide.Left];
+    [collectionView.Bottom equalTo:self.view.SafeAreaGuide.Bottom];
+    [collectionView.Right equalTo:self.view.SafeAreaGuide.Right];
 
 
 //    UITextAlignment

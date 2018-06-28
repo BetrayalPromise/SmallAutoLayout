@@ -24,10 +24,10 @@
     [self.view addSubview:v0];
     v0.translatesAutoresizingMaskIntoConstraints = NO;
     v0.backgroundColor = [UIColor redColor];
-    [v0.layout.centerX equalTo:self.view.layout.centerX];
-    [self.view.layout.centerY equalTo:v0.layout.centerY];
-    [v0.layout.width equalTo:nil trim:100];
-    [v0.layout.height equalTo:v0.layout.width];
+    [v0.CenterX equalTo:self.view.CenterX];
+    [self.view.CenterY equalTo:v0.CenterY];
+    [v0.Width equalTo:nil constant:100];
+    [v0.Height equalTo:v0.Width];
 
 
 }

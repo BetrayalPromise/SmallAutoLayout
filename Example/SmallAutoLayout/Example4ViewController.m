@@ -25,19 +25,19 @@
     v0.translatesAutoresizingMaskIntoConstraints = NO;
     v0.backgroundColor = [UIColor redColor];
 
-    [self.layout.topLayoutGuide.bottom equalTo:v0];
-    [v0.layout.centerX equalTo:self.view multiply:1];
-    [v0.layout.width equalTo:nil trim:100];
-    [v0.layout.height equalTo:v0.layout.width];
+    [self.TopGuide.Bottom equalTo:v0];
+    [v0.CenterX equalTo:self.view];
+    [v0.Width equalTo:@100];
+    [v0.Height equalTo:v0.Width];
 
-    UIView * v1 = [UIView new];
-    [self.view addSubview:v1];
-    v1.translatesAutoresizingMaskIntoConstraints = NO;
-    v1.backgroundColor = [UIColor redColor];
-    [self.layout.bottomLayoutGuide.top equalTo:v1];
-    [v1.layout.centerX equalTo:self.view multiply:1];
-    [v1.layout.width equalTo:nil trim:100];
-    [v1.layout.height equalTo:v1.layout.width];
+//    UIView * v1 = [UIView new];
+//    [self.view addSubview:v1];
+//    v1.translatesAutoresizingMaskIntoConstraints = NO;
+//    v1.backgroundColor = [UIColor redColor];
+//    [self.BottomLayoutGuide.Top equalTo:v1];
+//    [v1.CenterX equalTo:self.view multiplier:1];
+//    [v1.Width equalTo:nil constant:100];
+//    [v1.Height equalTo:v1.Width];
 }
 
 - (void)didReceiveMemoryWarning {

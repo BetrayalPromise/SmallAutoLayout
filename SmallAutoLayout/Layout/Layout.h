@@ -1,47 +1,59 @@
 //
 //  Layout.h
-//  Constraint
+//  ABCD
 //
-//  Created by 李阳 on 28/1/2018.
-//  Copyright © 2018 BetrayalPromise. All rights reserved.
+//  Created by LiChunYang on 27/6/2018.
+//  Copyright © 2018 com.qmtv. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-@class Constraint;
+#import <CoreGraphics/CoreGraphics.h>
+@class NSLayoutConstraint;
 
 @interface Layout : NSObject
 
-@property (nonatomic, strong) Constraint * _Nullable top;
-@property (nonatomic, strong) Constraint * _Nullable left;
-@property (nonatomic, strong) Constraint * _Nullable bottom;
-@property (nonatomic, strong) Constraint * _Nullable right;
-@property (nonatomic, strong) Constraint * _Nullable centerX;
-@property (nonatomic, strong) Constraint * _Nullable centerY;
-@property (nonatomic, strong) Constraint * _Nullable firstBaseline;
-@property (nonatomic, strong) Constraint * _Nullable lastBaseline;
-@property (nonatomic, strong) Constraint * _Nullable width;
-@property (nonatomic, strong) Constraint * _Nullable height;
-@property (nonatomic, strong) Constraint * _Nullable leading;
-@property (nonatomic, strong) Constraint * _Nullable trailing;
+/// Only For SafeArea
+@property (nonatomic, strong, readonly) Layout * Left;
+/// Only For SafeArea
+@property (nonatomic, strong, readonly) Layout * Right;
 
-//@property (nonatomic, strong) Constraint * _Nullable size;
-//@property (nonatomic, strong) Constraint * _Nullable insert;
 
-/// 仅支持top bottom两个属性
-@property (nonatomic, strong) Layout * _Nullable topLayoutGuide;
-/// 仅支持top bottom两个属性
-@property (nonatomic, strong) Layout * _Nullable bottomLayoutGuide;
+/// Only For SafeArea LayouGuide
+@property (nonatomic, strong, readonly) Layout * Top;
+/// Only For SafeArea LayouGuide
+@property (nonatomic, strong, readonly) Layout * Bottom;
 
-@property (nonatomic, strong) Layout * _Nullable safeAreaLayoutGuide;
 
-/// 外界不需设置 布局内部使用
-@property (nonatomic, weak) id _Nullable layoutItem;
-/// 外界不需设置 布局内部使用
-@property (nonatomic, assign, readonly) BOOL topLayoutGuideFlag;
-/// 外界不需设置 布局内部使用
-@property (nonatomic, assign, readonly) BOOL bottomLayoutGuideFlag;
-/// 外界不需设置 布局内部使用
-@property (nonatomic, assign) BOOL safeAreaLayoutGuideFlag;
+
+@property (nonatomic, assign) BOOL safeAreaGuideFlag;
+@property (nonatomic, assign) BOOL topLayoutGuideFlag;
+@property (nonatomic, assign) BOOL bottomLayoutGuideFlag;
+
+@property (nonatomic, weak) id item;
+@property (nonatomic, copy) NSString * mark;
+
++ (instancetype)buildWithItem:(id)item mark:(NSString *)mark;
+
+/*
+    view自己觉得的尺寸
+ 
+    other 为NSNumber时 multiplier和constant参数无效
+    other 为UIView时 self与参数拥有相同的属性
+    other 为nil时 multiplier无效
+ */
+- (NSLayoutConstraint *)equalTo:(id _Nullable)other multiplier:(CGFloat)multiplier constant:(CGFloat)c;
+- (NSLayoutConstraint *)equalTo:(id _Nullable)other multiplier:(CGFloat)multiplier;
+- (NSLayoutConstraint *)equalTo:(id _Nullable)other constant:(CGFloat)c;
+- (NSLayoutConstraint *)equalTo:(id _Nullable)other;
+
+- (NSLayoutConstraint *)lessOrEqualTo:(id _Nullable)other multiplier:(CGFloat)multiplier constant:(CGFloat)c;
+- (NSLayoutConstraint *)lessOrEqualTo:(id _Nullable)other multiplier:(CGFloat)multiplier;
+- (NSLayoutConstraint *)lessOrEqualTo:(id _Nullable)other constant:(CGFloat)c;
+- (NSLayoutConstraint *)lessOrEqualTo:(id _Nullable)other;
+
+- (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other multiplier:(CGFloat)multiplier constant:(CGFloat)c;
+- (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other multiplier:(CGFloat)multiplier;
+- (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other constant:(CGFloat)c;
+- (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other;
 
 @end
-
