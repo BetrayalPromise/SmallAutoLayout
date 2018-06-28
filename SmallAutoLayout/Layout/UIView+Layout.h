@@ -34,7 +34,7 @@
 @property (nonatomic, weak, readonly) Layout * CenterXMargin;
 @property (nonatomic, weak, readonly) Layout * CenterYMargin;
 
-/// 只支持 Left Right Top Bottom 四个属性
+/// 用户自定义的视图一般而言其范围和安全区范围是样的只支持 Left Right Top Bottom 四个属性
 @property (nonatomic, weak, readonly) Layout * SafeAreaGuide;
 
 @end

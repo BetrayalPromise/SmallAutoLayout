@@ -26,8 +26,8 @@
 
     [v0.Width equalTo:nil constant:100];
     [v0.Height equalTo:nil constant:100];
-    [v0.Top equalTo:self.view.SafeAreaGuide.Top];
-    [v0.Left equalTo:self.view.SafeAreaGuide.Left];
+    [v0.Top equalTo:self.view.SafeAreaGuide];
+    [v0.Left equalTo:self.view.SafeAreaGuide];
 
     UIView * v1 = [UIView new];
     [self.view addSubview:v1];

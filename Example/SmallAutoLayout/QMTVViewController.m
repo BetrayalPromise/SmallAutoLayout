@@ -39,10 +39,10 @@
     tableView.delegate = self;
     tableView.dataSource = self;
     [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
-    [tableView.Top equalTo:self.view.SafeAreaGuide.Top];
-    [tableView.Left equalTo:self.view.SafeAreaGuide.Left];
-    [tableView.Bottom equalTo:self.view.SafeAreaGuide.Bottom];
-    [tableView.Right equalTo:self.view.SafeAreaGuide.Right];
+    [tableView.SafeAreaGuide.Top equalTo:self.view.SafeAreaGuide.Top];
+    [tableView.SafeAreaGuide.Left equalTo:self.view.SafeAreaGuide.Left];
+    [tableView.SafeAreaGuide.Bottom equalTo:self.view.SafeAreaGuide.Bottom];
+    [tableView.SafeAreaGuide.Right equalTo:self.view.SafeAreaGuide.Right];
 }
 
 - (void)didReceiveMemoryWarning {
