@@ -32,8 +32,13 @@
 }
 
 - (NSLayoutConstraint *)make:(NSLayoutRelation)relation other:(id)other multiplier:(CGFloat)multiplier constant:(CGFloat)c {
+    NSAssert(self.mark != nil, @"First item's LayoutAttribute must be exit");
+    NSSet * set = [NSSet setWithObjects:@"Center", @"Size", @"SafeAreaGuide", @"TopGuide", @"BottomGuide", nil];
+    if ([set containsObject:self.mark]) {
+        NSAssert(NO, @"%@没有缺省值", self.mark);
+    }
     NSLayoutAttribute attribute = [self findAttribute:self.mark];
-    NSAssert(attribute != NSLayoutAttributeNotAnAttribute, @"First item must be assign NSLayoutAttribute");
+    NSAssert(attribute != NSLayoutAttributeNotAnAttribute, @"First item's LayoutAttribute must be exit");
     if (other == nil) {
         if ([self.item isKindOfClass:[UIViewController class]]) {
             NSAssert(NO, @"设置控制器的topLayoutGuide bottomLayoutGuide是不生效的");
@@ -366,6 +371,69 @@
 
 - (NSLayoutConstraint *)greaterOrEqualTo:(id)other {
     return [self make:NSLayoutRelationGreaterThanOrEqual other:other multiplier:1.0 constant:0.0];
+}
+
+- (NSArray <NSLayoutConstraint *> *)size:(id _Nullable)other trim:(CGSize)trim {
+    if ([self.mark isEqualToString:@"Size"]) {
+        if ([other isKindOfClass:[UIView class]]) {
+            NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
+            widthConstraint.active = YES;
+            NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
+            heightConstraint.active = YES;
+            return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
+        } else if ([other isKindOfClass:[self class]]) {
+            NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
+            widthConstraint.active = YES;
+            NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
+            heightConstraint.active = YES;
+            return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
+        } else if ([other isKindOfClass:[NSValue class]]) {
+            CGSize size = [other CGSizeValue];
+            NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:size.width + trim.width];
+            widthConstraint.active = YES;
+            NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:size.height + trim.height];
+            heightConstraint.active = YES;
+            return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
+        } else {
+            NSAssert(NO, @"parameter must be (UIView | Layout | NSValue) type");
+            return nil;
+        }
+    } else {
+        NSAssert(NO, @"self.mark must be \"Size\"");
+        return nil;
+    }
+}
+
+- (NSArray <NSLayoutConstraint *> *)size:(id _Nullable)other {
+    return [self size:other trim:(CGSizeZero)];
+}
+
+- (NSArray <NSLayoutConstraint *> *)center:(id _Nullable)other offset:(CGSize)offset {
+    if ([self.mark isEqualToString:@"Center"]) {
+        if ([other isKindOfClass:[UIView class]]) {
+            NSLayoutConstraint * centerXConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeCenterX) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeCenterX) multiplier:1.0 constant:offset.width];
+            centerXConstraint.active = YES;
+            NSLayoutConstraint * centerYConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeCenterY) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeCenterY) multiplier:1.0 constant:offset.height];
+            centerYConstraint.active = YES;
+            return [NSArray arrayWithObjects:centerXConstraint, centerYConstraint, nil];
+        } else if ([other isKindOfClass:[self class]]) {
+            NSLayoutConstraint * centerXConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeCenterX) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeCenterX) multiplier:1.0 constant:offset.width];
+            centerXConstraint.active = YES;
+            NSLayoutConstraint * centerYConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeCenterY) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeCenterY) multiplier:1.0 constant:offset.height];
+            centerYConstraint.active = YES;
+            return [NSArray arrayWithObjects:centerXConstraint, centerYConstraint, nil];
+        } else {
+            NSAssert(NO, @"parameter must be (UIView | Layout) type");
+            return nil;
+        }
+    } else {
+        NSAssert(NO, @"self.mark must be \"Size\"");
+        return nil;
+    }
+}
+
+- (NSArray <NSLayoutConstraint *> *)center:(id _Nullable)other {
+    return [self center:other offset:(CGSizeZero)];
 }
 
 @end

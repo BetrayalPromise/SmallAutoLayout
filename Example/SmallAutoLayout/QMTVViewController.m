@@ -16,6 +16,7 @@
 #import "NSObject+FunctionExtension.h"
 #import "Example4ViewController.h"
 #import "Example5ViewController.h"
+#import "Example6ViewController.h"
 
 @interface QMTVViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -81,6 +82,10 @@
         }] animated:YES];
     } else if (indexPath.row == 5) {
         [self.navigationController pushViewController:[[Example5ViewController new] objcetThen:^(Example5ViewController * _Nonnull source) {
+            source.title = @"SafeArea Default Value";
+        }] animated:YES];
+    } else if (indexPath.row == 6) {
+        [self.navigationController pushViewController:[[Example6ViewController new] objcetThen:^(Example5ViewController * _Nonnull source) {
             source.title = @"SafeArea Default Value";
         }] animated:YES];
     }

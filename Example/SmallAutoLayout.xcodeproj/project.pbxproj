@@ -32,6 +32,7 @@
 		6F5B97BA2026E93200D033E4 /* ExampleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5B97B92026E93200D033E4 /* ExampleCell.m */; };
 		6F7062B820455C8E00450734 /* Example4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7062B720455C8E00450734 /* Example4ViewController.m */; };
 		6F7062BB20456ACA00450734 /* Example5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7062BA20456ACA00450734 /* Example5ViewController.m */; };
+		6FB59DA220E5226F00AA4CB3 /* Example6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB59DA120E5226F00AA4CB3 /* Example6ViewController.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		A3801DC7AA9931A3A0A1CE78 /* Pods_SmallAutoLayout_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15252C6AF19D61626BF5680F /* Pods_SmallAutoLayout_Example.framework */; };
 		CD7ED483B828C5F5B0152ACE /* Pods_SmallAutoLayout_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E34EB419FB3FD894AF6B191E /* Pods_SmallAutoLayout_Tests.framework */; };
@@ -95,6 +96,8 @@
 		6F7062B720455C8E00450734 /* Example4ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Example4ViewController.m; sourceTree = "<group>"; };
 		6F7062B920456ACA00450734 /* Example5ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Example5ViewController.h; sourceTree = "<group>"; };
 		6F7062BA20456ACA00450734 /* Example5ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Example5ViewController.m; sourceTree = "<group>"; };
+		6FB59DA020E5226F00AA4CB3 /* Example6ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Example6ViewController.h; sourceTree = "<group>"; };
+		6FB59DA120E5226F00AA4CB3 /* Example6ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Example6ViewController.m; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A44F12BA8DC21859A65BCADE /* Pods-SmallAutoLayout_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmallAutoLayout_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmallAutoLayout_Tests/Pods-SmallAutoLayout_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D0292C337E2A0E9E1647705D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -249,6 +252,8 @@
 				6F7062B720455C8E00450734 /* Example4ViewController.m */,
 				6F7062B920456ACA00450734 /* Example5ViewController.h */,
 				6F7062BA20456ACA00450734 /* Example5ViewController.m */,
+				6FB59DA020E5226F00AA4CB3 /* Example6ViewController.h */,
+				6FB59DA120E5226F00AA4CB3 /* Example6ViewController.m */,
 				6F5B97B82026E93200D033E4 /* ExampleCell.h */,
 				6F5B97B92026E93200D033E4 /* ExampleCell.m */,
 				6F5B97B62026D5BE00D033E4 /* UICollectionViewLeftAlignedLayout.h */,
@@ -442,6 +447,7 @@
 				6F3F460E2020BD9900B64003 /* Example2ViewController.m in Sources */,
 				6F08038A2026F51B007C015B /* HoverReusableView.m in Sources */,
 				6003F59E195388D20070C39A /* QMTVAppDelegate.m in Sources */,
+				6FB59DA220E5226F00AA4CB3 /* Example6ViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* QMTVViewController.m in Sources */,
 				6F5B97B42026C26900D033E4 /* QMTVFlowLayout.m in Sources */,
 				6F5B97B12026B63A00D033E4 /* Example3ViewController.m in Sources */,

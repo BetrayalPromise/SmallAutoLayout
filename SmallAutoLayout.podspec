@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SmallAutoLayout'
-  s.version          = '2.0.0'
+  s.version          = '2.0.1'
   s.summary          = 'Description of SmallAutoLayout.'
 
 # This description is used to generate tags and improve search results.

@@ -95,6 +95,14 @@
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
+- (Layout *)Size {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
+- (Layout *)Center {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
 - (Layout *)SafeAreaGuide {
     Layout * layout = [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
     layout.safeAreaGuideFlag = YES;
