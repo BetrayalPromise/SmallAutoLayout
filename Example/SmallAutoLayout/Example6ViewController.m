@@ -24,9 +24,8 @@
     v.backgroundColor = [UIColor redColor];
     [self.view addSubview:v];
     v.translatesAutoresizingMaskIntoConstraints = NO;
-//    [v.Center center:self.view];
-    [v.Size size:@(CGSizeMake(100, 20))];
-    [self.view.SafeAreaGuide equalTo:v];
+    [v.SafeAreaGuide.Size size:@(CGSizeMake(100, 100))];
+    [v.SafeAreaGuide.Center center:self.view.SafeAreaGuide];
 }
 
 

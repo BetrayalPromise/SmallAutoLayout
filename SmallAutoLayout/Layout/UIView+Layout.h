@@ -38,8 +38,10 @@
 @property (nonatomic, weak, readonly) Layout * Size;
 /// 复合属性 Center 不能使用操作单个约束的函数
 @property (nonatomic, weak, readonly) Layout * Center;
+/// 复合属性 Insert 不能使用操作单个约束的函数
+@property (nonatomic, weak, readonly) Layout * Insert;
 
-/// 用户自定义的视图一般而言其范围和安全区范围是样的只支持 Left Right Top Bottom 四个属性
-@property (nonatomic, weak, readonly) Layout * SafeAreaGuide;
+/// 用户自定义的视图一般而言其范围和安全区范围是一样的 支持 Left Right Top Bottom Size Insert 属性
+@property (nonatomic, weak, readonly) Layout * SafeAreaGuide API_AVAILABLE(ios(11.0),tvos(11.0));;
 
 @end

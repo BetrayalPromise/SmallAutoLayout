@@ -26,7 +26,7 @@
     v0.backgroundColor = [UIColor redColor];
     [v0.CenterX equalTo:self.view.CenterX];
     [self.view.CenterY equalTo:v0.CenterY];
-    [v0.Width equalTo:nil constant:100];
+    [v0.Width equalTo:nil trim:100];
     [v0.Height equalTo:v0.Width];
 
 

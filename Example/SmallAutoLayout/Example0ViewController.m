@@ -24,8 +24,8 @@
     v0.translatesAutoresizingMaskIntoConstraints = NO;
     v0.backgroundColor = [UIColor redColor];
 
-    [v0.Width equalTo:nil constant:100];
-    [v0.Height equalTo:nil constant:100];
+    [v0.Width equalTo:nil trim:100];
+    [v0.Height equalTo:nil trim:100];
     [v0.Top equalTo:self.view.SafeAreaGuide];
     [v0.Left equalTo:self.view.SafeAreaGuide];
 
@@ -35,8 +35,8 @@
     v1.backgroundColor = [UIColor redColor];
     [self.view.SafeAreaGuide.Top equalTo:v1.Top];
     [self.view.SafeAreaGuide.Right equalTo:v1.Right];
-    [v1.Width equalTo:nil constant:100];
-    [v1.Height equalTo:nil constant:100];
+    [v1.Width equalTo:nil trim:100];
+    [v1.Height equalTo:nil trim:100];
 
 
     UIView * v2 = [UIView new];
@@ -45,8 +45,8 @@
     v2.backgroundColor = [UIColor redColor];
     [v2.Bottom equalTo:self.view.SafeAreaGuide.Bottom];
     [self.view.SafeAreaGuide.Left equalTo:v2.Left];
-    [v2.Width equalTo:nil constant:100];
-    [v2.Height equalTo:nil constant:100];
+    [v2.Width equalTo:nil trim:100];
+    [v2.Height equalTo:nil trim:100];
 
 
     UIView * v3 = [UIView new];
@@ -55,8 +55,8 @@
     v3.backgroundColor = [UIColor redColor];
     [self.view.SafeAreaGuide.Bottom equalTo:v3.Bottom];
     [v3.Right equalTo:self.view.SafeAreaGuide.Right];
-    [v3.Width equalTo:nil constant:100];
-    [v3.Height equalTo:nil constant:100];
+    [v3.Width equalTo:nil trim:100];
+    [v3.Height equalTo:nil trim:100];
 }
 
 - (void)didReceiveMemoryWarning {

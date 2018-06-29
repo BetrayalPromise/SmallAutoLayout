@@ -103,6 +103,10 @@
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
+- (Layout *)Insert {
+    return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
+}
+
 - (Layout *)SafeAreaGuide {
     Layout * layout = [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
     layout.safeAreaGuideFlag = YES;
