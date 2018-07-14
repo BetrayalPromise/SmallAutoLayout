@@ -17,16 +17,7 @@ yeah
 [view0.Width equalTo:view1.Width];
 ```
 
-### view0.Width == view1.Width
-```obj-c
-(狗娘养的API)fuck
-[NSLayoutConstraint constraintWithItem:view0 attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:view1 attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:10];
-
-yeah
-[view0.Width equalTo:view1.Width trim:10];
-```
-
-### view0. == view1.Width + 10
+### view0.Width == view1.Width + 10
 ```obj-c
 (狗娘养的API)fuck
 [NSLayoutConstraint constraintWithItem:view0. attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:view1 attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:10];
