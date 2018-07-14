@@ -8,6 +8,11 @@
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
+
+
+ 单一的属性(Left, Right, Top, Bottom, Leading, Trailing, Width, Height, CenterX, CenterY, LastBaseline, Baseline, FirstBaseline, LeftMargin, RightMargin, TopMargin, BottomMargin, LeadingMargin, TrailingMargin ,CenterXMargin, CenterYMargin)是使用equalTo lessOrEqualTo greaterOrEqualTo三个函数处理约束
+ 符合属性(Size, Center, Insert)都有其对应的处理函数
+
 ### view0.Width == view1.Width
 ```obj-c
 (狗娘养的API)fuck
