@@ -8,12 +8,49 @@
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
+### view0.Width == view1.Width
 ```obj-c
-fuck
+(狗娘养的API)fuck
 [NSLayoutConstraint constraintWithItem:view0 attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:view1 attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:0.0];
 
 yeah
-[view0.Width equalTo:view1.Width]
+[view0.Width equalTo:view1.Width];
+```
+
+### view0.Width == view1.Width
+```obj-c
+(狗娘养的API)fuck
+[NSLayoutConstraint constraintWithItem:view0 attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:view1 attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:10];
+
+yeah
+[view0.Width equalTo:view1.Width trim:10];
+```
+
+### view0. == view1.Width + 10
+```obj-c
+(狗娘养的API)fuck
+[NSLayoutConstraint constraintWithItem:view0. attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:view1 attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:10];
+
+yeah
+[view0.Width equalTo:view1.Width trim:10];
+```
+
+###  view0.Left == self.view.safeArea.Left
+```obj-c
+(狗娘养的API)fuck
+[NSLayoutConstraint constraintWithItem:view0 attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:self.view.safeAreaLayoutGuide attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:0.0];
+
+yeah
+[view0.Left equalTo:self.view.SafeAreaGuide.Left];
+```
+
+### view0.Top == self.topLayoutGuide.Bottom
+```obj-c
+(狗娘养的API)fuck
+[NSLayoutConstraint constraintWithItem:self.topLayoutGuide attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:view0 attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:0.0];
+
+yeah
+[view0.Top equalTo:self.TopGudie.Bottom];
 ```
 
 
