@@ -5,13 +5,14 @@
 [![License](https://img.shields.io/cocoapods/l/SmallAutoLayout.svg?style=flat)](http://cocoapods.org/pods/SmallAutoLayout)
 [![Platform](https://img.shields.io/cocoapods/p/SmallAutoLayout.svg?style=flat)](http://cocoapods.org/pods/SmallAutoLayout)
 
+## NOTICE
+### 1.单一的属性(Left, Right, Top, Bottom, Leading, Trailing, Width, Height, CenterX, CenterY, LastBaseline, Baseline, FirstBaseline, LeftMargin, RightMargin, TopMargin, BottomMargin, LeadingMargin, TrailingMargin ,CenterXMargin, CenterYMargin)是使用equalTo lessOrEqualTo greaterOrEqualTo三个函数处理约束
+### 2.复合属性(Size, Center, Insert)都有其对应的处理函数
+### 3.试图的translatesAutoresizingMaskIntoConstraints属性交由使用者决定 SmallAutoLayout 并不会处理改属性 原因是 可能存在跟frame配合的情况
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-
- 单一的属性(Left, Right, Top, Bottom, Leading, Trailing, Width, Height, CenterX, CenterY, LastBaseline, Baseline, FirstBaseline, LeftMargin, RightMargin, TopMargin, BottomMargin, LeadingMargin, TrailingMargin ,CenterXMargin, CenterYMargin)是使用equalTo lessOrEqualTo greaterOrEqualTo三个函数处理约束
- 符合属性(Size, Center, Insert)都有其对应的处理函数
 
 ### view0.Width == view1.Width
 ```obj-c
