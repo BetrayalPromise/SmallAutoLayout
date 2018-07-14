@@ -8,6 +8,14 @@
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
+```obj-c
+fuck
+[NSLayoutConstraint constraintWithItem:view0 attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:view1 attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:0.0];
+
+yeah
+[view0.Width equalTo:view1.Width]
+```
+
 
 ## Requirements
 
