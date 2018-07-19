@@ -39,13 +39,17 @@
     }
     collectionView.delegate = self;
     collectionView.dataSource = self;
-    [collectionView.top$ equalTo:self.view.safeAreaGuide$.top$];
-    [collectionView.left$ equalTo:self.view.safeAreaGuide$.left$];
-    [collectionView.bottom$ equalTo:self.view.safeAreaGuide$.bottom$];
-    [collectionView.right$ equalTo:self.view.safeAreaGuide$.right$];
-
-
-//    UITextAlignment
+    if (@available(iOS 11.0, *)) {
+        [collectionView.top$ equalTo:self.view.safeAreaGuide$.top$];
+        [collectionView.left$ equalTo:self.view.safeAreaGuide$.left$];
+        [collectionView.bottom$ equalTo:self.view.safeAreaGuide$.bottom$];
+        [collectionView.right$ equalTo:self.view.safeAreaGuide$.right$];
+    } else {
+        [collectionView.top$ equalTo:self.topGuide$.bottom$];
+        [collectionView.left$ equalTo:self.view.left$];
+        [collectionView.bottom$ equalTo:self.bottomGuide$.top$];
+        [collectionView.right$ equalTo:self.view.right$];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

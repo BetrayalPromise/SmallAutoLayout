@@ -48,8 +48,9 @@
 /// 复合属性 Insert 不能使用操作单个约束的函数
 @property (nonatomic, strong, readonly) Layout * insert$;
 
-@property (nonatomic, copy) Layout *(^equalTo)(id other, CGFloat rate, CGFloat trim);
-@property (nonatomic, copy) Layout * (^offset)(CGFloat offset);
+@property (nonatomic, copy) Layout *(^equal)(id other);
+@property (nonatomic, copy) Layout * (^rate)(CGFloat rate);
+@property (nonatomic, copy) Layout * (^trim)(CGFloat trim);
 
 ////////////////////////////////////////////////////////////////////////////布局标记////////////////////////////////////////////////////////////////////////////
 @property (nonatomic, assign) BOOL safeAreaGuideFlag;

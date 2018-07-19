@@ -23,11 +23,12 @@
     [self.view addSubview:v];
     v.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [v.left$.right$.width$.height$ equalTo:self.view];
+    [v.top$.left$.bottom$.right$ equalTo:self.view];
     
     
-    v.left$.equalTo(self.view, 1.0, 0.0);
-    v.right$.equalTo(self.view, 1.0, 0.0);
+//    v.left$.equal(self.view);
+//    v.right$.equal(self.view);
+//    v.width$.rate(0.5).trim(10).equal(self.view.width$.rate(2));
 }
 
 - (void)didReceiveMemoryWarning {

@@ -57,8 +57,6 @@
     [v3.right$ equalTo:self.view.safeAreaGuide$.right$];
     [v3.width$ equalTo:nil trim:100];
     [v3.height$ equalTo:nil trim:100];
-    
-    [v3.height$.width$ equalTo:self.view];
 }
 
 - (void)didReceiveMemoryWarning {

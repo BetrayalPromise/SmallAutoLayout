@@ -41,8 +41,6 @@
 /// 复合属性 Insert 不能使用操作单个约束的函数
 @property (nonatomic, weak, readonly) Layout * insert$;
 
-@property (nonatomic, copy) Layout * (^offset)(CGFloat offset);
-
 /// 用户自定义的视图一般而言其范围和安全区范围是一样的 支持 Left Right Top Bottom Size Insert 属性
 @property (nonatomic, weak, readonly) Layout * safeAreaGuide$ API_AVAILABLE(ios(11.0),tvos(11.0));;
 

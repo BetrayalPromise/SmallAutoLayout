@@ -25,10 +25,17 @@
     v1.translatesAutoresizingMaskIntoConstraints = NO;
     v1.backgroundColor = [UIColor redColor];
 
-    [v1.safeAreaGuide$.top$ equalTo:self.view];
-    [v1.safeAreaGuide$.left$ equalTo:self.view];
-    [v1.safeAreaGuide$.bottom$ equalTo:self.view];
-    [v1.safeAreaGuide$.right$ equalTo:self.view];
+    if (@available(iOS 11.0, *)) {
+        [v1.safeAreaGuide$.top$ equalTo:self.view];
+        [v1.safeAreaGuide$.left$ equalTo:self.view];
+        [v1.safeAreaGuide$.bottom$ equalTo:self.view];
+        [v1.safeAreaGuide$.right$ equalTo:self.view];
+    } else {
+        [v1.top$ equalTo:self.topGuide$.bottom$];
+        [v1.left$ equalTo:self.view];
+        [v1.bottom$ equalTo:self.bottomGuide$.top$];
+        [v1.right$ equalTo:self.view];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
