@@ -52,22 +52,11 @@
 + (instancetype)buildWithItem:(id)item mark:(NSString *)mark {
     Layout * layout = [Layout new];
     layout.mark = mark;
-    layout.item = item;
+    layout.layoutItem = item;
     return layout;
 }
 
 - (NSLayoutConstraint *)make:(NSLayoutRelation)relation other:(id)other multiplier:(CGFloat)multiplier constant:(CGFloat)c {
-    id item = self.item;
-    NSLog(@"%@", item);
-    while (item) {
-        if ([item isKindOfClass:[UIView class]] || [item isKindOfClass:[UIViewController class]]) {
-            break;
-        } else {
-            item = ((Layout *)item).item;
-            NSLog(@"%@", item);
-        }
-    }
-    
     NSAssert(self.mark != nil, @"First item's LayoutAttribute must be exit");
     NSSet * set = [NSSet setWithObjects:@"center$", @"size$", @"safeAreaGuide$", @"topGuide$", @"bottomGuide$", nil];
     if ([set containsObject:self.mark]) {
@@ -76,7 +65,7 @@
     NSLayoutAttribute attribute = [self findAttribute:self.mark];
     NSAssert(attribute != NSLayoutAttributeNotAnAttribute, @"First item's LayoutAttribute must be exit");
     if (other == nil) {
-        if ([self.item isKindOfClass:[UIViewController class]]) {
+        if ([self.layoutItem isKindOfClass:[UIViewController class]]) {
             NSAssert(NO, @"设置控制器的topLayoutGuide bottomLayoutGuide是不生效的");
             return nil;
         } else {
@@ -84,7 +73,7 @@
             if (self.safeAreaGuideFlag) {
                 if ([self.mark isEqualToString:@"width$"]) {
                     if (@available(iOS 11.0, *)) {
-                        NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
+                        NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
                         constraint.active = YES;
                         return constraint;
                     } else {
@@ -93,7 +82,7 @@
                     }
                 } else if ([self.mark isEqualToString:@"height$"]) {
                     if (@available(iOS 11.0, *)) {
-                        NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
+                        NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
                         constraint.active = YES;
                         return constraint;
                     } else {
@@ -107,11 +96,11 @@
             } else {
 //            处理非安全区
                 if ([self.mark isEqualToString:@"width$"]) {
-                    NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
+                    NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
                     constraint.active = YES;
                     return constraint;
                 } else if ([self.mark isEqualToString:@"height$"]) {
-                    NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
+                    NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
                     constraint.active = YES;
                     return constraint;
                 } else {
@@ -121,14 +110,14 @@
             }
         }
     } else if ([other isKindOfClass:[NSNumber class]]) {
-        if ([self.item isKindOfClass:[UIViewController class]]) {
+        if ([self.layoutItem isKindOfClass:[UIViewController class]]) {
             NSAssert(NO, @"设置控制器的topLayoutGuide bottomLayoutGuide是不生效的");
             return nil;
         } else {
             if (self.safeAreaGuideFlag) {
                 if ([self.mark isEqualToString:@"width$"]) {
                     if (@available(iOS 11.0, *)) {
-                        NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
+                        NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
                         constraint.active = YES;
                         return constraint;
                     } else {
@@ -137,7 +126,7 @@
                     }
                 } else if ([self.mark isEqualToString:@"height$"]) {
                     if (@available(iOS 11.0, *)) {
-                        NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
+                        NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
                         constraint.active = YES;
                         return constraint;
                     } else {
@@ -151,11 +140,11 @@
             } else {
                 //            处理非安全区
                 if ([self.mark isEqualToString:@"width$"]) {
-                    NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
+                    NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
                     constraint.active = YES;
                     return constraint;
                 } else if ([self.mark isEqualToString:@"height$"]) {
-                    NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
+                    NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
                     constraint.active = YES;
                     return constraint;
                 } else {
@@ -165,8 +154,8 @@
             }
         }
     } else if ([other isKindOfClass:[UIView class]]) {
-        if ([self.item isKindOfClass:[UIViewController class]]) {
-            UIViewController * item0 = self.item;
+        if ([self.layoutItem isKindOfClass:[UIViewController class]]) {
+            UIViewController * item0 = self.layoutItem;
             NSLayoutAttribute attr0 = [self findAttribute:self.mark];
             id item1 = other;
             NSLayoutAttribute attr1 = attr0;
@@ -182,9 +171,9 @@
                 NSAssert(NO, @"Only View-View, UIViewController-View constraint");
                 return nil;
             }
-        } else if ([self.item isKindOfClass:[UIView class]]) {
+        } else if ([self.layoutItem isKindOfClass:[UIView class]]) {
             if (@available(iOS 11.0, *)) {
-                NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.safeAreaGuideFlag == YES ? [(UIView *)self.item safeAreaLayoutGuide] : self.item attribute:[self findAttribute:self.mark] relatedBy:(relation) toItem:other attribute:[self findAttribute:[self mark]] multiplier:multiplier constant:c];
+                NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.safeAreaGuideFlag == YES ? [(UIView *)self.layoutItem safeAreaLayoutGuide] : self.layoutItem attribute:[self findAttribute:self.mark] relatedBy:(relation) toItem:other attribute:[self findAttribute:[self mark]] multiplier:multiplier constant:c];
                 constraint.active = YES;
                 return constraint;
             } else {
@@ -196,10 +185,10 @@
             return nil;
         }
     } else if ([other isKindOfClass:[Layout class]]) {
-        if ([self.item isKindOfClass:[UIView class]] && [[(Layout *)other item] isKindOfClass:[UIView class]]) {
+        if ([self.layoutItem isKindOfClass:[UIView class]] && [[(Layout *)other layoutItem] isKindOfClass:[UIView class]]) {
             if (@available(iOS 11.0, *)) {
-                id item0 = self.safeAreaGuideFlag == YES ? [(UIView *)self.item safeAreaLayoutGuide] : self.item;
-                id item1 = [(Layout *)other safeAreaGuideFlag] == YES ? [(UIView *)[(Layout *)other item] safeAreaLayoutGuide] : [(Layout *)other item];
+                id item0 = self.safeAreaGuideFlag == YES ? [(UIView *)self.layoutItem safeAreaLayoutGuide] : self.layoutItem;
+                id item1 = [(Layout *)other safeAreaGuideFlag] == YES ? [(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] : [(Layout *)other layoutItem];
                 NSLayoutAttribute attr0 = [self findAttribute:self.mark];
                 
                 NSLayoutAttribute attr1 = [self findAttribute:[(Layout *)other mark]] == NSLayoutAttributeNotAnAttribute ? attr0 : [self findAttribute:[(Layout *)other mark]];
@@ -210,11 +199,11 @@
                 NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
                 return nil;
             }
-        } else if ([self.item isKindOfClass:[UIViewController class]] && [[(Layout *)other item] isKindOfClass:[UIView class]]) {
+        } else if ([self.layoutItem isKindOfClass:[UIViewController class]] && [[(Layout *)other layoutItem] isKindOfClass:[UIView class]]) {
             if (@available(iOS 11.0, *)) {
-                UIViewController * item0 = self.item;
+                UIViewController * item0 = self.layoutItem;
                 NSLayoutAttribute attr0 = [self findAttribute:self.mark];
-                id item1 = [(Layout *)other safeAreaGuideFlag] == YES ? [(UIView *)[(Layout *)other item] safeAreaLayoutGuide] : [(Layout *)other item];
+                id item1 = [(Layout *)other safeAreaGuideFlag] == YES ? [(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] : [(Layout *)other layoutItem];
                 NSLayoutAttribute attr1 = [self findAttribute:[(Layout *)other mark]] == NSLayoutAttributeNotAnAttribute ? attr0 : [self findAttribute:[(Layout *)other mark]];
                 if (self.topGuideFlag && !self.bottomGuideFlag) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.topLayoutGuide attribute:(attr0) relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
@@ -232,11 +221,11 @@
                 NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
                 return nil;
             }
-        } else if ([self.item isKindOfClass:[UIView class]] && [[(Layout *)other item] isKindOfClass:[UIViewController class]]) {
+        } else if ([self.layoutItem isKindOfClass:[UIView class]] && [[(Layout *)other layoutItem] isKindOfClass:[UIViewController class]]) {
             if (@available(iOS 11.0, *)) {
-                UIViewController * item0 = [(Layout *)other item];
+                UIViewController * item0 = [(Layout *)other layoutItem];
                 NSLayoutAttribute attr0 = [self findAttribute:[(Layout *)other mark]] == NSLayoutAttributeNotAnAttribute ? [self findAttribute:self.mark] : [self findAttribute:[(Layout *)other mark]];
-                id item1 = [self safeAreaGuideFlag] == YES ? [(UIView *)self.item safeAreaLayoutGuide] : self.item;
+                id item1 = [self safeAreaGuideFlag] == YES ? [(UIView *)self.layoutItem safeAreaLayoutGuide] : self.layoutItem;
                 NSLayoutAttribute attr1 = [self findAttribute:self.mark];
                 if ([(Layout *)other topGuideFlag] && ![(Layout *)other bottomGuideFlag]) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.topLayoutGuide attribute:(attr0) relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
@@ -319,7 +308,7 @@
 
 - (Layout *)top$ {
     if (!_top$) {
-        Layout * layout = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
         _top$ = layout;
         _top$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _top$.topGuideFlag = self.topGuideFlag;
@@ -330,7 +319,7 @@
 
 - (Layout *)left$ {
     if (!_left$) {
-        Layout * layout = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
         _left$ = layout;
         _left$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _left$.topGuideFlag = self.topGuideFlag;
@@ -341,7 +330,7 @@
 
 - (Layout *)bottom$ {
     if (!_bottom$) {
-        _bottom$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _bottom$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
         _bottom$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _bottom$.topGuideFlag = self.topGuideFlag;
         _bottom$.bottomGuideFlag = self.bottomGuideFlag;
@@ -351,7 +340,7 @@
 
 - (Layout *)right$ {
     if (!_right$) {
-        _right$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _right$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
         _right$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _right$.topGuideFlag = self.topGuideFlag;
         _right$.bottomGuideFlag = self.bottomGuideFlag;
@@ -362,7 +351,7 @@
 
 - (Layout *)leading$ {
     if (!_leading$) {
-        _leading$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _leading$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
         _leading$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _leading$.topGuideFlag = self.topGuideFlag;
         _leading$.bottomGuideFlag = self.bottomGuideFlag;
@@ -372,7 +361,7 @@
 
 - (Layout *)trailing$ {
     if (!_trailing$) {
-        _trailing$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _trailing$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
         _trailing$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _trailing$.topGuideFlag = self.topGuideFlag;
         _trailing$.bottomGuideFlag = self.bottomGuideFlag;
@@ -382,7 +371,7 @@
 
 - (Layout *)width$ {
     if (!_width$) {
-        _width$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _width$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
         _width$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _width$.topGuideFlag = self.topGuideFlag;
         _width$.bottomGuideFlag = self.bottomGuideFlag;
@@ -392,7 +381,7 @@
 
 - (Layout *)height$ {
     if (!_height$) {
-        _height$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _height$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
         _height$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _height$.topGuideFlag = self.topGuideFlag;
         _height$.bottomGuideFlag = self.bottomGuideFlag;
@@ -402,7 +391,7 @@
 
 - (Layout *)centerX$ {
     if (!_centerX$) {
-        _centerX$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _centerX$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
         _centerX$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _centerX$.topGuideFlag = self.topGuideFlag;
         _centerX$.bottomGuideFlag = self.bottomGuideFlag;
@@ -412,7 +401,7 @@
 
 - (Layout *)centerY$ {
     if (!_centerY$) {
-        _centerY$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _centerY$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
         _centerY$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _centerY$.topGuideFlag = self.topGuideFlag;
         _centerY$.bottomGuideFlag = self.bottomGuideFlag;
@@ -422,7 +411,7 @@
 
 - (Layout *)lastBaseline$ {
     if (!_lastBaseline$) {
-        _lastBaseline$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _lastBaseline$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
         _lastBaseline$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _lastBaseline$.topGuideFlag = self.topGuideFlag;
         _lastBaseline$.bottomGuideFlag = self.bottomGuideFlag;
@@ -432,7 +421,7 @@
 
 - (Layout *)baseline$ {
     if (!_baseline$) {
-        _baseline$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _baseline$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
         _baseline$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _baseline$.topGuideFlag = self.topGuideFlag;
         _baseline$.bottomGuideFlag = self.bottomGuideFlag;
@@ -442,7 +431,7 @@
 
 - (Layout *)firstBaseline$ {
     if (!_firstBaseline$) {
-        _firstBaseline$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _firstBaseline$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
         _firstBaseline$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _firstBaseline$.topGuideFlag = self.topGuideFlag;
         _firstBaseline$.bottomGuideFlag = self.bottomGuideFlag;
@@ -452,7 +441,7 @@
 
 - (Layout *)leftMargin$ {
     if (!_leftMargin$) {
-        _leftMargin$ =  [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _leftMargin$ =  [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
         _leftMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _leftMargin$.topGuideFlag = self.topGuideFlag;
         _leftMargin$.bottomGuideFlag = self.bottomGuideFlag;
@@ -462,7 +451,7 @@
 
 - (Layout *)rightMargin$ {
     if (!_rightMargin$) {
-        _rightMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _rightMargin$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
         _rightMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _rightMargin$.topGuideFlag = self.topGuideFlag;
         _rightMargin$.bottomGuideFlag = self.bottomGuideFlag;
@@ -472,7 +461,7 @@
 
 - (Layout *)topMargin$ {
     if (!_topMargin$) {
-        _topMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _topMargin$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
         _topMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _topMargin$.topGuideFlag = self.topGuideFlag;
         _topMargin$.bottomGuideFlag = self.bottomGuideFlag;
@@ -482,7 +471,7 @@
 
 - (Layout *)bottomMargin$ {
     if (!_bottomMargin$) {
-        _bottomMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _bottomMargin$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
         _bottomMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _bottomMargin$.topGuideFlag = self.topGuideFlag;
         _bottomMargin$.bottomGuideFlag = self.bottomGuideFlag;
@@ -492,7 +481,7 @@
 
 - (Layout *)leadingMargin$ {
     if (!_leadingMargin$) {
-        _leadingMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _leadingMargin$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
         _leadingMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _leadingMargin$.topGuideFlag = self.topGuideFlag;
         _leadingMargin$.bottomGuideFlag = self.bottomGuideFlag;
@@ -502,7 +491,7 @@
 
 - (Layout *)trailingMargin$ {
     if (!_trailingMargin$) {
-        _trailingMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _trailingMargin$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
         _trailingMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _trailingMargin$.topGuideFlag = self.topGuideFlag;
         _trailingMargin$.bottomGuideFlag = self.bottomGuideFlag;
@@ -512,7 +501,7 @@
 
 - (Layout *)centerXMargin$ {
     if (!_centerXMargin$) {
-        _centerXMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _centerXMargin$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
         _centerXMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _centerXMargin$.topGuideFlag = self.topGuideFlag;
         _centerXMargin$.bottomGuideFlag = self.bottomGuideFlag;
@@ -522,7 +511,7 @@
 
 - (Layout *)centerYMargin$ {
     if (!_centerYMargin$) {
-        _centerYMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _centerYMargin$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
         _centerYMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _centerYMargin$.topGuideFlag = self.topGuideFlag;
         _centerYMargin$.bottomGuideFlag = self.bottomGuideFlag;
@@ -532,7 +521,7 @@
 
 - (Layout *)center$ {
     if (!_center$) {
-        _center$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _center$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
         _center$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _center$.topGuideFlag = self.topGuideFlag;
         _center$.bottomGuideFlag = self.bottomGuideFlag;
@@ -542,7 +531,7 @@
 
 - (Layout *)size$ {
     if (!_size$) {
-        _size$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _size$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
         _size$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _size$.topGuideFlag = self.topGuideFlag;
         _size$.bottomGuideFlag = self.bottomGuideFlag;
@@ -613,9 +602,9 @@
     if (self.safeAreaGuideFlag) {
         if ([other isKindOfClass:[UIView class]]) {
             if (@available(iOS 11.0, *)) {
-                NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
+                NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
                 widthConstraint.active = YES;
-                NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
+                NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
                 heightConstraint.active = YES;
                 return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
             } else {
@@ -625,9 +614,9 @@
         } else if ([other isKindOfClass:[Layout class]]) {
             if ([(Layout *)other safeAreaGuideFlag]) {
                 if (@available(iOS 11.0, *)) {
-                    NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other item] safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
+                    NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
                     widthConstraint.active = YES;
-                    NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other item] safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
+                    NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
                     heightConstraint.active = YES;
                     return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
                 } else {
@@ -636,9 +625,9 @@
                 }
             } else {
                 if (@available(iOS 11.0, *)) {
-                    NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
+                    NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
                     widthConstraint.active = YES;
-                    NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
+                    NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
                     heightConstraint.active = YES;
                     return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
                 } else {
@@ -649,9 +638,9 @@
         } else if ([other isKindOfClass:[NSValue class]]) {
             CGSize size = [other CGSizeValue];
             if (@available(iOS 11.0, *)) {
-                NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:size.width + trim.width];
+                NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:size.width + trim.width];
                 widthConstraint.active = YES;
-                NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:size.height + trim.height];
+                NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:size.height + trim.height];
                 heightConstraint.active = YES;
                 return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
             } else {
@@ -664,17 +653,17 @@
         }
     } else {
         if ([other isKindOfClass:[UIView class]]) {
-            NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
+            NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
             widthConstraint.active = YES;
-            NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
+            NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
             heightConstraint.active = YES;
             return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
         } else if ([other isKindOfClass:[Layout class]]) {
             if ([(Layout *)other safeAreaGuideFlag]) {
                 if (@available(iOS 11.0, *)) {
-                    NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other item] safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
+                    NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
                     widthConstraint.active = YES;
-                    NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other item] safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
+                    NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
                     heightConstraint.active = YES;
                     return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
                 } else {
@@ -683,17 +672,17 @@
                     return nil;
                 }
             } else {
-                NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
+                NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
                 widthConstraint.active = YES;
-                NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
+                NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
                 heightConstraint.active = YES;
                 return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
             }
         } else if ([other isKindOfClass:[NSValue class]]) {
             CGSize size = [other CGSizeValue];
-            NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:size.width + trim.width];
+            NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:size.width + trim.width];
                 widthConstraint.active = YES;
-            NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:size.height + trim.height];
+            NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:size.height + trim.height];
             heightConstraint.active = YES;
             return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
         } else {
@@ -709,15 +698,15 @@
 
 - (NSArray <NSLayoutConstraint *> *)center:(id _Nullable)other trim:(CGSize)trim {
     if ([other isKindOfClass:[UIView class]]) {
-        NSLayoutConstraint * centerXConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeCenterX) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeCenterX) multiplier:1.0 constant:trim.width];
+        NSLayoutConstraint * centerXConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeCenterX) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeCenterX) multiplier:1.0 constant:trim.width];
         centerXConstraint.active = YES;
-        NSLayoutConstraint * centerYConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeCenterY) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeCenterY) multiplier:1.0 constant:trim.height];
+        NSLayoutConstraint * centerYConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeCenterY) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeCenterY) multiplier:1.0 constant:trim.height];
         centerYConstraint.active = YES;
         return [NSArray arrayWithObjects:centerXConstraint, centerYConstraint, nil];
     } else if ([other isKindOfClass:[self class]]) {
-        NSLayoutConstraint * centerXConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeCenterX) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeCenterX) multiplier:1.0 constant:trim.width];
+        NSLayoutConstraint * centerXConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeCenterX) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeCenterX) multiplier:1.0 constant:trim.width];
         centerXConstraint.active = YES;
-        NSLayoutConstraint * centerYConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeCenterY) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeCenterY) multiplier:1.0 constant:trim.height];
+        NSLayoutConstraint * centerYConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeCenterY) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeCenterY) multiplier:1.0 constant:trim.height];
         centerYConstraint.active = YES;
         return [NSArray arrayWithObjects:centerXConstraint, centerYConstraint, nil];
     } else {
@@ -734,13 +723,13 @@
     if (self.safeAreaGuideFlag) {
         if ([other isKindOfClass:[UIView class]]) {
             if (@available(iOS 11.0, *)) {
-                NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
+                NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
                 topConstraint.active = YES;
-                NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
+                NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
                 leftConstraint.active = YES;
-                NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
+                NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
                 bottomConstraint.active = YES;
-                NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
+                NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
                 rightConstraint.active = YES;
                 return [NSArray arrayWithObjects:topConstraint, leftConstraint, bottomConstraint, rightConstraint, nil];
             } else {
@@ -750,13 +739,13 @@
         } else if ([other isKindOfClass:[Layout class]]) {
             if ([(Layout *)other safeAreaGuideFlag]) {
                 if (@available(iOS 11.0, *)) {
-                    NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other item] safeAreaLayoutGuide] attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
+                    NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
                     topConstraint.active = YES;
-                    NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other item] safeAreaLayoutGuide] attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
+                    NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
                     leftConstraint.active = YES;
-                    NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other item] safeAreaLayoutGuide] attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
+                    NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
                     bottomConstraint.active = YES;
-                    NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other item] safeAreaLayoutGuide] attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
+                    NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
                     rightConstraint.active = YES;
                     return [NSArray arrayWithObjects:topConstraint, leftConstraint, bottomConstraint, rightConstraint, nil];
                 } else {
@@ -765,13 +754,13 @@
                 }
             } else {
                 if (@available(iOS 11.0, *)) {
-                    NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
+                    NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
                     topConstraint.active = YES;
-                    NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
+                    NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
                     leftConstraint.active = YES;
-                    NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
+                    NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
                     bottomConstraint.active = YES;
-                    NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
+                    NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
                     rightConstraint.active = YES;
                     return [NSArray arrayWithObjects:topConstraint, leftConstraint, bottomConstraint, rightConstraint, nil];
                 } else {
@@ -785,25 +774,25 @@
         }
     } else {
         if ([other isKindOfClass:[UIView class]]) {
-            NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
+            NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
             topConstraint.active = YES;
-            NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
+            NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
             leftConstraint.active = YES;
-            NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
+            NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
             bottomConstraint.active = YES;
-            NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
+            NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
             rightConstraint.active = YES;
             return [NSArray arrayWithObjects:topConstraint, leftConstraint, bottomConstraint, rightConstraint, nil];
         } else if ([other isKindOfClass:[Layout class]]) {
             if ([(Layout *)other safeAreaGuideFlag]) {
                 if (@available(iOS 11.0, *)) {
-                    NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other item] safeAreaLayoutGuide] attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
+                    NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
                     topConstraint.active = YES;
-                    NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other item] safeAreaLayoutGuide] attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
+                    NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
                     leftConstraint.active = YES;
-                    NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other item] safeAreaLayoutGuide] attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
+                    NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
                     bottomConstraint.active = YES;
-                    NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other item] safeAreaLayoutGuide] attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
+                    NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
                     rightConstraint.active = YES;
                     return [NSArray arrayWithObjects:topConstraint, leftConstraint, bottomConstraint, rightConstraint, nil];
                 } else {
@@ -811,13 +800,13 @@
                     return nil;
                 }
             } else {
-                NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
+                NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
                 topConstraint.active = YES;
-                NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
+                NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
                 leftConstraint.active = YES;
-                NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
+                NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
                 bottomConstraint.active = YES;
-                NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other item] attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
+                NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
                 rightConstraint.active = YES;
                 return [NSArray arrayWithObjects:topConstraint, leftConstraint, bottomConstraint, rightConstraint, nil];
             }

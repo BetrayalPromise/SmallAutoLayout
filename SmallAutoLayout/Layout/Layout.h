@@ -57,7 +57,7 @@
 @property (nonatomic, assign) BOOL topGuideFlag;
 @property (nonatomic, assign) BOOL bottomGuideFlag;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@property (nonatomic, weak) id item;
+@property (nonatomic, weak) id layoutItem;
 @property (nonatomic, ) Layout * next;
 @property (nonatomic, copy) NSString * mark;
 + (instancetype)buildWithItem:(id)item mark:(NSString *)mark;
