@@ -25,7 +25,7 @@
     v0.backgroundColor = [UIColor redColor];
 
     [v0.width$ equalTo:nil trim:100];
-    [v0.height$ equalTo:nil trim:100];
+    [v0.height$ equalTo:@(100)];
     if (@available(iOS 11.0, *)) {
         [v0.top$ equalTo:self.view.safeAreaGuide$];
         [v0.left$ equalTo:self.view.safeAreaGuide$];

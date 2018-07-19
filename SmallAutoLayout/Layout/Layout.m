@@ -58,7 +58,7 @@
 
 - (NSLayoutConstraint *)make:(NSLayoutRelation)relation other:(id)other multiplier:(CGFloat)multiplier constant:(CGFloat)c {
     NSAssert(self.mark != nil, @"First item's LayoutAttribute must be exit");
-    NSSet * set = [NSSet setWithObjects:@"center$", @"size$", @"safeAreaGuide$", @"topGuide$", @"bottomGuide$", nil];
+    NSSet * set = [NSSet setWithObjects:@"center$", @"size$", @"insert$", @"safeAreaGuide$", @"topGuide$", @"bottomGuide$", nil];
     if ([set containsObject:self.mark]) {
         NSAssert(NO, @"%@没有缺省值", self.mark);
     }
@@ -313,6 +313,7 @@
         _top$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _top$.topGuideFlag = self.topGuideFlag;
         _top$.bottomGuideFlag = self.bottomGuideFlag;
+        _top$.head = self;
     }
     return _top$;
 }
@@ -324,6 +325,7 @@
         _left$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _left$.topGuideFlag = self.topGuideFlag;
         _left$.bottomGuideFlag = self.bottomGuideFlag;
+        _left$.head = self;
     }
     return _left$;
 }
@@ -334,6 +336,7 @@
         _bottom$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _bottom$.topGuideFlag = self.topGuideFlag;
         _bottom$.bottomGuideFlag = self.bottomGuideFlag;
+        _bottom$.head = self;
     }
     return _bottom$;
 }
@@ -344,7 +347,7 @@
         _right$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _right$.topGuideFlag = self.topGuideFlag;
         _right$.bottomGuideFlag = self.bottomGuideFlag;
-        self.next = _right$;
+        _right$.head = self;
     }
     return _right$;
 }
@@ -355,6 +358,7 @@
         _leading$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _leading$.topGuideFlag = self.topGuideFlag;
         _leading$.bottomGuideFlag = self.bottomGuideFlag;
+        _leading$.head = self;
     }
     return _leading$;
 }
@@ -365,6 +369,7 @@
         _trailing$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _trailing$.topGuideFlag = self.topGuideFlag;
         _trailing$.bottomGuideFlag = self.bottomGuideFlag;
+        _trailing$.head = self;
     }
     return _trailing$;
 }
@@ -375,6 +380,7 @@
         _width$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _width$.topGuideFlag = self.topGuideFlag;
         _width$.bottomGuideFlag = self.bottomGuideFlag;
+        _width$.head = self;
     }
     return _width$;
 }
@@ -385,6 +391,7 @@
         _height$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _height$.topGuideFlag = self.topGuideFlag;
         _height$.bottomGuideFlag = self.bottomGuideFlag;
+        _height$.head = self;
     }
     return _height$;
 }
@@ -395,6 +402,7 @@
         _centerX$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _centerX$.topGuideFlag = self.topGuideFlag;
         _centerX$.bottomGuideFlag = self.bottomGuideFlag;
+        _centerX$.head = self;
     }
     return _centerX$;
 }
@@ -405,6 +413,7 @@
         _centerY$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _centerY$.topGuideFlag = self.topGuideFlag;
         _centerY$.bottomGuideFlag = self.bottomGuideFlag;
+        _centerY$.head = self;
     }
     return _centerY$;
 }
@@ -415,6 +424,7 @@
         _lastBaseline$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _lastBaseline$.topGuideFlag = self.topGuideFlag;
         _lastBaseline$.bottomGuideFlag = self.bottomGuideFlag;
+        _lastBaseline$.head = self;
     }
     return _lastBaseline$;
 }
@@ -425,6 +435,7 @@
         _baseline$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _baseline$.topGuideFlag = self.topGuideFlag;
         _baseline$.bottomGuideFlag = self.bottomGuideFlag;
+        _baseline$.head = self;
     }
     return _baseline$;
 }
@@ -435,6 +446,7 @@
         _firstBaseline$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _firstBaseline$.topGuideFlag = self.topGuideFlag;
         _firstBaseline$.bottomGuideFlag = self.bottomGuideFlag;
+        _firstBaseline$.head = self;
     }
     return _firstBaseline$;
 }
@@ -445,6 +457,7 @@
         _leftMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _leftMargin$.topGuideFlag = self.topGuideFlag;
         _leftMargin$.bottomGuideFlag = self.bottomGuideFlag;
+        _leftMargin$.head = self;
     }
     return _leftMargin$;
 }
@@ -455,6 +468,7 @@
         _rightMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _rightMargin$.topGuideFlag = self.topGuideFlag;
         _rightMargin$.bottomGuideFlag = self.bottomGuideFlag;
+        _leftMargin$.head = self;
     }
     return _rightMargin$;
 }
@@ -465,6 +479,7 @@
         _topMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _topMargin$.topGuideFlag = self.topGuideFlag;
         _topMargin$.bottomGuideFlag = self.bottomGuideFlag;
+        _topMargin$.head = self;
     }
     return _topMargin$;
 }
@@ -475,6 +490,7 @@
         _bottomMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _bottomMargin$.topGuideFlag = self.topGuideFlag;
         _bottomMargin$.bottomGuideFlag = self.bottomGuideFlag;
+        _bottom$.head = self;
     }
     return _bottomMargin$;
 }
@@ -485,6 +501,7 @@
         _leadingMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _leadingMargin$.topGuideFlag = self.topGuideFlag;
         _leadingMargin$.bottomGuideFlag = self.bottomGuideFlag;
+        _leadingMargin$.head = self;
     }
     return _leadingMargin$;
 }
@@ -495,6 +512,7 @@
         _trailingMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _trailingMargin$.topGuideFlag = self.topGuideFlag;
         _trailingMargin$.bottomGuideFlag = self.bottomGuideFlag;
+        _trailingMargin$.head = self;
     }
     return _trailingMargin$;
 }
@@ -505,6 +523,7 @@
         _centerXMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _centerXMargin$.topGuideFlag = self.topGuideFlag;
         _centerXMargin$.bottomGuideFlag = self.bottomGuideFlag;
+        _centerXMargin$.head = self;
     }
     return _centerXMargin$;
 }
@@ -515,6 +534,7 @@
         _centerYMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _centerYMargin$.topGuideFlag = self.topGuideFlag;
         _centerYMargin$.bottomGuideFlag = self.bottomGuideFlag;
+        _centerYMargin$.head = self;
     }
     return _centerYMargin$;
 }
@@ -525,6 +545,7 @@
         _center$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _center$.topGuideFlag = self.topGuideFlag;
         _center$.bottomGuideFlag = self.bottomGuideFlag;
+        _center$.head = self;
     }
     return _center$;
 }
@@ -535,6 +556,7 @@
         _size$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _size$.topGuideFlag = self.topGuideFlag;
         _size$.bottomGuideFlag = self.bottomGuideFlag;
+        _size$.head = self;
     }
     return _size$;
 }
@@ -545,24 +567,86 @@
         _insert$.safeAreaGuideFlag = self.safeAreaGuideFlag;
         _insert$.topGuideFlag = self.topGuideFlag;
         _insert$.bottomGuideFlag = self.bottomGuideFlag;
+        _insert$.head = self;
     }
     return _insert$;
 }
 
-- (NSLayoutConstraint *)equalTo:(id)other rate:(CGFloat)rate trim:(CGFloat)c {
-    return [self make:(NSLayoutRelationEqual) other:other multiplier:rate constant:c];
+- (NSArray <NSLayoutConstraint *> *)equalTo:(id)other rate:(CGFloat)rate trim:(CGFloat)trim {
+    NSMutableArray <NSLayoutConstraint *> * constraints = [NSMutableArray array];
+    Layout * node = self;
+    NSSet * ignoreSet = [NSSet setWithObjects:@"safeAreaGuide$", @"topGuide$", @"bottomGuide$", nil];
+    NSSet * specialSet = [NSSet setWithObjects:@"center$", @"size$", @"insert$", nil];
+    while (node) {
+        if ([ignoreSet containsObject:node.mark]) {
+            node = node.head;
+            continue;
+        } else {
+            if ([specialSet containsObject:node.mark]) {
+                if ([node.mark isEqualToString:@"center$"]) {
+                    [constraints addObjectsFromArray:[node.center$ center:other]];
+                } else if ([node.mark isEqualToString:@"size$"]) {
+                    [constraints addObjectsFromArray:[node.size$ size:other]];
+                } else if ([node.mark isEqualToString:@"insert$"]) {
+                    [constraints addObjectsFromArray:[node.insert$ insert:other]];
+                } else {
+                    NSAssert(NO, @"unknow:%@", node.mark);
+                }
+                node = node.head;
+            } else {
+                NSLayoutConstraint * constraint = [node make:NSLayoutRelationEqual other:other multiplier:rate constant:trim];
+                [constraints addObject:constraint];
+                node = node.head;
+            }
+        }
+    }
+    return constraints;
+//    return [self make:(NSLayoutRelationEqual) other:other multiplier:rate constant:c];
 }
 
-- (NSLayoutConstraint *)equalTo:(id)other rate:(CGFloat)rate {
-    return [self make:(NSLayoutRelationEqual) other:other multiplier:rate constant:0.0];
+- (NSArray <NSLayoutConstraint *> *)equalTo:(id)other rate:(CGFloat)rate {
+    return [self equalTo:other rate:rate trim:0.0];
+//    return [self make:(NSLayoutRelationEqual) other:other multiplier:rate constant:0.0];
 }
 
-- (NSLayoutConstraint *)equalTo:(id)other trim:(CGFloat)c {
-    return [self make:(NSLayoutRelationEqual) other:other multiplier:1.0 constant:c];
+- (NSArray <NSLayoutConstraint *> *)equalTo:(id)other trim:(CGFloat)trim {
+    return [self equalTo:other rate:1.0 trim:trim];
+//    return [self make:(NSLayoutRelationEqual) other:other multiplier:1.0 constant:c];
 }
 
-- (NSLayoutConstraint *)equalTo:(id)other {
-    return [self make:(NSLayoutRelationEqual) other:other multiplier:1.0 constant:0.0];
+- (NSArray <NSLayoutConstraint *> *)equalTo:(id)other {
+//    NSMutableArray <NSLayoutConstraint *> * constraints = [NSMutableArray array];
+//    Layout * node = self;
+//    NSSet * ignoreSet = [NSSet setWithObjects:@"safeAreaGuide$", @"topGuide$", @"bottomGuide$", nil];
+//    NSSet * specialSet = [NSSet setWithObjects:@"center$", @"size$", @"insert$", nil];
+//    while (node) {
+//        if ([ignoreSet containsObject:node.mark]) {
+//            node = node.head;
+//            continue;
+//        } else {
+//            if ([specialSet containsObject:node.mark]) {
+//                if ([node.mark isEqualToString:@"center$"]) {
+//                    [constraints addObjectsFromArray:[node.center$ center:other]];
+//                } else if ([node.mark isEqualToString:@"size$"]) {
+//                    [constraints addObjectsFromArray:[node.size$ size:other]];
+//                } else if ([node.mark isEqualToString:@"insert$"]) {
+//                    [constraints addObjectsFromArray:[node.insert$ insert:other]];
+//                } else {
+//                    NSAssert(NO, @"unknow:%@", node.mark);
+//                }
+//                node = node.head;
+//            } else {
+//                NSLayoutConstraint * constraint = [node make:NSLayoutRelationEqual other:other multiplier:1.0 constant:0.0];
+//                [constraints addObject:constraint];
+//                node = node.head;
+//            }
+//        }
+//    }
+//    return constraints;
+    
+//    return [self make:(NSLayoutRelationEqual) other:other multiplier:1.0 constant:0.0];
+    
+    return [self equalTo:other rate:1.0 trim:0];
 }
 
 - (NSLayoutConstraint *)lessOrEqualTo:(id)other rate:(CGFloat)rate trim:(CGFloat)c {
@@ -819,6 +903,10 @@
 
 - (NSArray <NSLayoutConstraint *> *)insert:(id _Nonnull)other {
     return [self insert:other trim:(UIEdgeInsetsZero)];
+}
+
+inline NSSet * ignoreSet() {
+    return nil;
 }
 
 - (void)dealloc {

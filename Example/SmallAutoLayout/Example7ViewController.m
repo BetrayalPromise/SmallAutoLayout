@@ -19,12 +19,25 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIView * v = [[UIView alloc] initWithFrame:CGRectZero];
-    [self.view addSubview:v];
-    v.translatesAutoresizingMaskIntoConstraints = NO;
+    UIView * v0 = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.view addSubview:v0];
+    v0.backgroundColor = UIColor.redColor;
+    v0.translatesAutoresizingMaskIntoConstraints = NO;
+    /// 已支持
+    [v0.top$.left$.bottom$.right$ equalTo:self.view.safeAreaGuide$];
     
-    [v.top$.left$.bottom$.right$ equalTo:self.view];
+    UIView * v1 = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.view addSubview:v1];
+    v1.backgroundColor = UIColor.blueColor;
+    v1.translatesAutoresizingMaskIntoConstraints = NO;
+    /// 已支持
+//    [v1.center$ equalTo:self.view rate:10];
+//    /// 已支持
+//    [v1.size$ equalTo:@(CGSizeMake(100, 100))];
+    [v1.size$.left$.top$ equalTo:self.view];
     
+    /// 待支持
+//    v.size$.equal(self.view.size$.rate(0.4));
     
 //    v.left$.equal(self.view);
 //    v.right$.equal(self.view);
