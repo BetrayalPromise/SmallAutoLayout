@@ -170,11 +170,11 @@
             NSLayoutAttribute attr0 = [self findAttribute:self.mark];
             id item1 = other;
             NSLayoutAttribute attr1 = attr0;
-            if (self.topLayoutGuideFlag && !self.bottomLayoutGuideFlag) {
+            if (self.topGuideFlag && !self.bottomGuideFlag) {
                 NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.topLayoutGuide attribute:attr0 relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
                 constraint.active = YES;
                 return constraint;
-            } else if (!self.topLayoutGuideFlag && self.bottomLayoutGuideFlag) {
+            } else if (!self.topGuideFlag && self.bottomGuideFlag) {
                 NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.bottomLayoutGuide attribute:attr0 relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
                 constraint.active = YES;
                 return constraint;
@@ -216,11 +216,11 @@
                 NSLayoutAttribute attr0 = [self findAttribute:self.mark];
                 id item1 = [(Layout *)other safeAreaGuideFlag] == YES ? [(UIView *)[(Layout *)other item] safeAreaLayoutGuide] : [(Layout *)other item];
                 NSLayoutAttribute attr1 = [self findAttribute:[(Layout *)other mark]] == NSLayoutAttributeNotAnAttribute ? attr0 : [self findAttribute:[(Layout *)other mark]];
-                if (self.topLayoutGuideFlag && !self.bottomLayoutGuideFlag) {
+                if (self.topGuideFlag && !self.bottomGuideFlag) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.topLayoutGuide attribute:(attr0) relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
                     constraint.active = YES;
                     return constraint;
-                } else if (!self.topLayoutGuideFlag && self.bottomLayoutGuideFlag) {
+                } else if (!self.topGuideFlag && self.bottomGuideFlag) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.bottomLayoutGuide attribute:(attr0) relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
                     constraint.active = YES;
                     return constraint;
@@ -238,11 +238,11 @@
                 NSLayoutAttribute attr0 = [self findAttribute:[(Layout *)other mark]] == NSLayoutAttributeNotAnAttribute ? [self findAttribute:self.mark] : [self findAttribute:[(Layout *)other mark]];
                 id item1 = [self safeAreaGuideFlag] == YES ? [(UIView *)self.item safeAreaLayoutGuide] : self.item;
                 NSLayoutAttribute attr1 = [self findAttribute:self.mark];
-                if ([(Layout *)other topLayoutGuideFlag] && ![(Layout *)other bottomLayoutGuideFlag]) {
+                if ([(Layout *)other topGuideFlag] && ![(Layout *)other bottomGuideFlag]) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.topLayoutGuide attribute:(attr0) relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
                     constraint.active = YES;
                     return constraint;
-                } else if (![(Layout *)other topLayoutGuideFlag] && [(Layout *)other bottomLayoutGuideFlag]) {
+                } else if (![(Layout *)other topGuideFlag] && [(Layout *)other bottomGuideFlag]) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.bottomLayoutGuide attribute:(attr0) relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
                     constraint.active = YES;
                     return constraint;
@@ -322,8 +322,8 @@
         Layout * layout = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
         _top$ = layout;
         _top$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _top$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _top$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _top$.topGuideFlag = self.topGuideFlag;
+        _top$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _top$;
 }
@@ -333,8 +333,8 @@
         Layout * layout = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
         _left$ = layout;
         _left$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _left$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _left$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _left$.topGuideFlag = self.topGuideFlag;
+        _left$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _left$;
 }
@@ -343,8 +343,8 @@
     if (!_bottom$) {
         _bottom$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
         _bottom$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _bottom$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _bottom$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _bottom$.topGuideFlag = self.topGuideFlag;
+        _bottom$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _bottom$;
 }
@@ -353,8 +353,8 @@
     if (!_right$) {
         _right$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
         _right$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _right$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _right$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _right$.topGuideFlag = self.topGuideFlag;
+        _right$.bottomGuideFlag = self.bottomGuideFlag;
         self.next = _right$;
     }
     return _right$;
@@ -364,8 +364,8 @@
     if (!_leading$) {
         _leading$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
         _leading$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _leading$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _leading$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _leading$.topGuideFlag = self.topGuideFlag;
+        _leading$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _leading$;
 }
@@ -374,8 +374,8 @@
     if (!_trailing$) {
         _trailing$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
         _trailing$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _trailing$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _trailing$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _trailing$.topGuideFlag = self.topGuideFlag;
+        _trailing$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _trailing$;
 }
@@ -384,8 +384,8 @@
     if (!_width$) {
         _width$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
         _width$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _width$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _width$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _width$.topGuideFlag = self.topGuideFlag;
+        _width$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _width$;
 }
@@ -394,8 +394,8 @@
     if (!_height$) {
         _height$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
         _height$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _height$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _height$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _height$.topGuideFlag = self.topGuideFlag;
+        _height$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _height$;
 }
@@ -404,8 +404,8 @@
     if (!_centerX$) {
         _centerX$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
         _centerX$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _centerX$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _centerX$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _centerX$.topGuideFlag = self.topGuideFlag;
+        _centerX$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _centerX$;
 }
@@ -414,8 +414,8 @@
     if (!_centerY$) {
         _centerY$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
         _centerY$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _centerY$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _centerY$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _centerY$.topGuideFlag = self.topGuideFlag;
+        _centerY$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _centerY$;
 }
@@ -424,8 +424,8 @@
     if (!_lastBaseline$) {
         _lastBaseline$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
         _lastBaseline$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _lastBaseline$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _lastBaseline$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _lastBaseline$.topGuideFlag = self.topGuideFlag;
+        _lastBaseline$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _lastBaseline$;
 }
@@ -434,8 +434,8 @@
     if (!_baseline$) {
         _baseline$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
         _baseline$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _baseline$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _baseline$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _baseline$.topGuideFlag = self.topGuideFlag;
+        _baseline$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _baseline$;
 }
@@ -444,8 +444,8 @@
     if (!_firstBaseline$) {
         _firstBaseline$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
         _firstBaseline$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _firstBaseline$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _firstBaseline$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _firstBaseline$.topGuideFlag = self.topGuideFlag;
+        _firstBaseline$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _firstBaseline$;
 }
@@ -454,8 +454,8 @@
     if (!_leftMargin$) {
         _leftMargin$ =  [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
         _leftMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _leftMargin$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _leftMargin$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _leftMargin$.topGuideFlag = self.topGuideFlag;
+        _leftMargin$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _leftMargin$;
 }
@@ -464,8 +464,8 @@
     if (!_rightMargin$) {
         _rightMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
         _rightMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _rightMargin$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _rightMargin$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _rightMargin$.topGuideFlag = self.topGuideFlag;
+        _rightMargin$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _rightMargin$;
 }
@@ -474,8 +474,8 @@
     if (!_topMargin$) {
         _topMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
         _topMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _topMargin$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _topMargin$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _topMargin$.topGuideFlag = self.topGuideFlag;
+        _topMargin$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _topMargin$;
 }
@@ -484,8 +484,8 @@
     if (!_bottomMargin$) {
         _bottomMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
         _bottomMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _bottomMargin$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _bottomMargin$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _bottomMargin$.topGuideFlag = self.topGuideFlag;
+        _bottomMargin$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _bottomMargin$;
 }
@@ -494,8 +494,8 @@
     if (!_leadingMargin$) {
         _leadingMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
         _leadingMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _leadingMargin$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _leadingMargin$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _leadingMargin$.topGuideFlag = self.topGuideFlag;
+        _leadingMargin$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _leadingMargin$;
 }
@@ -504,8 +504,8 @@
     if (!_trailingMargin$) {
         _trailingMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
         _trailingMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _trailingMargin$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _trailingMargin$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _trailingMargin$.topGuideFlag = self.topGuideFlag;
+        _trailingMargin$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _trailingMargin$;
 }
@@ -514,8 +514,8 @@
     if (!_centerXMargin$) {
         _centerXMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
         _centerXMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _centerXMargin$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _centerXMargin$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _centerXMargin$.topGuideFlag = self.topGuideFlag;
+        _centerXMargin$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _centerXMargin$;
 }
@@ -524,8 +524,8 @@
     if (!_centerYMargin$) {
         _centerYMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
         _centerYMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _centerYMargin$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _centerYMargin$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _centerYMargin$.topGuideFlag = self.topGuideFlag;
+        _centerYMargin$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _centerYMargin$;
 }
@@ -534,8 +534,8 @@
     if (!_center$) {
         _center$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
         _center$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _center$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _center$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _center$.topGuideFlag = self.topGuideFlag;
+        _center$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _center$;
 }
@@ -544,8 +544,8 @@
     if (!_size$) {
         _size$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
         _size$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _size$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _size$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _size$.topGuideFlag = self.topGuideFlag;
+        _size$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _size$;
 }
@@ -554,8 +554,8 @@
     if (!_insert$) {
         _insert$ = [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];;
         _insert$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _insert$.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _insert$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        _insert$.topGuideFlag = self.topGuideFlag;
+        _insert$.bottomGuideFlag = self.bottomGuideFlag;
     }
     return _insert$;
 }

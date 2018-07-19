@@ -13,13 +13,13 @@
 
 - (Layout *)topGuide$ {
     Layout * layout = [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
-    layout.topLayoutGuideFlag = YES;
+    layout.topGuideFlag = YES;
     return layout;
 }
 
 - (Layout *)bottomGuide$ {
     Layout * layout = [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
-    layout.bottomLayoutGuideFlag = YES;
+    layout.bottomGuideFlag = YES;
     return layout;
 }
 
