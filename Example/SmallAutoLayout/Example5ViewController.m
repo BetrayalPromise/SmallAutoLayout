@@ -25,10 +25,10 @@
     v1.translatesAutoresizingMaskIntoConstraints = NO;
     v1.backgroundColor = [UIColor redColor];
 
-    [v1.SafeAreaGuide.Top equalTo:self.view];
-    [v1.SafeAreaGuide.Left equalTo:self.view];
-    [v1.SafeAreaGuide.Bottom equalTo:self.view];
-    [v1.SafeAreaGuide.Right equalTo:self.view];
+    [v1.safeAreaGuide$.top$ equalTo:self.view];
+    [v1.safeAreaGuide$.left$ equalTo:self.view];
+    [v1.safeAreaGuide$.bottom$ equalTo:self.view];
+    [v1.safeAreaGuide$.right$ equalTo:self.view];
 }
 
 - (void)didReceiveMemoryWarning {

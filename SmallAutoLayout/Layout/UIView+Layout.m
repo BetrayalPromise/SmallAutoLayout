@@ -11,103 +11,103 @@
 
 @implementation UIView (Layout)
 
-- (Layout *)Left {
+- (Layout *)left$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)Right {
+- (Layout *)right$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)Top {
+- (Layout *)top$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)Bottom {
+- (Layout *)bottom$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)Leading {
+- (Layout *)leading$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)Trailing {
+- (Layout *)trailing$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)Width {
+- (Layout *)width$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)Height {
+- (Layout *)height$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)CenterX {
+- (Layout *)centerX$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)CenterY {
+- (Layout *)centerY$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)LastBaseline {
+- (Layout *)lastBaseline$ {
      return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)Baseline {
+- (Layout *)baseline$ {
      return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)FirstBaseline {
+- (Layout *)firstBaseline$ {
      return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)LeftMargin {
+- (Layout *)leftMargin$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)RightMargin {
+- (Layout *)rightMargin$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)TopMargin {
+- (Layout *)topMargin$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)BottomMargin {
+- (Layout *)bottomMargin$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)LeadingMargin {
+- (Layout *)leadingMargin$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)TrailingMargin {
+- (Layout *)trailingMargin$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)CenterXMargin {
+- (Layout *)centerXMargin$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)CenterYMargin {
+- (Layout *)centerYMargin$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)Size {
+- (Layout *)size$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)Center {
+- (Layout *)center$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)Insert {
+- (Layout *)insert$ {
     return [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
 }
 
-- (Layout *)SafeAreaGuide {
+- (Layout *)safeAreaGuide$ {
     Layout * layout = [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
     layout.safeAreaGuideFlag = YES;
     return layout;

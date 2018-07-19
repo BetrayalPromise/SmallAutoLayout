@@ -11,13 +11,13 @@
 
 @implementation UIViewController (Layout)
 
-- (Layout *)TopGuide {
+- (Layout *)topGuide$ {
     Layout * layout = [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
     layout.topLayoutGuideFlag = YES;
     return layout;
 }
 
-- (Layout *)BottomGuide {
+- (Layout *)bottomGuide$ {
     Layout * layout = [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
     layout.bottomLayoutGuideFlag = YES;
     return layout;

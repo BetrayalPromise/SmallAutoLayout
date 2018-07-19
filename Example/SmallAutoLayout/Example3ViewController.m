@@ -39,10 +39,10 @@
     }
     collectionView.delegate = self;
     collectionView.dataSource = self;
-    [collectionView.Top equalTo:self.view.SafeAreaGuide.Top];
-    [collectionView.Left equalTo:self.view.SafeAreaGuide.Left];
-    [collectionView.Bottom equalTo:self.view.SafeAreaGuide.Bottom];
-    [collectionView.Right equalTo:self.view.SafeAreaGuide.Right];
+    [collectionView.top$ equalTo:self.view.safeAreaGuide$.top$];
+    [collectionView.left$ equalTo:self.view.safeAreaGuide$.left$];
+    [collectionView.bottom$ equalTo:self.view.safeAreaGuide$.bottom$];
+    [collectionView.right$ equalTo:self.view.safeAreaGuide$.right$];
 
 
 //    UITextAlignment

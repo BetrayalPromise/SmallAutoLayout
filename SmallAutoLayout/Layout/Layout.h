@@ -8,43 +8,56 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import <UIKit/UIGeometry.h>
 @class NSLayoutConstraint;
 
+
 @interface Layout : NSObject
-////////////////////////////////////////////////////////////////////////////单一属性////////////////////////////////////////////////////////////////////////////
-@property (nonatomic, strong, readonly) Layout * Left;
-@property (nonatomic, strong, readonly) Layout * Right;
+
+@property (nonatomic, strong, readonly) Layout * left$;
+@property (nonatomic, strong, readonly) Layout * right$;
 /// Support topLayoutGuide bottomLayoutGuide
-@property (nonatomic, strong, readonly) Layout * Top;
+@property (nonatomic, strong, readonly) Layout * top$;
 /// Support topLayoutGuide bottomLayoutGuide
-@property (nonatomic, strong, readonly) Layout * Bottom;
-@property (nonatomic, strong, readonly) Layout * Leading;
-@property (nonatomic, strong, readonly) Layout * Trailing;
-@property (nonatomic, strong, readonly) Layout * Width;
-@property (nonatomic, strong, readonly) Layout * Height;
-@property (nonatomic, strong, readonly) Layout * CenterX;
-@property (nonatomic, strong, readonly) Layout * CenterY;
-@property (nonatomic, strong, readonly) Layout * LastBaseline;
-@property (nonatomic, strong, readonly) Layout * Baseline;
-@property (nonatomic, strong, readonly) Layout * FirstBaseline;
-@property (nonatomic, strong, readonly) Layout * LeftMargin;
-@property (nonatomic, strong, readonly) Layout * RightMargin;
-@property (nonatomic, strong, readonly) Layout * TopMargin;
-@property (nonatomic, strong, readonly) Layout * BottomMargin;
-@property (nonatomic, strong, readonly) Layout * LeadingMargin;
-@property (nonatomic, strong, readonly) Layout * TrailingMargin;
-@property (nonatomic, strong, readonly) Layout * CenterXMargin;
-@property (nonatomic, strong, readonly) Layout * CenterYMargin;
+@property (nonatomic, strong, readonly) Layout * bottom$;
+@property (nonatomic, strong, readonly) Layout * leading$;
+@property (nonatomic, strong, readonly) Layout * trailing$;
+@property (nonatomic, strong, readonly) Layout * width$;
+@property (nonatomic, strong, readonly) Layout * height$;
+@property (nonatomic, strong, readonly) Layout * centerX$;
+@property (nonatomic, strong, readonly) Layout * centerY$;
+
+@property (nonatomic, strong, readonly) Layout * lastBaseline$;
+@property (nonatomic, strong, readonly) Layout * baseline$;
+@property (nonatomic, strong, readonly) Layout * firstBaseline$;
+@property (nonatomic, strong, readonly) Layout * leftMargin$;
+@property (nonatomic, strong, readonly) Layout * rightMargin$;
+@property (nonatomic, strong, readonly) Layout * topMargin$;
+@property (nonatomic, strong, readonly) Layout * bottomMargin$;
+@property (nonatomic, strong, readonly) Layout * leadingMargin$;
+@property (nonatomic, strong, readonly) Layout * trailingMargin$;
+@property (nonatomic, strong, readonly) Layout * centerXMargin$;
+@property (nonatomic, strong, readonly) Layout * centerYMargin$;
+
 ////////////////////////////////////////////////////////////////////////////复合属性////////////////////////////////////////////////////////////////////////////
-@property (nonatomic, strong, readonly) Layout * Center;
-@property (nonatomic, strong, readonly) Layout * Size;
-@property (nonatomic, strong, readonly) Layout * Insert;
+
+/// 复合属性 Size 不能使用操单个约束的函数
+@property (nonatomic, strong, readonly) Layout * size$;
+/// 复合属性 Center 不能使用操作单个约束的函数
+@property (nonatomic, strong, readonly) Layout * center$;
+/// 复合属性 Insert 不能使用操作单个约束的函数
+@property (nonatomic, strong, readonly) Layout * insert$;
+
+@property (nonatomic, copy) Layout *(^equalTo)(id other, CGFloat rate, CGFloat trim);
+@property (nonatomic, copy) Layout * (^offset)(CGFloat offset);
+
 ////////////////////////////////////////////////////////////////////////////布局标记////////////////////////////////////////////////////////////////////////////
 @property (nonatomic, assign) BOOL safeAreaGuideFlag;
 @property (nonatomic, assign) BOOL topLayoutGuideFlag;
 @property (nonatomic, assign) BOOL bottomLayoutGuideFlag;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @property (nonatomic, weak) id item;
+@property (nonatomic, strong) Layout * next;
 @property (nonatomic, copy) NSString * mark;
 + (instancetype)buildWithItem:(id)item mark:(NSString *)mark;
 

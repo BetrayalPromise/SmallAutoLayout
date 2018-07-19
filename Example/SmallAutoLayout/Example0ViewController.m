@@ -24,39 +24,41 @@
     v0.translatesAutoresizingMaskIntoConstraints = NO;
     v0.backgroundColor = [UIColor redColor];
 
-    [v0.Width equalTo:nil trim:100];
-    [v0.Height equalTo:nil trim:100];
-    [v0.Top equalTo:self.view.SafeAreaGuide];
-    [v0.Left equalTo:self.view.SafeAreaGuide];
+    [v0.width$ equalTo:nil trim:100];
+    [v0.height$ equalTo:nil trim:100];
+    [v0.top$ equalTo:self.view.safeAreaGuide$];
+    [v0.left$ equalTo:self.view.safeAreaGuide$];
 
     UIView * v1 = [UIView new];
     [self.view addSubview:v1];
     v1.translatesAutoresizingMaskIntoConstraints = NO;
     v1.backgroundColor = [UIColor redColor];
-    [self.view.SafeAreaGuide.Top equalTo:v1.Top];
-    [self.view.SafeAreaGuide.Right equalTo:v1.Right];
-    [v1.Width equalTo:nil trim:100];
-    [v1.Height equalTo:nil trim:100];
+    [self.view.safeAreaGuide$.top$ equalTo:v1.top$];
+    [self.view.safeAreaGuide$.right$ equalTo:v1.right$];
+    [v1.width$ equalTo:nil trim:100];
+    [v1.height$ equalTo:nil trim:100];
 
 
     UIView * v2 = [UIView new];
     [self.view addSubview:v2];
     v2.translatesAutoresizingMaskIntoConstraints = NO;
     v2.backgroundColor = [UIColor redColor];
-    [v2.Bottom equalTo:self.view.SafeAreaGuide.Bottom];
-    [self.view.SafeAreaGuide.Left equalTo:v2.Left];
-    [v2.Width equalTo:nil trim:100];
-    [v2.Height equalTo:nil trim:100];
+    [v2.bottom$ equalTo:self.view.safeAreaGuide$.bottom$];
+    [self.view.safeAreaGuide$.left$ equalTo:v2.left$];
+    [v2.width$ equalTo:nil trim:100];
+    [v2.height$ equalTo:nil trim:100];
 
 
     UIView * v3 = [UIView new];
     [self.view addSubview:v3];
     v3.translatesAutoresizingMaskIntoConstraints = NO;
     v3.backgroundColor = [UIColor redColor];
-    [self.view.SafeAreaGuide.Bottom equalTo:v3.Bottom];
-    [v3.Right equalTo:self.view.SafeAreaGuide.Right];
-    [v3.Width equalTo:nil trim:100];
-    [v3.Height equalTo:nil trim:100];
+    [self.view.safeAreaGuide$.bottom$ equalTo:v3.bottom$];
+    [v3.right$ equalTo:self.view.safeAreaGuide$.right$];
+    [v3.width$ equalTo:nil trim:100];
+    [v3.height$ equalTo:nil trim:100];
+    
+    [v3.height$.width$ equalTo:self.view];
 }
 
 - (void)didReceiveMemoryWarning {

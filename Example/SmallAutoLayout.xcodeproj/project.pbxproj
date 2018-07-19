@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11A4A537201F1F72007D3B96 /* QMTVShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A4A536201F1F72007D3B96 /* QMTVShowCell.m */; };
+		11ECD23D21004647002F5EA1 /* Example7ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11ECD23C21004647002F5EA1 /* Example7ViewController.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -51,6 +52,8 @@
 /* Begin PBXFileReference section */
 		11A4A535201F1F72007D3B96 /* QMTVShowCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QMTVShowCell.h; sourceTree = "<group>"; };
 		11A4A536201F1F72007D3B96 /* QMTVShowCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QMTVShowCell.m; sourceTree = "<group>"; };
+		11ECD23B21004647002F5EA1 /* Example7ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Example7ViewController.h; sourceTree = "<group>"; };
+		11ECD23C21004647002F5EA1 /* Example7ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Example7ViewController.m; sourceTree = "<group>"; };
 		15252C6AF19D61626BF5680F /* Pods_SmallAutoLayout_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmallAutoLayout_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3703C468640228C903A9164B /* SmallAutoLayout.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SmallAutoLayout.podspec; path = ../SmallAutoLayout.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		3EDA80EB74F50DE036CC14CA /* Pods-SmallAutoLayout_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmallAutoLayout_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmallAutoLayout_Example/Pods-SmallAutoLayout_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -254,6 +257,8 @@
 				6F7062BA20456ACA00450734 /* Example5ViewController.m */,
 				6FB59DA020E5226F00AA4CB3 /* Example6ViewController.h */,
 				6FB59DA120E5226F00AA4CB3 /* Example6ViewController.m */,
+				11ECD23B21004647002F5EA1 /* Example7ViewController.h */,
+				11ECD23C21004647002F5EA1 /* Example7ViewController.m */,
 				6F5B97B82026E93200D033E4 /* ExampleCell.h */,
 				6F5B97B92026E93200D033E4 /* ExampleCell.m */,
 				6F5B97B62026D5BE00D033E4 /* UICollectionViewLeftAlignedLayout.h */,
@@ -450,6 +455,7 @@
 				6FB59DA220E5226F00AA4CB3 /* Example6ViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* QMTVViewController.m in Sources */,
 				6F5B97B42026C26900D033E4 /* QMTVFlowLayout.m in Sources */,
+				11ECD23D21004647002F5EA1 /* Example7ViewController.m in Sources */,
 				6F5B97B12026B63A00D033E4 /* Example3ViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				6F5B97B72026D5BE00D033E4 /* UICollectionViewLeftAlignedLayout.m in Sources */,

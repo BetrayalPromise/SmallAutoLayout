@@ -17,6 +17,7 @@
 #import "Example4ViewController.h"
 #import "Example5ViewController.h"
 #import "Example6ViewController.h"
+#import "Example7ViewController.h"
 
 @interface QMTVViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -28,22 +29,30 @@
 
 - (void)loadView {
     [super loadView];
-    _datasource = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6"];
+    _datasource = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7"];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+
     UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectZero style:(UITableViewStylePlain)];
     [self.view addSubview:tableView];
     tableView.translatesAutoresizingMaskIntoConstraints = NO;
     tableView.delegate = self;
     tableView.dataSource = self;
     [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
-    [tableView.SafeAreaGuide.Top equalTo:self.view.SafeAreaGuide.Top];
-    [tableView.SafeAreaGuide.Left equalTo:self.view.SafeAreaGuide.Left];
-    [tableView.SafeAreaGuide.Bottom equalTo:self.view.SafeAreaGuide.Bottom];
-    [tableView.SafeAreaGuide.Right equalTo:self.view.SafeAreaGuide.Right];
+    if (@available(iOS 11.0, *)) {
+        [tableView.safeAreaGuide$.top$ equalTo:self.view.safeAreaGuide$.top$];
+        [tableView.safeAreaGuide$.left$ equalTo:self.view.safeAreaGuide$.left$];
+        [tableView.safeAreaGuide$.bottom$ equalTo:self.view.safeAreaGuide$.bottom$];
+        [tableView.safeAreaGuide$.right$ equalTo:self.view.safeAreaGuide$.right$];
+    } else {
+        [tableView.top$ equalTo:self.bottomGuide$.bottom$];
+        [tableView.left$ equalTo:self.view.left$];
+        [tableView.bottom$ equalTo:self.bottomGuide$.top$];
+        [tableView.right$ equalTo:self.view.right$];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,6 +95,10 @@
         }] animated:YES];
     } else if (indexPath.row == 6) {
         [self.navigationController pushViewController:[[Example6ViewController new] objcetThen:^(Example5ViewController * _Nonnull source) {
+            source.title = @"SafeArea Default Value";
+        }] animated:YES];
+    } else if (indexPath.row == 7) {
+        [self.navigationController pushViewController:[[Example7ViewController new] objcetThen:^(Example5ViewController * _Nonnull source) {
             source.title = @"SafeArea Default Value";
         }] animated:YES];
     }

@@ -11,37 +11,39 @@
 
 @interface UIView (Layout)
 
-@property (nonatomic, weak, readonly) Layout * Left;
-@property (nonatomic, weak, readonly) Layout * Right;
-@property (nonatomic, weak, readonly) Layout * Top;
-@property (nonatomic, weak, readonly) Layout * Bottom;
-@property (nonatomic, weak, readonly) Layout * Leading;
-@property (nonatomic, weak, readonly) Layout * Trailing;
-@property (nonatomic, weak, readonly) Layout * Width;
-@property (nonatomic, weak, readonly) Layout * Height;
-@property (nonatomic, weak, readonly) Layout * CenterX;
-@property (nonatomic, weak, readonly) Layout * CenterY;
+@property (nonatomic, weak, readonly) Layout * left$;
+@property (nonatomic, weak, readonly) Layout * right$;
+@property (nonatomic, weak, readonly) Layout * top$;
+@property (nonatomic, weak, readonly) Layout * bottom$;
+@property (nonatomic, weak, readonly) Layout * leading$;
+@property (nonatomic, weak, readonly) Layout * trailing$;
+@property (nonatomic, weak, readonly) Layout * width$;
+@property (nonatomic, weak, readonly) Layout * height$;
+@property (nonatomic, weak, readonly) Layout * centerX$;
+@property (nonatomic, weak, readonly) Layout * centerY$;
 
-@property (nonatomic, weak, readonly) Layout * LastBaseline;
-@property (nonatomic, weak, readonly) Layout * Baseline;
-@property (nonatomic, weak, readonly) Layout * FirstBaseline;
-@property (nonatomic, weak, readonly) Layout * LeftMargin;
-@property (nonatomic, weak, readonly) Layout * RightMargin;
-@property (nonatomic, weak, readonly) Layout * TopMargin;
-@property (nonatomic, weak, readonly) Layout * BottomMargin;
-@property (nonatomic, weak, readonly) Layout * LeadingMargin;
-@property (nonatomic, weak, readonly) Layout * TrailingMargin;
-@property (nonatomic, weak, readonly) Layout * CenterXMargin;
-@property (nonatomic, weak, readonly) Layout * CenterYMargin;
+@property (nonatomic, weak, readonly) Layout * lastBaseline$;
+@property (nonatomic, weak, readonly) Layout * baseline$;
+@property (nonatomic, weak, readonly) Layout * firstBaseline$;
+@property (nonatomic, weak, readonly) Layout * leftMargin$;
+@property (nonatomic, weak, readonly) Layout * rightMargin$;
+@property (nonatomic, weak, readonly) Layout * topMargin$;
+@property (nonatomic, weak, readonly) Layout * bottomMargin$;
+@property (nonatomic, weak, readonly) Layout * leadingMargin$;
+@property (nonatomic, weak, readonly) Layout * trailingMargin$;
+@property (nonatomic, weak, readonly) Layout * centerXMargin$;
+@property (nonatomic, weak, readonly) Layout * centerYMargin$;
 
 /// 复合属性 Size 不能使用操单个约束的函数
-@property (nonatomic, weak, readonly) Layout * Size;
+@property (nonatomic, weak, readonly) Layout * size$;
 /// 复合属性 Center 不能使用操作单个约束的函数
-@property (nonatomic, weak, readonly) Layout * Center;
+@property (nonatomic, weak, readonly) Layout * center$;
 /// 复合属性 Insert 不能使用操作单个约束的函数
-@property (nonatomic, weak, readonly) Layout * Insert;
+@property (nonatomic, weak, readonly) Layout * insert$;
+
+@property (nonatomic, copy) Layout * (^offset)(CGFloat offset);
 
 /// 用户自定义的视图一般而言其范围和安全区范围是一样的 支持 Left Right Top Bottom Size Insert 属性
-@property (nonatomic, weak, readonly) Layout * SafeAreaGuide API_AVAILABLE(ios(11.0),tvos(11.0));;
+@property (nonatomic, weak, readonly) Layout * safeAreaGuide$ API_AVAILABLE(ios(11.0),tvos(11.0));;
 
 @end

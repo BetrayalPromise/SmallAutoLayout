@@ -11,32 +11,39 @@
 
 @interface Layout ()
 
-@property (nonatomic, strong) Layout * Left;
-@property (nonatomic, strong) Layout * Right;
-@property (nonatomic, strong) Layout * Top;
-@property (nonatomic, strong) Layout * Bottom;
-@property (nonatomic, strong) Layout * Leading;
-@property (nonatomic, strong) Layout * Trailing;
-@property (nonatomic, strong) Layout * Width;
-@property (nonatomic, strong) Layout * Height;
-@property (nonatomic, strong) Layout * CenterX;
-@property (nonatomic, strong) Layout * CenterY;
-@property (nonatomic, strong) Layout * LastBaseline;
-@property (nonatomic, strong) Layout * Baseline;
-@property (nonatomic, strong) Layout * FirstBaseline;
-@property (nonatomic, strong) Layout * LeftMargin;
-@property (nonatomic, strong) Layout * RightMargin;
-@property (nonatomic, strong) Layout * TopMargin;
-@property (nonatomic, strong) Layout * BottomMargin;
-@property (nonatomic, strong) Layout * LeadingMargin;
-@property (nonatomic, strong) Layout * TrailingMargin;
-@property (nonatomic, strong) Layout * CenterXMargin;
-@property (nonatomic, strong) Layout * CenterYMargin;
+@property (nonatomic, strong) Layout * left$;
+@property (nonatomic, strong) Layout * right$;
+/// Support topLayoutGuide bottomLayoutGuide
+@property (nonatomic, strong) Layout * top$;
+/// Support topLayoutGuide bottomLayoutGuide
+@property (nonatomic, strong) Layout * bottom$;
+@property (nonatomic, strong) Layout * leading$;
+@property (nonatomic, strong) Layout * trailing$;
+@property (nonatomic, strong) Layout * width$;
+@property (nonatomic, strong) Layout * height$;
+@property (nonatomic, strong) Layout * centerX$;
+@property (nonatomic, strong) Layout * centerY$;
 
+@property (nonatomic, strong) Layout * lastBaseline$;
+@property (nonatomic, strong) Layout * baseline$;
+@property (nonatomic, strong) Layout * firstBaseline$;
+@property (nonatomic, strong) Layout * leftMargin$;
+@property (nonatomic, strong) Layout * rightMargin$;
+@property (nonatomic, strong) Layout * topMargin$;
+@property (nonatomic, strong) Layout * bottomMargin$;
+@property (nonatomic, strong) Layout * leadingMargin$;
+@property (nonatomic, strong) Layout * trailingMargin$;
+@property (nonatomic, strong) Layout * centerXMargin$;
+@property (nonatomic, strong) Layout * centerYMargin$;
 
-@property (nonatomic, strong) Layout * Center;
-@property (nonatomic, strong) Layout * Size;
-@property (nonatomic, strong) Layout * Insert;
+////////////////////////////////////////////////////////////////////////////复合属性////////////////////////////////////////////////////////////////////////////
+
+/// 复合属性 Size 不能使用操单个约束的函数
+@property (nonatomic, strong) Layout * size$;
+/// 复合属性 Center 不能使用操作单个约束的函数
+@property (nonatomic, strong) Layout * center$;
+/// 复合属性 Insert 不能使用操作单个约束的函数
+@property (nonatomic, strong) Layout * insert$;
 
 @end
 
@@ -50,8 +57,19 @@
 }
 
 - (NSLayoutConstraint *)make:(NSLayoutRelation)relation other:(id)other multiplier:(CGFloat)multiplier constant:(CGFloat)c {
+    id item = self.item;
+    NSLog(@"%@", item);
+    while (item) {
+        if ([item isKindOfClass:[UIView class]] || [item isKindOfClass:[UIViewController class]]) {
+            break;
+        } else {
+            item = ((Layout *)item).item;
+            NSLog(@"%@", item);
+        }
+    }
+    
     NSAssert(self.mark != nil, @"First item's LayoutAttribute must be exit");
-    NSSet * set = [NSSet setWithObjects:@"Center", @"Size", @"SafeAreaGuide", @"TopGuide", @"BottomGuide", nil];
+    NSSet * set = [NSSet setWithObjects:@"center$", @"size$", @"safeAreaGuide$", @"topGuide$", @"bottomGuide$", nil];
     if ([set containsObject:self.mark]) {
         NSAssert(NO, @"%@没有缺省值", self.mark);
     }
@@ -64,7 +82,7 @@
         } else {
 //            处理安全区 自定试图的范围一般来说是跟安全区范围一致的
             if (self.safeAreaGuideFlag) {
-                if ([self.mark isEqualToString:@"Width"]) {
+                if ([self.mark isEqualToString:@"width$"]) {
                     if (@available(iOS 11.0, *)) {
                         NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
                         constraint.active = YES;
@@ -73,7 +91,7 @@
                         NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
                         return nil;
                     }
-                } else if ([self.mark isEqualToString:@"Height"]) {
+                } else if ([self.mark isEqualToString:@"height$"]) {
                     if (@available(iOS 11.0, *)) {
                         NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
                         constraint.active = YES;
@@ -88,11 +106,11 @@
                 }
             } else {
 //            处理非安全区
-                if ([self.mark isEqualToString:@"Width"]) {
+                if ([self.mark isEqualToString:@"width$"]) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
                     constraint.active = YES;
                     return constraint;
-                } else if ([self.mark isEqualToString:@"Height"]) {
+                } else if ([self.mark isEqualToString:@"height$"]) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
                     constraint.active = YES;
                     return constraint;
@@ -108,7 +126,7 @@
             return nil;
         } else {
             if (self.safeAreaGuideFlag) {
-                if ([self.mark isEqualToString:@"Width"]) {
+                if ([self.mark isEqualToString:@"width$"]) {
                     if (@available(iOS 11.0, *)) {
                         NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
                         constraint.active = YES;
@@ -117,7 +135,7 @@
                         NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
                         return nil;
                     }
-                } else if ([self.mark isEqualToString:@"Height"]) {
+                } else if ([self.mark isEqualToString:@"height$"]) {
                     if (@available(iOS 11.0, *)) {
                         NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.item safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
                         constraint.active = YES;
@@ -132,11 +150,11 @@
                 }
             } else {
                 //            处理非安全区
-                if ([self.mark isEqualToString:@"Width"]) {
+                if ([self.mark isEqualToString:@"width$"]) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
                     constraint.active = YES;
                     return constraint;
-                } else if ([self.mark isEqualToString:@"Height"]) {
+                } else if ([self.mark isEqualToString:@"height$"]) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.item attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
                     constraint.active = YES;
                     return constraint;
@@ -246,306 +264,300 @@
 }
 
 - (NSLayoutAttribute)findAttribute:(NSString *)name {
-    if ([name isEqualToString:@"Left"]) {
+    if ([name isEqualToString:@"left$"]) {
         return NSLayoutAttributeLeft;
-    } else if ([name isEqualToString:@"Right"]) {
+    } else if ([name isEqualToString:@"right$"]) {
         return NSLayoutAttributeRight;
-    } else if ([name isEqualToString:@"Top"]) {
+    } else if ([name isEqualToString:@"top$"]) {
         return NSLayoutAttributeTop;
-    } else if ([name isEqualToString:@"Bottom"]) {
+    } else if ([name isEqualToString:@"bottom$"]) {
         return NSLayoutAttributeBottom;
-    } else if ([name isEqualToString:@"Leading"]) {
+    } else if ([name isEqualToString:@"leading$"]) {
         return NSLayoutAttributeLeading;
-    } else if ([name isEqualToString:@"Trailing"]) {
+    } else if ([name isEqualToString:@"trailing$"]) {
         return NSLayoutAttributeTrailing;
-    } else if ([name isEqualToString:@"Width"]) {
+    } else if ([name isEqualToString:@"width$"]) {
         return NSLayoutAttributeWidth;
-    } else if ([name isEqualToString:@"Height"]) {
+    } else if ([name isEqualToString:@"height$"]) {
         return NSLayoutAttributeHeight;
-    } else if ([name isEqualToString:@"CenterX"]) {
+    } else if ([name isEqualToString:@"centerX$"]) {
         return NSLayoutAttributeCenterX;
-    } else if ([name isEqualToString:@"CenterY"]) {
+    } else if ([name isEqualToString:@"centerY$"]) {
         return NSLayoutAttributeCenterY;
-    } else if ([name isEqualToString:@"LastBaseline"]) {
+    } else if ([name isEqualToString:@"lastBaseline$"]) {
         return NSLayoutAttributeLastBaseline;
-    } else if ([name isEqualToString:@"Baseline"]) {
+    } else if ([name isEqualToString:@"baseline$"]) {
         return NSLayoutAttributeBaseline;
-    } else if ([name isEqualToString:@"FirstBaseline"]) {
+    } else if ([name isEqualToString:@"firstBaseline$"]) {
         return NSLayoutAttributeFirstBaseline;
-    } else if ([name isEqualToString:@"LeftMargin"]) {
+    } else if ([name isEqualToString:@"leftMargin$"]) {
         return NSLayoutAttributeLeftMargin;
-    } else if ([name isEqualToString:@"RightMargin"]) {
+    } else if ([name isEqualToString:@"rightMargin$"]) {
         return NSLayoutAttributeRightMargin;
-    } else if ([name isEqualToString:@"TopMargin"]) {
+    } else if ([name isEqualToString:@"topMargin$"]) {
         return NSLayoutAttributeTopMargin;
-    } else if ([name isEqualToString:@"BottomMargin"]) {
+    } else if ([name isEqualToString:@"bottomMargin$"]) {
         return NSLayoutAttributeBottomMargin;
-    } else if ([name isEqualToString:@"LeadingMargin"]) {
+    } else if ([name isEqualToString:@"leadingMargin$"]) {
         return NSLayoutAttributeLeadingMargin;
-    } else if ([name isEqualToString:@"TrailingMargin"]) {
+    } else if ([name isEqualToString:@"trailingMargin$"]) {
         return NSLayoutAttributeTrailingMargin;
-    } else if ([name isEqualToString:@"CenterXMargin"]) {
+    } else if ([name isEqualToString:@"centerXMargin$"]) {
         return NSLayoutAttributeCenterXWithinMargins;
-    } else if ([name isEqualToString:@"CenterYMargin"]) {
+    } else if ([name isEqualToString:@"centerYMargin$"]) {
         return NSLayoutAttributeCenterYWithinMargins;
-    } else if ([name isEqualToString:@"SafeAreaGuide"]) {
+    } else if ([name isEqualToString:@"safeAreaGuide$"]) {
         return NSLayoutAttributeNotAnAttribute;
-    } else if ([name isEqualToString:@"TopGuide"]) {
+    } else if ([name isEqualToString:@"topGuide$"]) {
         return NSLayoutAttributeNotAnAttribute;
-    } else if ([name isEqualToString:@"BottomGuide"]) {
+    } else if ([name isEqualToString:@"bottomGuide$"]) {
          return NSLayoutAttributeNotAnAttribute;
     } else {
         return NSLayoutAttributeNotAnAttribute;
     }
 }
 
-- (Layout *)Top {
-    if (!_Top) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"Top"];
-        _Top = layout;
-        _Top.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _Top.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _Top.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
-        return _Top;
+- (Layout *)top$ {
+    if (!_top$) {
+        Layout * layout = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _top$ = layout;
+        _top$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _top$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _top$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _Top;
+    return _top$;
 }
 
-- (Layout *)Left {
-    if (!_Left) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"Left"];
-        _Left = layout;
-        _Left.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _Left;
+- (Layout *)left$ {
+    if (!_left$) {
+        Layout * layout = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _left$ = layout;
+        _left$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _left$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _left$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _Left;
+    return _left$;
 }
 
-- (Layout *)Bottom {
-    if (!_Bottom) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"Bottom"];
-        _Bottom = layout;
-        _Bottom.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _Bottom.topLayoutGuideFlag = self.topLayoutGuideFlag;
-        _Bottom.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
-        return _Bottom;
+- (Layout *)bottom$ {
+    if (!_bottom$) {
+        _bottom$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _bottom$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _bottom$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _bottom$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _Bottom;
+    return _bottom$;
 }
 
-- (Layout *)Right {
-    if (!_Right) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"Right"];
-        _Right = layout;
-        _Right.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _Right;
+- (Layout *)right$ {
+    if (!_right$) {
+        _right$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _right$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _right$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _right$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
+        self.next = _right$;
     }
-    return _Right;
+    return _right$;
 }
 
-- (Layout *)Leading {
-    if (!_Leading) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"Leading"];
-        _Leading = layout;
-        _Leading.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _Leading;
+- (Layout *)leading$ {
+    if (!_leading$) {
+        _leading$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _leading$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _leading$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _leading$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _Leading;
+    return _leading$;
 }
 
-- (Layout *)Trailing {
-    if (!_Trailing) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"Trailing"];
-        _Trailing = layout;
-        _Trailing.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _Leading;
+- (Layout *)trailing$ {
+    if (!_trailing$) {
+        _trailing$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _trailing$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _trailing$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _trailing$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _Trailing;
+    return _trailing$;
 }
 
-- (Layout *)Width {
-    if (!_Width) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"Width"];
-        _Width = layout;
-        _Width.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _Width;
+- (Layout *)width$ {
+    if (!_width$) {
+        _width$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _width$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _width$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _width$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _Width;
+    return _width$;
 }
 
-- (Layout *)Height {
-    if (!_Height) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"Height"];
-        _Height = layout;
-        _Height.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _Height;
+- (Layout *)height$ {
+    if (!_height$) {
+        _height$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _height$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _height$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _height$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _Height;
+    return _height$;
 }
 
-- (Layout *)CenterX {
-    if (!_CenterX) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"CenterX"];
-        _CenterX = layout;
-        _CenterX.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _CenterX;
+- (Layout *)centerX$ {
+    if (!_centerX$) {
+        _centerX$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _centerX$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _centerX$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _centerX$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _CenterX;
+    return _centerX$;
 }
 
-- (Layout *)CenterY {
-    if (!_CenterY) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"CenterY"];
-        _CenterY = layout;
-        _CenterY.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _CenterY;
+- (Layout *)centerY$ {
+    if (!_centerY$) {
+        _centerY$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _centerY$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _centerY$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _centerY$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _CenterY;
+    return _centerY$;
 }
 
-- (Layout *)LastBaseline {
-    if (!_LastBaseline) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"LastBaseline"];
-        _LastBaseline = layout;
-        _LastBaseline.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _LastBaseline;
+- (Layout *)lastBaseline$ {
+    if (!_lastBaseline$) {
+        _lastBaseline$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _lastBaseline$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _lastBaseline$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _lastBaseline$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _LastBaseline;
+    return _lastBaseline$;
 }
 
-- (Layout *)Baseline {
-    if (!_Baseline) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"Baseline"];
-        _Baseline = layout;
-        _Baseline.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _Baseline;
+- (Layout *)baseline$ {
+    if (!_baseline$) {
+        _baseline$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _baseline$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _baseline$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _baseline$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _Baseline;
+    return _baseline$;
 }
 
-- (Layout *)FirstBaseline {
-    if (!_FirstBaseline) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"FirstBaseline"];
-        _FirstBaseline = layout;
-        _FirstBaseline.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _FirstBaseline;
+- (Layout *)firstBaseline$ {
+    if (!_firstBaseline$) {
+        _firstBaseline$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _firstBaseline$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _firstBaseline$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _firstBaseline$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _FirstBaseline;
+    return _firstBaseline$;
 }
 
-- (Layout *)LeftMargin {
-    if (!_LeftMargin) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"LeftMargin"];
-        _LeftMargin = layout;
-        _LeftMargin.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _LeftMargin;
+- (Layout *)leftMargin$ {
+    if (!_leftMargin$) {
+        _leftMargin$ =  [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _leftMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _leftMargin$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _leftMargin$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _LeftMargin;
+    return _leftMargin$;
 }
 
-- (Layout *)RightMargin {
-    if (!_RightMargin) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"RightMargin"];
-        _RightMargin = layout;
-        _RightMargin.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _RightMargin;
+- (Layout *)rightMargin$ {
+    if (!_rightMargin$) {
+        _rightMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];
+        _rightMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _rightMargin$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _rightMargin$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _RightMargin;
+    return _rightMargin$;
 }
 
-- (Layout *)TopMargin {
-    if (!_TopMargin) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"TopMargin"];
-        _TopMargin = layout;
-        _TopMargin.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _TopMargin;
+- (Layout *)topMargin$ {
+    if (!_topMargin$) {
+        _topMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _topMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _topMargin$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _topMargin$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _TopMargin;
+    return _topMargin$;
 }
 
-- (Layout *)BottomMargin {
-    if (!_BottomMargin) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"BottomMargin"];
-        _BottomMargin = layout;
-        _BottomMargin.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _BottomMargin;
+- (Layout *)bottomMargin$ {
+    if (!_bottomMargin$) {
+        _bottomMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _bottomMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _bottomMargin$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _bottomMargin$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _BottomMargin;
+    return _bottomMargin$;
 }
 
-- (Layout *)LeadingMargin {
-    if (!_LeadingMargin) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"LeadingMargin"];
-        _LeadingMargin = layout;
-        _LeadingMargin.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _LeadingMargin;
+- (Layout *)leadingMargin$ {
+    if (!_leadingMargin$) {
+        _leadingMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _leadingMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _leadingMargin$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _leadingMargin$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _LeadingMargin;
+    return _leadingMargin$;
 }
 
-- (Layout *)TrailingMargin {
-    if (!_TrailingMargin) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"TrailingMargin"];
-        _TrailingMargin = layout;
-        _TrailingMargin.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        return _TrailingMargin;
+- (Layout *)trailingMargin$ {
+    if (!_trailingMargin$) {
+        _trailingMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _trailingMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _trailingMargin$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _trailingMargin$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _TrailingMargin;
+    return _trailingMargin$;
 }
 
-- (Layout *)CenterXMargin {
-    if (!_CenterXMargin) {
-        Layout * layou = [Layout buildWithItem:self.item mark:@"CenterXMargin"];
-        _CenterXMargin = layou;
-        _CenterXMargin.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _CenterXMargin.item = self.item;
-        return _CenterXMargin;
+- (Layout *)centerXMargin$ {
+    if (!_centerXMargin$) {
+        _centerXMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _centerXMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _centerXMargin$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _centerXMargin$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _CenterXMargin;
+    return _centerXMargin$;
 }
 
-- (Layout *)CenterYMargin {
-    if (!_CenterYMargin) {
-        Layout * layou = [Layout buildWithItem:self.item mark:@"CenterYMargin"];
-        _CenterYMargin = layou;
-        _CenterYMargin.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _CenterYMargin.item = self.item;
-        return _CenterYMargin;
+- (Layout *)centerYMargin$ {
+    if (!_centerYMargin$) {
+        _centerYMargin$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _centerYMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _centerYMargin$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _centerYMargin$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _CenterYMargin;
+    return _centerYMargin$;
 }
 
-- (Layout *)Center {
-    if (!_Center) {
-        Layout * layou = [Layout buildWithItem:self.item mark:@"Center"];
-        _Center = layou;
-        _Center.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _Center.item = self.item;
-        return _Center;
+- (Layout *)center$ {
+    if (!_center$) {
+        _center$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _center$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _center$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _center$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _Center;
+    return _center$;
 }
 
-- (Layout *)Size {
-    if (!_Size) {
-        Layout * layout = [Layout buildWithItem:self.item mark:@"Size"];
-        _Size = layout;
-        _Size.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _Size.item = self.item;
-        return _Size;
+- (Layout *)size$ {
+    if (!_size$) {
+        _size$ = [Layout buildWithItem:self.item mark:NSStringFromSelector(_cmd)];;
+        _size$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _size$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _size$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _Size;
+    return _size$;
 }
 
-- (Layout *)Insert {
-    if (!_Insert) {
-        Layout * layout = [Layout buildWithItem:self mark:@"Insert"];
-        _Insert = layout;
-        _Insert.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _Insert.item = self.item;
-        return _Insert;
+- (Layout *)insert$ {
+    if (!_insert$) {
+        _insert$ = [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];;
+        _insert$.safeAreaGuideFlag = self.safeAreaGuideFlag;
+        _insert$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _insert$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
-    return _Insert;
+    return _insert$;
 }
 
 - (NSLayoutConstraint *)equalTo:(id)other rate:(CGFloat)rate trim:(CGFloat)c {
@@ -818,6 +830,10 @@
 
 - (NSArray <NSLayoutConstraint *> *)insert:(id _Nonnull)other {
     return [self insert:other trim:(UIEdgeInsetsZero)];
+}
+
+- (void)dealloc {
+    
 }
 
 @end

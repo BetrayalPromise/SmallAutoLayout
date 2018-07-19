@@ -12,8 +12,8 @@
 @interface UIViewController (Layout)
 
 /// 只支持 Top Bottom 两个属性
-@property (nonatomic, weak, readonly) Layout * TopGuide __attribute__((deprecated("deprecated on iOS 11.0 recommand use view.safeLayoutGudie")));;
+@property (nonatomic, weak, readonly) Layout * topGuide$ API_DEPRECATED("Use view.safeAreaLayoutGuide.topAnchor instead of topLayoutGuide.bottomAnchor", ios(7.0,11.0), tvos(7.0,11.0));
 /// 只支持 Top Bottom 两个属性
-@property (nonatomic, weak, readonly) Layout * BottomGuide __attribute__((deprecated("deprecated on iOS 11.0 recommand use view.safeLayoutGudie")));;
+@property (nonatomic, weak, readonly) Layout * bottomGuide$ API_DEPRECATED("Use view.safeAreaLayoutGuide.topAnchor instead of topLayoutGuide.bottomAnchor", ios(7.0,11.0), tvos(7.0,11.0));
 
 @end
