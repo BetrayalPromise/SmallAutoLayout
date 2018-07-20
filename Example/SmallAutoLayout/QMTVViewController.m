@@ -29,7 +29,7 @@
 
 - (void)loadView {
     [super loadView];
-    _datasource = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7"];
+    _datasource = @[@"SafeArea", @"LayouGuide", @"Center", @"3", @"4", @"5", @"6", @"7"];
 }
 
 - (void)viewDidLoad {

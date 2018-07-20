@@ -36,7 +36,7 @@
 
 /// 复合属性 Size 不能使用操单个约束的函数
 @property (nonatomic, weak, readonly) Layout * size$;
-/// 复合属性 Center 不能使用操作单个约束的函数
+/// 不支持直接使用 equalTo:@(CGPointMake(x, y)) 因为没有参照物
 @property (nonatomic, weak, readonly) Layout * center$;
 /// 复合属性 Insert 不能使用操作单个约束的函数
 @property (nonatomic, weak, readonly) Layout * insert$;

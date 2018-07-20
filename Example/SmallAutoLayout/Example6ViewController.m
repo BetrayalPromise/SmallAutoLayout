@@ -25,13 +25,12 @@
     [self.view addSubview:v];
     v.translatesAutoresizingMaskIntoConstraints = NO;
     if (@available(iOS 11.0, *)) {
-        [v.safeAreaGuide$.size$ size:@(CGSizeMake(100, 100))];
-        [v.safeAreaGuide$.center$ center:self.view.safeAreaGuide$];
+        [v.safeAreaGuide$.size$ equalTo:@(CGSizeMake(100, 100))];
+        [v.safeAreaGuide$.center$ equalTo:self.view.safeAreaGuide$];
     } else {
-        [v.size$ size:@(CGSizeMake(100, 100))];
-        [v.center$ center:self.view];
+        [v.size$ equalTo:@(CGSizeMake(100, 100))];
+        [v.center$ equalTo:self.view];
     }
-
 }
 
 

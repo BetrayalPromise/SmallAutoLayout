@@ -56,6 +56,7 @@
     return layout;
 }
 
+#pragma mark - 核心
 - (NSLayoutConstraint *)make:(NSLayoutRelation)relation other:(id)other multiplier:(CGFloat)multiplier constant:(CGFloat)c {
     NSAssert(self.mark != nil, @"First item's LayoutAttribute must be exit");
     NSSet * set = [NSSet setWithObjects:@"center$", @"size$", @"insert$", @"safeAreaGuide$", @"topGuide$", @"bottomGuide$", nil];
@@ -252,6 +253,7 @@
     }
 }
 
+#pragma mark - 转换约束
 - (NSLayoutAttribute)findAttribute:(NSString *)name {
     if ([name isEqualToString:@"left$"]) {
         return NSLayoutAttributeLeft;
@@ -572,6 +574,7 @@
     return _insert$;
 }
 
+#pragma mark - 构建约束
 - (NSArray <NSLayoutConstraint *> *)equalTo:(id)other rate:(CGFloat)rate trim:(CGFloat)trim {
     NSMutableArray <NSLayoutConstraint *> * constraints = [NSMutableArray array];
     Layout * node = self;
@@ -581,72 +584,65 @@
         if ([ignoreSet containsObject:node.mark]) {
             node = node.head;
             continue;
-        } else {
-            if ([specialSet containsObject:node.mark]) {
-                if ([node.mark isEqualToString:@"center$"]) {
-                    [constraints addObjectsFromArray:[node.center$ center:other]];
-                } else if ([node.mark isEqualToString:@"size$"]) {
-                    [constraints addObjectsFromArray:[node.size$ size:other]];
-                } else if ([node.mark isEqualToString:@"insert$"]) {
-                    [constraints addObjectsFromArray:[node.insert$ insert:other]];
+        } else if ([specialSet containsObject:node.mark]) {
+            if ([node.mark isEqualToString:@"center$"]) {
+                if ([other isKindOfClass:[UIView class]] || [other isKindOfClass:[Layout class]]) {
+                    NSLayoutConstraint * centerX = [node.centerX$ make:NSLayoutRelationEqual other:other multiplier:rate constant:trim];
+                    NSLayoutConstraint * centerY = [node.centerY$ make:NSLayoutRelationEqual other:other multiplier:rate constant:trim];
+                    [constraints addObject:centerX];
+                    [constraints addObject:centerY];
                 } else {
-                    NSAssert(NO, @"unknow:%@", node.mark);
+                    NSAssert(NO, @"center 没有参考对象");
                 }
-                node = node.head;
+            } else if ([node.mark isEqualToString:@"size$"]) {
+                if ([other isKindOfClass:[UIView class]] || [other isKindOfClass:[Layout class]]) {
+                    NSLayoutConstraint * width = [node.width$ make:NSLayoutRelationEqual other:other multiplier:rate constant:trim];
+                    NSLayoutConstraint * height = [node.height$ make:NSLayoutRelationEqual other:other multiplier:rate constant:trim];
+                    [constraints addObject:width];
+                    [constraints addObject:height];
+                } else {
+                    CGSize size = [(NSValue *)other CGSizeValue];
+                    NSLayoutConstraint * width = [node.width$ make:NSLayoutRelationEqual other:nil multiplier:rate constant:size.width + trim];
+                    NSLayoutConstraint * height = [node.height$ make:NSLayoutRelationEqual other:nil multiplier:rate constant:size.height + trim];
+                    [constraints addObject:width];
+                    [constraints addObject:height];
+                }
+            } else if ([node.mark isEqualToString:@"insert$"]) {
+                if ([other isKindOfClass:[UIView class]] || [other isKindOfClass:[Layout class]]) {
+                    NSLayoutConstraint * top = [node.top$ make:NSLayoutRelationEqual other:other multiplier:rate constant:trim];
+                    NSLayoutConstraint * left = [node.left$ make:NSLayoutRelationEqual other:other multiplier:rate constant:trim];
+                    NSLayoutConstraint * bottom = [node.bottom$ make:NSLayoutRelationEqual other:other multiplier:rate constant:-trim];
+                    NSLayoutConstraint * right = [node.right$ make:NSLayoutRelationEqual other:other multiplier:rate constant:-trim];
+                    [constraints addObject:top];
+                    [constraints addObject:left];
+                    [constraints addObject:bottom];
+                    [constraints addObject:right];
+                } else {
+                    NSAssert(NO, @"insert 没有参考对象");
+                }
             } else {
-                NSLayoutConstraint * constraint = [node make:NSLayoutRelationEqual other:other multiplier:rate constant:trim];
-                [constraints addObject:constraint];
-                node = node.head;
+                NSAssert(NO, @"不支持属性: %@", node.mark);
             }
+            node = node.head;
+        } else {
+            NSLayoutConstraint * constraint = [node make:NSLayoutRelationEqual other:other multiplier:rate constant:trim];
+            [constraints addObject:constraint];
+            node = node.head;
         }
     }
     return constraints;
-//    return [self make:(NSLayoutRelationEqual) other:other multiplier:rate constant:c];
 }
 
 - (NSArray <NSLayoutConstraint *> *)equalTo:(id)other rate:(CGFloat)rate {
     return [self equalTo:other rate:rate trim:0.0];
-//    return [self make:(NSLayoutRelationEqual) other:other multiplier:rate constant:0.0];
 }
 
 - (NSArray <NSLayoutConstraint *> *)equalTo:(id)other trim:(CGFloat)trim {
     return [self equalTo:other rate:1.0 trim:trim];
-//    return [self make:(NSLayoutRelationEqual) other:other multiplier:1.0 constant:c];
 }
 
 - (NSArray <NSLayoutConstraint *> *)equalTo:(id)other {
-//    NSMutableArray <NSLayoutConstraint *> * constraints = [NSMutableArray array];
-//    Layout * node = self;
-//    NSSet * ignoreSet = [NSSet setWithObjects:@"safeAreaGuide$", @"topGuide$", @"bottomGuide$", nil];
-//    NSSet * specialSet = [NSSet setWithObjects:@"center$", @"size$", @"insert$", nil];
-//    while (node) {
-//        if ([ignoreSet containsObject:node.mark]) {
-//            node = node.head;
-//            continue;
-//        } else {
-//            if ([specialSet containsObject:node.mark]) {
-//                if ([node.mark isEqualToString:@"center$"]) {
-//                    [constraints addObjectsFromArray:[node.center$ center:other]];
-//                } else if ([node.mark isEqualToString:@"size$"]) {
-//                    [constraints addObjectsFromArray:[node.size$ size:other]];
-//                } else if ([node.mark isEqualToString:@"insert$"]) {
-//                    [constraints addObjectsFromArray:[node.insert$ insert:other]];
-//                } else {
-//                    NSAssert(NO, @"unknow:%@", node.mark);
-//                }
-//                node = node.head;
-//            } else {
-//                NSLayoutConstraint * constraint = [node make:NSLayoutRelationEqual other:other multiplier:1.0 constant:0.0];
-//                [constraints addObject:constraint];
-//                node = node.head;
-//            }
-//        }
-//    }
-//    return constraints;
-    
-//    return [self make:(NSLayoutRelationEqual) other:other multiplier:1.0 constant:0.0];
-    
-    return [self equalTo:other rate:1.0 trim:0];
+    return [self equalTo:other rate:1.0 trim:0.0];
 }
 
 - (NSLayoutConstraint *)lessOrEqualTo:(id)other rate:(CGFloat)rate trim:(CGFloat)c {

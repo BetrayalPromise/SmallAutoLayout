@@ -81,16 +81,4 @@
 - (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other trim:(CGFloat)c;
 - (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other;
 
-/// 复合属性Size处理函数
-- (NSArray <NSLayoutConstraint *> *)size:(id _Nullable)other trim:(CGSize)trim;
-- (NSArray <NSLayoutConstraint *> *)size:(id _Nullable)other;
-
-/// 复合属性Center处理函数
-- (NSArray <NSLayoutConstraint *> *)center:(id _Nullable)other trim:(CGSize)trim;
-- (NSArray <NSLayoutConstraint *> *)center:(id _Nullable)other;
-
-/// 符合属性Insert
-- (NSArray <NSLayoutConstraint *> *)insert:(id _Nonnull)other trim:(UIEdgeInsets)trim;
-- (NSArray <NSLayoutConstraint *> *)insert:(id _Nonnull)other;
-
 @end
