@@ -49,6 +49,27 @@ yeah
 [view0.top$ equalTo:self.topGudie$.bottom$];
 ```
 
+### view0.size == CGSizeMake(100, 100)
+```
+[view0.size$ equalTo:@(CGSizeMake(100, 100))];
+```
+
+### view0.center == view1.center
+```
+[view0.center$ equalTo:view1.center$];
+[view0.center$ equalTo:view1];
+```
+
+### view0.safeArea.size == view1.size
+```
+[view0.safeAreaGuide$.size$ equalTo:view1.size$];
+[view0.safeAreaGuide$.size$ equalTo:view1];
+```
+
+### view0.top == view1.top view0.left == view1.left view0.bottom == view1.bottom
+```
+[view1.top$.left$.bottom$ equalTo:view1];
+```
 
 ## Requirements
 
