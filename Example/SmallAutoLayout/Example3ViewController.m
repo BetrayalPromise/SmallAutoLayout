@@ -8,13 +8,11 @@
 
 #import "Example3ViewController.h"
 #import <SmallAutoLayout/SmallAutoLayout.h>
-#import "UICollectionViewLeftAlignedLayout.h"
 #import "ExampleCell.h"
 #import "HoverReusableView.h"
-#import "QMTVFlowLayout.h"
 #import "NSObject+FunctionExtension.h"
 
-@interface Example3ViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface Example3ViewController ()
 
 @end
 
@@ -22,75 +20,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    UICollectionView * collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[UICollectionViewLeftAlignedLayout new]];
-    UICollectionView * collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[[QMFlowLayout new] objcetThen:^(QMFlowLayout * _Nonnull source) {
-        source.navigationHeight = 0;
-    }]];
-//    UICollectionView * collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[QMTVHoverFlowLayout new]];
-    collectionView.translatesAutoresizingMaskIntoConstraints = NO;
-    [collectionView registerClass:[ExampleCell class] forCellWithReuseIdentifier:NSStringFromClass([ExampleCell class])];
-    [collectionView registerClass:[HoverReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([HoverReusableView class])];
-    [self.view addSubview:collectionView];
 
-    if (@available(iOS 11.0, *)) {
-        collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    } else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-    collectionView.delegate = self;
-    collectionView.dataSource = self;
-    if (@available(iOS 11.0, *)) {
-        [collectionView.top$ equalTo:self.view.safeAreaGuide$.top$];
-        [collectionView.left$ equalTo:self.view.safeAreaGuide$.left$];
-        [collectionView.bottom$ equalTo:self.view.safeAreaGuide$.bottom$];
-        [collectionView.right$ equalTo:self.view.safeAreaGuide$.right$];
-    } else {
-        [collectionView.top$ equalTo:self.topGuide$.bottom$];
-        [collectionView.left$ equalTo:self.view.left$];
-        [collectionView.bottom$ equalTo:self.bottomGuide$.top$];
-        [collectionView.right$ equalTo:self.view.right$];
-    }
+    self.view.backgroundColor = [UIColor whiteColor];
+
+    UIView * v = [[UIView alloc] init];
+    v.backgroundColor = [UIColor redColor];
+    v.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:v];
+
+//    [v.size$ equalTo:self.view.safeAreaGuide$];
+
+    [v.center$ equalTo:self.view.safeAreaGuide$.center$];
+    [v.size$ equalTo:self.view.safeAreaGuide$.size$];
+//    [v.width$ equalTo:@(10)];
+//    [v.height$ equalTo:@(10)];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    ExampleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([ExampleCell class]) forIndexPath:indexPath];
-    return cell;
-}
-
-- (UICollectionReusableView  *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    HoverReusableView * v = nil;
-    if (kind == UICollectionElementKindSectionHeader) {
-        v = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([HoverReusableView class]) forIndexPath:indexPath];
-    }
-    return v;
-}
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 10;
-}
-
-- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    collectionViewLayout = [UICollectionViewLeftAlignedLayout new];
-    if (indexPath.row % 5 == 1) {
-        return CGSizeMake(collectionView.frame.size.width, 50);
-    }
-    return CGSizeMake(60, 50);
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(collectionView.frame.size.width - 20, 50);
-}
-
-//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-//    return UIEdgeInsetsMake(10, 10, 10, 10);
-//}
 
 @end

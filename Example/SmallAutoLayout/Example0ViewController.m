@@ -39,8 +39,9 @@
     UIView * v1 = [UIView new];
     [self.view addSubview:v1];
     v1.translatesAutoresizingMaskIntoConstraints = NO;
-    [v1.width$ equalTo:nil trim:100];
-    [v1.height$ equalTo:nil trim:100];
+//    [v1.width$ equalTo:nil trim:100];
+//    [v1.height$ equalTo:nil trim:100];
+    [v1.size$ equalTo:@(CGSizeMake(100, 100))];
     v1.backgroundColor = [UIColor redColor];
     if (@available(iOS 11.0, *)) {
 //        二者写法是等价的
@@ -73,8 +74,9 @@
         [self.view.safeAreaGuide$.bottom$ equalTo:v3.bottom$];
         [v3.right$ equalTo:self.view.safeAreaGuide$.right$];
     } else {
+        [self.bottomGuide$.top$ equalTo:v3.bottom$];
+        [v3.right$ equalTo:self.view];
     }
-
     [v3.width$ equalTo:nil trim:100];
     [v3.height$ equalTo:nil trim:100];
 }

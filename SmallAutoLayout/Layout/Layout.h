@@ -48,10 +48,6 @@
 /// 复合属性 Insert 不能使用操作单个约束的函数
 @property (nonatomic, strong, readonly) Layout * insert$;
 
-@property (nonatomic, copy) Layout *(^equal)(id other);
-@property (nonatomic, copy) Layout * (^rate)(CGFloat rate);
-@property (nonatomic, copy) Layout * (^trim)(CGFloat trim);
-
 ////////////////////////////////////////////////////////////////////////////布局标记////////////////////////////////////////////////////////////////////////////
 @property (nonatomic, assign) BOOL safeAreaGuideFlag;
 @property (nonatomic, assign) BOOL topGuideFlag;
@@ -71,14 +67,15 @@
 /// 为单一或者复合属性都rate(内部设置为1) trim(内部设置为0)均无效
 - (NSArray <NSLayoutConstraint *> *)equalTo:(id _Nullable)other;
 
-- (NSLayoutConstraint *)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c;
-- (NSLayoutConstraint *)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate;
-- (NSLayoutConstraint *)lessOrEqualTo:(id _Nullable)other trim:(CGFloat)c;
-- (NSLayoutConstraint *)lessOrEqualTo:(id _Nullable)other;
+/// 为单一属性rate trim有效 为复合属性rate(内部设置为1) trim(内部设置为0)值无效
+- (NSArray <NSLayoutConstraint *> *)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)trim;
+- (NSArray <NSLayoutConstraint *> *)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate;
+- (NSArray <NSLayoutConstraint *> *)lessOrEqualTo:(id _Nullable)other trim:(CGFloat)trim;
+- (NSArray <NSLayoutConstraint *> *)lessOrEqualTo:(id _Nullable)other;
 
-- (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c;
-- (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)rate;
-- (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other trim:(CGFloat)c;
-- (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other;
+- (NSArray <NSLayoutConstraint *> *)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)trim;
+- (NSArray <NSLayoutConstraint *> *)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)rate;
+- (NSArray <NSLayoutConstraint *> *)greaterOrEqualTo:(id _Nullable)other trim:(CGFloat)trim;
+- (NSArray <NSLayoutConstraint *> *)greaterOrEqualTo:(id _Nullable)other;
 
 @end

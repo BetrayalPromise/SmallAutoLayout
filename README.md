@@ -6,33 +6,32 @@
 [![Platform](https://img.shields.io/cocoapods/p/SmallAutoLayout.svg?style=flat)](http://cocoapods.org/pods/SmallAutoLayout)
 
 ## NOTICE
-### 1.单一的属性(Left, Right, Top, Bottom, Leading, Trailing, Width, Height, CenterX, CenterY, LastBaseline, Baseline, FirstBaseline, LeftMargin, RightMargin, TopMargin, BottomMargin, LeadingMargin, TrailingMargin ,CenterXMargin, CenterYMargin)是使用equalTo lessOrEqualTo greaterOrEqualTo三个函数处理约束
-### 2.复合属性(Size, Center, Insert)都有其对应的处理函数
-### 3.视图的translatesAutoresizingMaskIntoConstraints属性交由使用者决定 SmallAutoLayout 并不会处理改属性 原因是 可能存在跟frame配合的情况
+### 1.视图的translatesAutoresizingMaskIntoConstraints属性交由使用者决定 SmallAutoLayout 并不会处理改属性 原因是 可能存在跟frame配合的情况
+### 2.特殊的标记safeAreaGuide$ topGuide$ bottomGuide$必须最先设置
 
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-### view0.Width == view1.Width
+### view0.width == view1.width$
 ```obj-c
 (狗娘养的API)fuck
 [NSLayoutConstraint constraintWithItem:view0 attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:view1 attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:0.0];
 
 yeah
-[view0.Width equalTo:view1.Width];
+[view0.width$ equalTo:view1.width$];
 ```
 
-### view0.Width == view1.Width + 10
+### view0.width == view1.width + 10
 ```obj-c
 (狗娘养的API)fuck
 [NSLayoutConstraint constraintWithItem:view0. attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:view1 attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:10];
 
 yeah
-[view0.Width equalTo:view1.Width trim:10];
+[view0.width$ equalTo:view1.width$ trim:10];
 ```
 
-###  view0.Left == self.view.safeArea.Left
+### [view0.left == self.view.safeArea.left
 ```obj-c
 (狗娘养的API)fuck
 [NSLayoutConstraint constraintWithItem:view0 attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:self.view.safeAreaLayoutGuide attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:0.0];
@@ -41,13 +40,13 @@ yeah
 [view0.Left equalTo:self.view.SafeAreaGuide.Left];
 ```
 
-### view0.Top == self.topLayoutGuide.Bottom
+### view0.top == self.topLayoutGuide.bottom
 ```obj-c
 (狗娘养的API)fuck
 [NSLayoutConstraint constraintWithItem:self.topLayoutGuide attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:view0 attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:0.0];
 
 yeah
-[view0.Top equalTo:self.TopGudie.Bottom];
+[view0.top$ equalTo:self.topGudie$.bottom$];
 ```
 
 
