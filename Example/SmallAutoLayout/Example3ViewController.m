@@ -22,18 +22,21 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor whiteColor];
+   
+    UIView * v0 = [UIView new];
+    [self.view addSubview:v0];
+    v0.translatesAutoresizingMaskIntoConstraints = NO;
+    v0.backgroundColor = [UIColor redColor];
+    if (@available(iOS 11.0, *)) {
+        [v0.centerX$ equalTo:self.view.safeAreaGuide$.centerX$];
+        [self.view.safeAreaGuide$.centerY$ equalTo:v0.centerY$];
+        [v0.width$ equalTo:nil trim:100];
+        [v0.height$ equalTo:v0.width$];
+    } else {
+        // iOS 11一下没有安全API
+    }
 
-    UIView * v = [[UIView alloc] init];
-    v.backgroundColor = [UIColor redColor];
-    v.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:v];
 
-//    [v.size$ equalTo:self.view.safeAreaGuide$];
-
-    [v.center$ equalTo:self.view.safeAreaGuide$.center$];
-    [v.size$ equalTo:self.view.safeAreaGuide$.size$];
-//    [v.width$ equalTo:@(10)];
-//    [v.height$ equalTo:@(10)];
 }
 
 @end

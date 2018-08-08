@@ -11,7 +11,6 @@
 #import <UIKit/UIGeometry.h>
 @class NSLayoutConstraint;
 
-
 @interface Layout : NSObject
 
 @property (nonatomic, strong, readonly) Layout * left$;
@@ -50,32 +49,48 @@
 
 ////////////////////////////////////////////////////////////////////////////布局标记////////////////////////////////////////////////////////////////////////////
 @property (nonatomic, assign) BOOL safeAreaGuideFlag;
-@property (nonatomic, assign) BOOL topGuideFlag;
-@property (nonatomic, assign) BOOL bottomGuideFlag;
+@property (nonatomic, assign) BOOL topLayoutGuideFlag;
+@property (nonatomic, assign) BOOL bottomLayoutGuideFlag;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @property (nonatomic, weak) id layoutItem;
-@property (nonatomic, weak) Layout * head;
 @property (nonatomic, copy) NSString * mark;
 + (instancetype)buildWithItem:(id)item mark:(NSString *)mark;
 
-/// 为单一属性rate trim有效 为复合属性rate(内部设置为1) trim(内部设置为0)值无效
-- (NSArray <NSLayoutConstraint *> *)equalTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)trim;
-/// 为单一属性rate有效 为复合属性rate(内部设置为1)值无效 trim(内部设置为0)值无效
-- (NSArray <NSLayoutConstraint *> *)equalTo:(id _Nullable)other rate:(CGFloat)rate;
-/// 为单一属性trim有效 为复合属性trim(内部设置为1) trim(内部设置为0)值无效
-- (NSArray <NSLayoutConstraint *> *)equalTo:(id _Nullable)other trim:(CGFloat)trim;
-/// 为单一或者复合属性都rate(内部设置为1) trim(内部设置为0)均无效
-- (NSArray <NSLayoutConstraint *> *)equalTo:(id _Nullable)other;
+/*
+    view自己觉得的尺寸
+ 
+    other 为NSNumber时 rate参数无效
+    other 为UIView时 self与参数拥有相同的属性
+    other 为nil时 multiplier无效
+ */
+- (NSLayoutConstraint *)equalTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c;
+- (NSLayoutConstraint *)equalTo:(id _Nullable)other rate:(CGFloat)rate;
+- (NSLayoutConstraint *)equalTo:(id _Nullable)other trim:(CGFloat)c;
+- (NSLayoutConstraint *)equalTo:(id _Nullable)other;
 
-/// 为单一属性rate trim有效 为复合属性rate(内部设置为1) trim(内部设置为0)值无效
-- (NSArray <NSLayoutConstraint *> *)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)trim;
-- (NSArray <NSLayoutConstraint *> *)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate;
-- (NSArray <NSLayoutConstraint *> *)lessOrEqualTo:(id _Nullable)other trim:(CGFloat)trim;
-- (NSArray <NSLayoutConstraint *> *)lessOrEqualTo:(id _Nullable)other;
+- (NSLayoutConstraint *)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c;
+- (NSLayoutConstraint *)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate;
+- (NSLayoutConstraint *)lessOrEqualTo:(id _Nullable)other trim:(CGFloat)c;
+- (NSLayoutConstraint *)lessOrEqualTo:(id _Nullable)other;
 
-- (NSArray <NSLayoutConstraint *> *)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)trim;
-- (NSArray <NSLayoutConstraint *> *)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)rate;
-- (NSArray <NSLayoutConstraint *> *)greaterOrEqualTo:(id _Nullable)other trim:(CGFloat)trim;
-- (NSArray <NSLayoutConstraint *> *)greaterOrEqualTo:(id _Nullable)other;
+- (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c;
+- (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)multiplier;
+- (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other trim:(CGFloat)c;
+- (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other;
+
+/// 复合属性Size处理函数
+- (NSArray <NSLayoutConstraint *> *)size:(id _Nullable)other trim:(CGSize)trim;
+- (NSArray <NSLayoutConstraint *> *)size:(id _Nullable)other;
+
+/// 复合属性Center处理函数
+- (NSArray <NSLayoutConstraint *> *)center:(id _Nullable)other trim:(CGSize)trim;
+- (NSArray <NSLayoutConstraint *> *)center:(id _Nullable)other;
+
+/// 符合属性Insert
+- (NSArray <NSLayoutConstraint *> *)insert:(id _Nonnull)other trim:(UIEdgeInsets)trim;
+- (NSArray <NSLayoutConstraint *> *)insert:(id _Nonnull)other;
+
+
+- (void)clearConstraints;
 
 @end

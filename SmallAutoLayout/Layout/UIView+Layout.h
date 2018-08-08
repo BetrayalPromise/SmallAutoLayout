@@ -34,14 +34,16 @@
 @property (nonatomic, weak, readonly) Layout * centerXMargin$;
 @property (nonatomic, weak, readonly) Layout * centerYMargin$;
 
-/// 复合属性 size
+/// 复合属性 Size 不能使用操单个约束的函数
 @property (nonatomic, weak, readonly) Layout * size$;
-/// 不支持直接使用 equalTo:@(CGPointMake(x, y)) 因为没有参照物
+/// 复合属性 Center 不能使用操作单个约束的函数
 @property (nonatomic, weak, readonly) Layout * center$;
-/// 复合属性 insert
+/// 复合属性 Insert 不能使用操作单个约束的函数
 @property (nonatomic, weak, readonly) Layout * insert$;
 
-/// 用户自定义的视图一般而言其范围和安全区范围是一样的 支持 left right top bottom size insert 属性
-@property (nonatomic, weak, readonly) Layout * safeAreaGuide$ API_AVAILABLE(ios(11.0),tvos(11.0));;
+/// 用户自定义的视图一般而言其范围和安全区范围是一样的 支持 Left Right Top Bottom Size Insert 属性
+@property (nonatomic, weak, readonly) Layout * safeAreaGuide$ API_AVAILABLE(ios(11.0),tvos(11.0));
+
+@property (nonatomic, strong, readonly) NSHashTable <NSLayoutConstraint *> * ownConstraints;
 
 @end

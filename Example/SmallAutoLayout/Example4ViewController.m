@@ -25,10 +25,20 @@
     v0.translatesAutoresizingMaskIntoConstraints = NO;
     v0.backgroundColor = [UIColor redColor];
 
-    [self.topGuide$.bottom$ equalTo:v0 trim:-100];
+    [self.topGuide$.bottom$ equalTo:v0];
     [v0.centerX$ equalTo:self.view];
-    [v0.width$ equalTo:@100];
+    [v0.width$ equalTo:@200];
     [v0.height$ equalTo:v0.width$];
+    
+    UIView * v1 = [UIView new];
+    [self.view addSubview:v1];
+    v1.translatesAutoresizingMaskIntoConstraints = NO;
+    v1.backgroundColor = [UIColor redColor];
+    
+    [self.bottomGuide$.top$ equalTo:v1];
+    [v1.centerX$ equalTo:self.view];
+    [v1.width$ equalTo:@200];
+    [v1.height$ equalTo:v0.width$];
 }
 
 - (void)didReceiveMemoryWarning {

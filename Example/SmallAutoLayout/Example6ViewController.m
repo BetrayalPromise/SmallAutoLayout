@@ -25,11 +25,12 @@
     [self.view addSubview:v];
     v.translatesAutoresizingMaskIntoConstraints = NO;
     if (@available(iOS 11.0, *)) {
-        [v.safeAreaGuide$.size$ equalTo:@(CGSizeMake(100, 100))];
-        [v.safeAreaGuide$.center$ equalTo:self.view.safeAreaGuide$];
+        [v.safeAreaGuide$.top$ equalTo:self.view.safeAreaGuide$];
+        [v.safeAreaGuide$.left$ equalTo:self.view.safeAreaGuide$];
+        [v.safeAreaGuide$.bottom$ equalTo:self.view.safeAreaGuide$];
+        [v.safeAreaGuide$.right$ equalTo:self.view.safeAreaGuide$];
     } else {
-        [v.size$ equalTo:@(CGSizeMake(100, 100))];
-        [v.center$ equalTo:self.view];
+        // ios 11 以下没有安全区API
     }
 }
 

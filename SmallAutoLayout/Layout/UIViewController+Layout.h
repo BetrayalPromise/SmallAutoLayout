@@ -16,4 +16,6 @@
 /// 只支持 Top Bottom 两个属性
 @property (nonatomic, weak, readonly) Layout * bottomGuide$ API_DEPRECATED("Use view.safeAreaLayoutGuide.topAnchor instead of topLayoutGuide.bottomAnchor", ios(7.0,11.0), tvos(7.0,11.0));
 
+@property (nonatomic, strong, readonly) NSHashTable <NSLayoutConstraint *> * ownConstraints;
+
 @end

@@ -29,7 +29,7 @@
 
 - (void)loadView {
     [super loadView];
-    _datasource = @[@"SafeArea", @"LayouGuide", @"Center", @"3", @"4", @"5", @"6", @"7"];
+    _datasource = @[@"SafeArea", @"LayouGuide", @"View Center", @"View SafeArea Center", @"Default Value", @"View Size", @"View SafeArea Size", @"7"];
 }
 
 - (void)viewDidLoad {
@@ -72,33 +72,35 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
         [self.navigationController pushViewController:[[Example0ViewController new] objcetThen:^(Example0ViewController *  _Nonnull source) {
-            source.title = @"SafeArea 适配";
+            source.title = @"SafeArea";
         }] animated:YES];
     } else if (indexPath.row == 1) {
         [self.navigationController pushViewController:[[Example1ViewController new] objcetThen:^(Example0ViewController *  _Nonnull source) {
-            source.title = @"LayoutGuide 适配";
+            source.title = @"LayoutGuide";
         }] animated:YES];
     } else if (indexPath.row == 2) {
-        [self.navigationController pushViewController:[Example2ViewController new] animated:YES];
+        [self.navigationController pushViewController:[[Example2ViewController new] objcetThen:^(Example2ViewController * _Nonnull source) {
+            source.title = @"View Center";
+        }] animated:YES];
     } else if (indexPath.row == 3) {
         [self.navigationController pushViewController:[[Example3ViewController new] objcetThen:^(Example3ViewController * _Nonnull source) {
-            source.title = @"UICollectionView";
+            source.title = @"View SafeArea Center";
         }] animated:YES];
     } else if (indexPath.row == 4) {
         [self.navigationController pushViewController:[[Example4ViewController new] objcetThen:^(Example4ViewController * _Nonnull source) {
-            source.title = @"LayoutGuide Default Value";
+            source.title = @"Default Value";
         }] animated:YES];
     } else if (indexPath.row == 5) {
         [self.navigationController pushViewController:[[Example5ViewController new] objcetThen:^(Example5ViewController * _Nonnull source) {
-            source.title = @"SafeArea Default Value";
+            source.title = @"View Size";
         }] animated:YES];
     } else if (indexPath.row == 6) {
         [self.navigationController pushViewController:[[Example6ViewController new] objcetThen:^(Example5ViewController * _Nonnull source) {
-            source.title = @"SafeArea Default Value";
+            source.title = @"View SafeArea Size";
         }] animated:YES];
     } else if (indexPath.row == 7) {
         [self.navigationController pushViewController:[[Example7ViewController new] objcetThen:^(Example5ViewController * _Nonnull source) {
-            source.title = @"SafeArea Default Value";
+//            source.title = @"SafeArea Default Value";
         }] animated:YES];
     }
 }

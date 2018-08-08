@@ -8,6 +8,7 @@
 
 #import "Layout.h"
 #import <UIKit/UIKit.h>
+#import "UIView+Layout.h"
 
 @interface Layout ()
 
@@ -49,18 +50,6 @@
 
 @implementation Layout
 
-static inline NSSet * layoutFlagSet(void) {
-     return [NSSet setWithObjects:@"safeAreaGuide$", @"topGuide$", @"bottomGuide$", nil];
-}
-
-static inline NSSet * layoutCompositeSet(void) {
-    return [NSSet setWithObjects:@"center$", @"size$", @"insert$", nil];
-}
-
-static inline NSSet * layoutspecialSet(void) {
-    return [NSSet setWithObjects:@"center$", @"size$", @"insert$", @"safeAreaGuide$", @"topGuide$", @"bottomGuide$", nil];
-}
-
 + (instancetype)buildWithItem:(id)item mark:(NSString *)mark {
     Layout * layout = [Layout new];
     layout.mark = mark;
@@ -68,11 +57,27 @@ static inline NSSet * layoutspecialSet(void) {
     return layout;
 }
 
-#pragma mark - 核心
-- (NSLayoutConstraint *)make:(id)other relation:(NSLayoutRelation)relation multiplier:(CGFloat)multiplier constant:(CGFloat)c {
+- (NSLayoutConstraint *)make:(NSLayoutRelation)relation other:(id)other multiplier:(CGFloat)multiplier constant:(CGFloat)c {
+//    NSArray * constraintArray = [(UIView *)self.layoutItem constraints];
+//    if (constraintArray.count != 0) {
+//        NSString * name = [self.mark substringToIndex:self.mark.length - 1];
+//        for (NSLayoutConstraint * constraint in [(UIView *)self.layoutItem constraints]) {
+//            if ([constraint.description containsString:name]) {
+//                constraint.active = NO;
+//            }
+//        }
+//    }
+    
+//    if ([(UIView *)self.layoutItem ownConstraints].count != 0) {
+//        NSHashTable <NSLayoutConstraint *> * hashTable = [(UIView *)self.layoutItem ownConstraints];
+//        for (NSLayoutConstraint * constraint in hashTable.allObjects) {
+//            NSLog(@"%@.%ld -- %@.%ld", constraint.firstItem, (long)constraint.firstAttribute, constraint.secondItem, (long)constraint.secondAttribute);
+//        }
+//    }
+    
     NSAssert(self.mark != nil, @"First item's LayoutAttribute must be exit");
-    NSSet * specialSet = layoutspecialSet();
-    if ([specialSet containsObject:self.mark]) {
+    NSSet * set = [NSSet setWithObjects:@"center$", @"size$", @"safeAreaGuide$", @"topGuide$", @"bottomGuide$", nil];
+    if ([set containsObject:self.mark]) {
         NSAssert(NO, @"%@没有缺省值", self.mark);
     }
     NSLayoutAttribute attribute = [self findAttribute:self.mark];
@@ -88,6 +93,7 @@ static inline NSSet * layoutspecialSet(void) {
                     if (@available(iOS 11.0, *)) {
                         NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
                         constraint.active = YES;
+                        [[(UIView *)self.layoutItem ownConstraints] addObject:constraint];
                         return constraint;
                     } else {
                         NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
@@ -97,6 +103,7 @@ static inline NSSet * layoutspecialSet(void) {
                     if (@available(iOS 11.0, *)) {
                         NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
                         constraint.active = YES;
+                        [[(UIView *)self.layoutItem ownConstraints] addObject:constraint];
                         return constraint;
                     } else {
                         NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
@@ -111,13 +118,15 @@ static inline NSSet * layoutspecialSet(void) {
                 if ([self.mark isEqualToString:@"width$"]) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
                     constraint.active = YES;
+                    [[(UIView *)self.layoutItem ownConstraints] addObject:constraint];
                     return constraint;
                 } else if ([self.mark isEqualToString:@"height$"]) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
                     constraint.active = YES;
+                    [[(UIView *)self.layoutItem ownConstraints] addObject:constraint];
                     return constraint;
                 } else {
-                    NSAssert(NO, @"Only Support Width and Height");
+                    NSAssert(NO, @"Only Support width$ and height$");
                     return nil;
                 }
             }
@@ -132,6 +141,7 @@ static inline NSSet * layoutspecialSet(void) {
                     if (@available(iOS 11.0, *)) {
                         NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
                         constraint.active = YES;
+                        [[(UIView *)self.layoutItem ownConstraints] addObject:constraint];
                         return constraint;
                     } else {
                         NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
@@ -141,6 +151,7 @@ static inline NSSet * layoutspecialSet(void) {
                     if (@available(iOS 11.0, *)) {
                         NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
                         constraint.active = YES;
+                        [[(UIView *)self.layoutItem ownConstraints] addObject:constraint];
                         return constraint;
                     } else {
                         NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
@@ -155,10 +166,12 @@ static inline NSSet * layoutspecialSet(void) {
                 if ([self.mark isEqualToString:@"width$"]) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
                     constraint.active = YES;
+                    [[(UIView *)self.layoutItem ownConstraints] addObject:constraint];
                     return constraint;
                 } else if ([self.mark isEqualToString:@"height$"]) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
                     constraint.active = YES;
+                    [[(UIView *)self.layoutItem ownConstraints] addObject:constraint];
                     return constraint;
                 } else {
                     NSAssert(NO, @"Only Support Width and Height");
@@ -172,13 +185,15 @@ static inline NSSet * layoutspecialSet(void) {
             NSLayoutAttribute attr0 = [self findAttribute:self.mark];
             id item1 = other;
             NSLayoutAttribute attr1 = attr0;
-            if (self.topGuideFlag && !self.bottomGuideFlag) {
+            if (self.topLayoutGuideFlag && !self.bottomLayoutGuideFlag) {
                 NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.topLayoutGuide attribute:attr0 relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
                 constraint.active = YES;
+                [[(UIView *)self.layoutItem ownConstraints] addObject:constraint];
                 return constraint;
-            } else if (!self.topGuideFlag && self.bottomGuideFlag) {
+            } else if (!self.topLayoutGuideFlag && self.bottomLayoutGuideFlag) {
                 NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.bottomLayoutGuide attribute:attr0 relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
                 constraint.active = YES;
+                [[(UIView *)self.layoutItem ownConstraints] addObject:constraint];
                 return constraint;
             } else {
                 NSAssert(NO, @"Only View-View, UIViewController-View constraint");
@@ -188,6 +203,7 @@ static inline NSSet * layoutspecialSet(void) {
             if (@available(iOS 11.0, *)) {
                 NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.safeAreaGuideFlag == YES ? [(UIView *)self.layoutItem safeAreaLayoutGuide] : self.layoutItem attribute:[self findAttribute:self.mark] relatedBy:(relation) toItem:other attribute:[self findAttribute:[self mark]] multiplier:multiplier constant:c];
                 constraint.active = YES;
+                [[(UIView *)self.layoutItem ownConstraints] addObject:constraint];
                 return constraint;
             } else {
                 NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
@@ -203,10 +219,10 @@ static inline NSSet * layoutspecialSet(void) {
                 id item0 = self.safeAreaGuideFlag == YES ? [(UIView *)self.layoutItem safeAreaLayoutGuide] : self.layoutItem;
                 id item1 = [(Layout *)other safeAreaGuideFlag] == YES ? [(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] : [(Layout *)other layoutItem];
                 NSLayoutAttribute attr0 = [self findAttribute:self.mark];
-                
                 NSLayoutAttribute attr1 = [self findAttribute:[(Layout *)other mark]] == NSLayoutAttributeNotAnAttribute ? attr0 : [self findAttribute:[(Layout *)other mark]];
                 NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0 attribute:attr0 relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
                 constraint.active = YES;
+                [[(UIView *)self.layoutItem ownConstraints] addObject:constraint];
                 return constraint;
             } else {
                 NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
@@ -218,13 +234,15 @@ static inline NSSet * layoutspecialSet(void) {
                 NSLayoutAttribute attr0 = [self findAttribute:self.mark];
                 id item1 = [(Layout *)other safeAreaGuideFlag] == YES ? [(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] : [(Layout *)other layoutItem];
                 NSLayoutAttribute attr1 = [self findAttribute:[(Layout *)other mark]] == NSLayoutAttributeNotAnAttribute ? attr0 : [self findAttribute:[(Layout *)other mark]];
-                if (self.topGuideFlag && !self.bottomGuideFlag) {
+                if (self.topLayoutGuideFlag && !self.bottomLayoutGuideFlag) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.topLayoutGuide attribute:(attr0) relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
                     constraint.active = YES;
+                    [[(UIView *)self.layoutItem ownConstraints] addObject:constraint];
                     return constraint;
-                } else if (!self.topGuideFlag && self.bottomGuideFlag) {
+                } else if (!self.topLayoutGuideFlag && self.bottomLayoutGuideFlag) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.bottomLayoutGuide attribute:(attr0) relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
                     constraint.active = YES;
+                    [[(UIView *)self.layoutItem ownConstraints] addObject:constraint];
                     return constraint;
                 } else {
                     NSAssert(NO, @"Only View-View, UIViewController-View constraint");
@@ -240,13 +258,15 @@ static inline NSSet * layoutspecialSet(void) {
                 NSLayoutAttribute attr0 = [self findAttribute:[(Layout *)other mark]] == NSLayoutAttributeNotAnAttribute ? [self findAttribute:self.mark] : [self findAttribute:[(Layout *)other mark]];
                 id item1 = [self safeAreaGuideFlag] == YES ? [(UIView *)self.layoutItem safeAreaLayoutGuide] : self.layoutItem;
                 NSLayoutAttribute attr1 = [self findAttribute:self.mark];
-                if ([(Layout *)other topGuideFlag] && ![(Layout *)other bottomGuideFlag]) {
+                if ([(Layout *)other topLayoutGuideFlag] && ![(Layout *)other bottomLayoutGuideFlag]) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.topLayoutGuide attribute:(attr0) relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
                     constraint.active = YES;
+                    [[(UIView *)self.layoutItem ownConstraints] addObject:constraint];
                     return constraint;
-                } else if (![(Layout *)other topGuideFlag] && [(Layout *)other bottomGuideFlag]) {
+                } else if (![(Layout *)other topLayoutGuideFlag] && [(Layout *)other bottomLayoutGuideFlag]) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.bottomLayoutGuide attribute:(attr0) relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
                     constraint.active = YES;
+                    [[(UIView *)self.layoutItem ownConstraints] addObject:constraint];
                     return constraint;
                 } else {
                     return nil;
@@ -265,7 +285,6 @@ static inline NSSet * layoutspecialSet(void) {
     }
 }
 
-#pragma mark - 转换约束
 - (NSLayoutAttribute)findAttribute:(NSString *)name {
     if ([name isEqualToString:@"left$"]) {
         return NSLayoutAttributeLeft;
@@ -322,382 +341,503 @@ static inline NSSet * layoutspecialSet(void) {
 
 - (Layout *)top$ {
     if (!_top$) {
-        Layout * layout = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"top$"];
         _top$ = layout;
         _top$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _top$.topGuideFlag = self.topGuideFlag;
-        _top$.bottomGuideFlag = self.bottomGuideFlag;
-        _top$.head = self;
+        _top$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _top$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
     return _top$;
 }
 
 - (Layout *)left$ {
     if (!_left$) {
-        Layout * layout = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"left$"];
         _left$ = layout;
         _left$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _left$.topGuideFlag = self.topGuideFlag;
-        _left$.bottomGuideFlag = self.bottomGuideFlag;
-        _left$.head = self;
     }
     return _left$;
 }
 
 - (Layout *)bottom$ {
     if (!_bottom$) {
-        _bottom$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"bottom$"];
+        _bottom$ = layout;
         _bottom$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _bottom$.topGuideFlag = self.topGuideFlag;
-        _bottom$.bottomGuideFlag = self.bottomGuideFlag;
-        _bottom$.head = self;
+        _bottom$.topLayoutGuideFlag = self.topLayoutGuideFlag;
+        _bottom$.bottomLayoutGuideFlag = self.bottomLayoutGuideFlag;
     }
     return _bottom$;
 }
 
 - (Layout *)right$ {
     if (!_right$) {
-        _right$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"right$"];
+        _right$ = layout;
         _right$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _right$.topGuideFlag = self.topGuideFlag;
-        _right$.bottomGuideFlag = self.bottomGuideFlag;
-        _right$.head = self;
     }
     return _right$;
 }
 
 - (Layout *)leading$ {
     if (!_leading$) {
-        _leading$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"leading$"];
+        _leading$ = layout;
         _leading$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _leading$.topGuideFlag = self.topGuideFlag;
-        _leading$.bottomGuideFlag = self.bottomGuideFlag;
-        _leading$.head = self;
     }
     return _leading$;
 }
 
 - (Layout *)trailing$ {
     if (!_trailing$) {
-        _trailing$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"trailing$"];
+        _trailing$ = layout;
         _trailing$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _trailing$.topGuideFlag = self.topGuideFlag;
-        _trailing$.bottomGuideFlag = self.bottomGuideFlag;
-        _trailing$.head = self;
     }
     return _trailing$;
 }
 
 - (Layout *)width$ {
     if (!_width$) {
-        _width$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"width$"];
+        _width$ = layout;
         _width$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _width$.topGuideFlag = self.topGuideFlag;
-        _width$.bottomGuideFlag = self.bottomGuideFlag;
-        _width$.head = self;
     }
     return _width$;
 }
 
 - (Layout *)height$ {
     if (!_height$) {
-        _height$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"height$"];
+        _height$ = layout;
         _height$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _height$.topGuideFlag = self.topGuideFlag;
-        _height$.bottomGuideFlag = self.bottomGuideFlag;
-        _height$.head = self;
     }
     return _height$;
 }
 
 - (Layout *)centerX$ {
     if (!_centerX$) {
-        _centerX$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"centerX$"];
+        _centerX$ = layout;
         _centerX$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _centerX$.topGuideFlag = self.topGuideFlag;
-        _centerX$.bottomGuideFlag = self.bottomGuideFlag;
-        _centerX$.head = self;
     }
     return _centerX$;
 }
 
 - (Layout *)centerY$ {
     if (!_centerY$) {
-        _centerY$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"centerY$"];
+        _centerY$ = layout;
         _centerY$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _centerY$.topGuideFlag = self.topGuideFlag;
-        _centerY$.bottomGuideFlag = self.bottomGuideFlag;
-        _centerY$.head = self;
     }
     return _centerY$;
 }
 
 - (Layout *)lastBaseline$ {
     if (!_lastBaseline$) {
-        _lastBaseline$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"lastBaseline$"];
+        _lastBaseline$ = layout;
         _lastBaseline$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _lastBaseline$.topGuideFlag = self.topGuideFlag;
-        _lastBaseline$.bottomGuideFlag = self.bottomGuideFlag;
-        _lastBaseline$.head = self;
     }
     return _lastBaseline$;
 }
 
 - (Layout *)baseline$ {
     if (!_baseline$) {
-        _baseline$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"baseline$"];
+        _baseline$ = layout;
         _baseline$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _baseline$.topGuideFlag = self.topGuideFlag;
-        _baseline$.bottomGuideFlag = self.bottomGuideFlag;
-        _baseline$.head = self;
     }
     return _baseline$;
 }
 
 - (Layout *)firstBaseline$ {
     if (!_firstBaseline$) {
-        _firstBaseline$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"firstBaseline$"];
+        _firstBaseline$ = layout;
         _firstBaseline$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _firstBaseline$.topGuideFlag = self.topGuideFlag;
-        _firstBaseline$.bottomGuideFlag = self.bottomGuideFlag;
-        _firstBaseline$.head = self;
     }
     return _firstBaseline$;
 }
 
 - (Layout *)leftMargin$ {
     if (!_leftMargin$) {
-        _leftMargin$ =  [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"leftMargin$"];
+        _leftMargin$ = layout;
         _leftMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _leftMargin$.topGuideFlag = self.topGuideFlag;
-        _leftMargin$.bottomGuideFlag = self.bottomGuideFlag;
-        _leftMargin$.head = self;
     }
     return _leftMargin$;
 }
 
 - (Layout *)rightMargin$ {
     if (!_rightMargin$) {
-        _rightMargin$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"rightMargin$"];
+        _rightMargin$ = layout;
         _rightMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _rightMargin$.topGuideFlag = self.topGuideFlag;
-        _rightMargin$.bottomGuideFlag = self.bottomGuideFlag;
-        _rightMargin$.head = self;
     }
     return _rightMargin$;
 }
 
 - (Layout *)topMargin$ {
     if (!_topMargin$) {
-        _topMargin$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"topMargin$"];
+        _topMargin$ = layout;
         _topMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _topMargin$.topGuideFlag = self.topGuideFlag;
-        _topMargin$.bottomGuideFlag = self.bottomGuideFlag;
-        _topMargin$.head = self;
     }
     return _topMargin$;
 }
 
 - (Layout *)bottomMargin$ {
     if (!_bottomMargin$) {
-        _bottomMargin$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"bottomMargin$"];
+        _bottomMargin$ = layout;
         _bottomMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _bottomMargin$.topGuideFlag = self.topGuideFlag;
-        _bottomMargin$.bottomGuideFlag = self.bottomGuideFlag;
-        _bottomMargin$.head = self;
     }
     return _bottomMargin$;
 }
 
 - (Layout *)leadingMargin$ {
     if (!_leadingMargin$) {
-        _leadingMargin$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"leadingMargin$"];
+        _leadingMargin$ = layout;
         _leadingMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _leadingMargin$.topGuideFlag = self.topGuideFlag;
-        _leadingMargin$.bottomGuideFlag = self.bottomGuideFlag;
-        _leadingMargin$.head = self;
     }
     return _leadingMargin$;
 }
 
 - (Layout *)trailingMargin$ {
     if (!_trailingMargin$) {
-        _trailingMargin$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"trailingMargin$"];
+        _trailingMargin$ = layout;
         _trailingMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _trailingMargin$.topGuideFlag = self.topGuideFlag;
-        _trailingMargin$.bottomGuideFlag = self.bottomGuideFlag;
-        _trailingMargin$.head = self;
     }
     return _trailingMargin$;
 }
 
 - (Layout *)centerXMargin$ {
     if (!_centerXMargin$) {
-        _centerXMargin$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
+        Layout * layou = [Layout buildWithItem:self.layoutItem mark:@"centerXMargin$"];
+        _centerXMargin$ = layou;
         _centerXMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _centerXMargin$.topGuideFlag = self.topGuideFlag;
-        _centerXMargin$.bottomGuideFlag = self.bottomGuideFlag;
-        _centerXMargin$.head = self;
+        _centerXMargin$.layoutItem = self.layoutItem;
     }
     return _centerXMargin$;
 }
 
 - (Layout *)centerYMargin$ {
     if (!_centerYMargin$) {
-        _centerYMargin$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
+        Layout * layou = [Layout buildWithItem:self.layoutItem mark:@"centerYMargin$"];
+        _centerYMargin$ = layou;
         _centerYMargin$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _centerYMargin$.topGuideFlag = self.topGuideFlag;
-        _centerYMargin$.bottomGuideFlag = self.bottomGuideFlag;
-        _centerYMargin$.head = self;
+        _centerYMargin$.layoutItem = self.layoutItem;
     }
     return _centerYMargin$;
 }
 
 - (Layout *)center$ {
     if (!_center$) {
-        _center$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
+        Layout * layou = [Layout buildWithItem:self.layoutItem mark:@"center$"];
+        _center$ = layou;
         _center$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _center$.topGuideFlag = self.topGuideFlag;
-        _center$.bottomGuideFlag = self.bottomGuideFlag;
-        _center$.head = self;
+        _center$.layoutItem = self.layoutItem;
     }
     return _center$;
 }
 
 - (Layout *)size$ {
     if (!_size$) {
-        _size$ = [Layout buildWithItem:self.layoutItem mark:NSStringFromSelector(_cmd)];;
+        Layout * layout = [Layout buildWithItem:self.layoutItem mark:@"size$"];
+        _size$ = layout;
         _size$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _size$.topGuideFlag = self.topGuideFlag;
-        _size$.bottomGuideFlag = self.bottomGuideFlag;
-        _size$.head = self;
+        _size$.layoutItem = self.layoutItem;
     }
     return _size$;
 }
 
 - (Layout *)insert$ {
     if (!_insert$) {
-        _insert$ = [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];;
+        Layout * layout = [Layout buildWithItem:self mark:@"insert$"];
+        _insert$ = layout;
         _insert$.safeAreaGuideFlag = self.safeAreaGuideFlag;
-        _insert$.topGuideFlag = self.topGuideFlag;
-        _insert$.bottomGuideFlag = self.bottomGuideFlag;
-        _insert$.head = self;
+        _insert$.layoutItem = self.layoutItem;
     }
     return _insert$;
 }
 
-#pragma mark - 处理复合属性
-- (NSArray <NSLayoutConstraint *> *)build:(id)other relation:(NSLayoutRelation)relation rate:(CGFloat)rate trim:(CGFloat)trim {
-    NSAssert([NSThread isMainThread] == YES, @"约束构建必须在主线程中");
-    NSMutableArray <NSLayoutConstraint *> * constraints = [NSMutableArray array];
-    Layout * node = self;
-    NSSet * ignoreSet = layoutFlagSet();
-    NSSet * compositeSet = layoutCompositeSet();
-    while (node) {
-        if ([ignoreSet containsObject:node.mark]) {
-            node = node.head;
-            continue;
-        } else if ([compositeSet containsObject:node.mark]) {
-            if ([node.mark isEqualToString:@"center$"]) {
-                if ([other isKindOfClass:[UIView class]] || [other isKindOfClass:[Layout class]]) {
-                    NSLayoutConstraint * centerX = [node.centerX$ make:other relation:relation multiplier:rate constant:trim];
-                    NSLayoutConstraint * centerY = [node.centerY$ make:other relation:relation multiplier:rate constant:trim];
-                    [constraints addObject:centerX];
-                    [constraints addObject:centerY];
+- (NSLayoutConstraint *)equalTo:(id)other rate:(CGFloat)rate trim:(CGFloat)c {
+    return [self make:(NSLayoutRelationEqual) other:other multiplier:rate constant:c];
+}
+
+- (NSLayoutConstraint *)equalTo:(id)other rate:(CGFloat)rate {
+    return [self make:(NSLayoutRelationEqual) other:other multiplier:rate constant:0.0];
+}
+
+- (NSLayoutConstraint *)equalTo:(id)other trim:(CGFloat)c {
+    return [self make:(NSLayoutRelationEqual) other:other multiplier:1.0 constant:c];
+}
+
+- (NSLayoutConstraint *)equalTo:(id)other {
+    return [self make:(NSLayoutRelationEqual) other:other multiplier:1.0 constant:0.0];
+}
+
+- (NSLayoutConstraint *)lessOrEqualTo:(id)other rate:(CGFloat)rate trim:(CGFloat)c {
+    return [self make:(NSLayoutRelationLessThanOrEqual) other:other multiplier:rate constant:c];
+}
+
+- (NSLayoutConstraint *)lessOrEqualTo:(id)other rate:(CGFloat)rate {
+    return [self make:NSLayoutRelationLessThanOrEqual other:other multiplier:rate constant:0.0];
+}
+
+- (NSLayoutConstraint *)lessOrEqualTo:(id)other trim:(CGFloat)c {
+    return [self make:(NSLayoutRelationLessThanOrEqual) other:other multiplier:1.0 constant:c];
+}
+
+- (NSLayoutConstraint *)lessOrEqualTo:(id)other {
+    return [self make:NSLayoutRelationLessThanOrEqual other:other multiplier:1.0 constant:0.0];
+}
+
+- (NSLayoutConstraint *)greaterOrEqualTo:(id)other rate:(CGFloat)rate trim:(CGFloat)c {
+    return [self make:(NSLayoutRelationGreaterThanOrEqual) other:other multiplier:rate constant:c];
+}
+
+- (NSLayoutConstraint *)greaterOrEqualTo:(id)other rate:(CGFloat)rate {
+    return [self make:(NSLayoutRelationGreaterThanOrEqual) other:other multiplier:rate constant:0.0];
+}
+
+- (NSLayoutConstraint *)greaterOrEqualTo:(id)other trim:(CGFloat)c {
+    return [self make:NSLayoutRelationGreaterThanOrEqual other:other multiplier:1.0 constant:c];
+}
+
+- (NSLayoutConstraint *)greaterOrEqualTo:(id)other {
+    return [self make:NSLayoutRelationGreaterThanOrEqual other:other multiplier:1.0 constant:0.0];
+}
+
+- (NSArray <NSLayoutConstraint *> *)size:(id _Nullable)other trim:(CGSize)trim {
+    NSAssert(other != nil, @"other 不能为空");
+    if (self.safeAreaGuideFlag) {
+        if ([other isKindOfClass:[UIView class]]) {
+            if (@available(iOS 11.0, *)) {
+                NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
+                widthConstraint.active = YES;
+                NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
+                heightConstraint.active = YES;
+                return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
+            } else {
+                NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
+                return nil;
+            }
+        } else if ([other isKindOfClass:[Layout class]]) {
+            if ([(Layout *)other safeAreaGuideFlag]) {
+                if (@available(iOS 11.0, *)) {
+                    NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
+                    widthConstraint.active = YES;
+                    NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
+                    heightConstraint.active = YES;
+                    return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
                 } else {
-                    NSAssert(NO, @"center 没有参考对象");
-                }
-            } else if ([node.mark isEqualToString:@"size$"]) {
-                if ([other isKindOfClass:[UIView class]] || [other isKindOfClass:[Layout class]]) {
-                    NSLayoutConstraint * width = [node.width$ make:other relation:relation multiplier:rate constant:trim];
-                    NSLayoutConstraint * height = [node.height$ make:other relation:relation multiplier:rate constant:trim];
-                    [constraints addObject:width];
-                    [constraints addObject:height];
-                } else {
-                    CGSize size = [(NSValue *)other CGSizeValue];
-                    NSLayoutConstraint * width = [node.width$ make:nil relation:relation multiplier:rate constant:size.width + trim];
-                    NSLayoutConstraint * height = [node.height$ make:nil relation:relation multiplier:rate constant:size.height + trim];
-                    [constraints addObject:width];
-                    [constraints addObject:height];
-                }
-            } else if ([node.mark isEqualToString:@"insert$"]) {
-                if ([other isKindOfClass:[UIView class]] || [other isKindOfClass:[Layout class]]) {
-                    NSLayoutConstraint * t = [node.top$ make:other relation:relation multiplier:rate constant:trim];
-                    NSLayoutConstraint * l = [node.left$ make:other relation:relation multiplier:rate constant:trim];
-                    NSLayoutConstraint * b = [node.bottom$ make:other relation:relation multiplier:rate constant:-trim];
-                    NSLayoutConstraint * r = [node.right$ make:other relation:relation multiplier:rate constant:-trim];
-                    [constraints addObject:t];
-                    [constraints addObject:l];
-                    [constraints addObject:b];
-                    [constraints addObject:r];
-                } else {
-                    NSAssert(NO, @"insert 没有参考对象");
+                    NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
+                    return nil;
                 }
             } else {
-                NSAssert(NO, @"不支持属性: %@", node.mark);
+                if (@available(iOS 11.0, *)) {
+                    NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
+                    widthConstraint.active = YES;
+                    NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
+                    heightConstraint.active = YES;
+                    return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
+                } else {
+                    NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
+                    return nil;
+                }
             }
-            node = node.head;
+        } else if ([other isKindOfClass:[NSValue class]]) {
+            CGSize size = [other CGSizeValue];
+            if (@available(iOS 11.0, *)) {
+                NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:size.width + trim.width];
+                widthConstraint.active = YES;
+                NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:size.height + trim.height];
+                heightConstraint.active = YES;
+                return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
+            } else {
+                NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
+                return nil;
+            }
         } else {
-            NSLayoutConstraint * constraint = [node make:other relation:(relation) multiplier:rate constant:trim];
-            [constraints addObject:constraint];
-            node = node.head;
+            NSAssert(NO, @"other参数只支持NSValue UIView Layout类型");
+            return nil;
+        }
+    } else {
+        if ([other isKindOfClass:[UIView class]]) {
+            NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
+            widthConstraint.active = YES;
+            NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
+            heightConstraint.active = YES;
+            return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
+        } else if ([other isKindOfClass:[Layout class]]) {
+            if ([(Layout *)other safeAreaGuideFlag]) {
+                if (@available(iOS 11.0, *)) {
+                    NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
+                    widthConstraint.active = YES;
+                    NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
+                    heightConstraint.active = YES;
+                    return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
+                } else {
+                    // Fallback on earlier versions
+                    NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
+                    return nil;
+                }
+            } else {
+                NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeWidth) multiplier:1.0 constant:trim.width];
+                widthConstraint.active = YES;
+                NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeHeight) multiplier:1.0 constant:trim.height];
+                heightConstraint.active = YES;
+                return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
+            }
+        } else if ([other isKindOfClass:[NSValue class]]) {
+            CGSize size = [other CGSizeValue];
+            NSLayoutConstraint * widthConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:size.width + trim.width];
+                widthConstraint.active = YES;
+            NSLayoutConstraint * heightConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeHeight) relatedBy:(NSLayoutRelationEqual) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:size.height + trim.height];
+            heightConstraint.active = YES;
+            return [NSArray arrayWithObjects:widthConstraint, heightConstraint, nil];
+        } else {
+            NSAssert(NO, @"other参数只支持NSValue UIView Layout类型");
+            return nil;
         }
     }
-    return constraints;
 }
 
-#pragma mark - 等于约束
-- (NSArray <NSLayoutConstraint *> *)equalTo:(id)other rate:(CGFloat)rate trim:(CGFloat)trim {
-    return [self build:other relation:(NSLayoutRelationEqual) rate:rate trim:trim];
+- (NSArray <NSLayoutConstraint *> *)size:(id _Nullable)other {
+    return [self size:other trim:(CGSizeZero)];
 }
 
-- (NSArray <NSLayoutConstraint *> *)equalTo:(id)other rate:(CGFloat)rate {
-    return [self build:other relation:(NSLayoutRelationEqual) rate:rate trim:0.0];
+- (NSArray <NSLayoutConstraint *> *)center:(id _Nullable)other trim:(CGSize)trim {
+    if ([other isKindOfClass:[UIView class]]) {
+        NSLayoutConstraint * centerXConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeCenterX) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeCenterX) multiplier:1.0 constant:trim.width];
+        centerXConstraint.active = YES;
+        NSLayoutConstraint * centerYConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeCenterY) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeCenterY) multiplier:1.0 constant:trim.height];
+        centerYConstraint.active = YES;
+        return [NSArray arrayWithObjects:centerXConstraint, centerYConstraint, nil];
+    } else if ([other isKindOfClass:[self class]]) {
+        NSLayoutConstraint * centerXConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeCenterX) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeCenterX) multiplier:1.0 constant:trim.width];
+        centerXConstraint.active = YES;
+        NSLayoutConstraint * centerYConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeCenterY) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeCenterY) multiplier:1.0 constant:trim.height];
+        centerYConstraint.active = YES;
+        return [NSArray arrayWithObjects:centerXConstraint, centerYConstraint, nil];
+    } else {
+        NSAssert(NO, @"parameter must be (UIView | Layout) type");
+        return nil;
+    }
 }
 
-- (NSArray <NSLayoutConstraint *> *)equalTo:(id)other trim:(CGFloat)trim {
-    return [self build:other relation:(NSLayoutRelationEqual) rate:1.0 trim:trim];
+- (NSArray <NSLayoutConstraint *> *)center:(id _Nullable)other {
+    return [self center:other trim:(CGSizeZero)];
 }
 
-- (NSArray <NSLayoutConstraint *> *)equalTo:(id)other {
-    return [self build:other relation:(NSLayoutRelationEqual) rate:1.0 trim:0.0];
+- (NSArray <NSLayoutConstraint *> *)insert:(id _Nonnull)other trim:(UIEdgeInsets)trim {
+    if (self.safeAreaGuideFlag) {
+        if ([other isKindOfClass:[UIView class]]) {
+            if (@available(iOS 11.0, *)) {
+                NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
+                topConstraint.active = YES;
+                NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
+                leftConstraint.active = YES;
+                NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
+                bottomConstraint.active = YES;
+                NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
+                rightConstraint.active = YES;
+                return [NSArray arrayWithObjects:topConstraint, leftConstraint, bottomConstraint, rightConstraint, nil];
+            } else {
+                NSAssert(NO, @"other参数只支持NSValue UIView Layout类型");
+                return nil;
+            }
+        } else if ([other isKindOfClass:[Layout class]]) {
+            if ([(Layout *)other safeAreaGuideFlag]) {
+                if (@available(iOS 11.0, *)) {
+                    NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
+                    topConstraint.active = YES;
+                    NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
+                    leftConstraint.active = YES;
+                    NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
+                    bottomConstraint.active = YES;
+                    NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
+                    rightConstraint.active = YES;
+                    return [NSArray arrayWithObjects:topConstraint, leftConstraint, bottomConstraint, rightConstraint, nil];
+                } else {
+                    NSAssert(NO, @"other参数只支持NSValue UIView Layout类型");
+                    return nil;
+                }
+            } else {
+                if (@available(iOS 11.0, *)) {
+                    NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
+                    topConstraint.active = YES;
+                    NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
+                    leftConstraint.active = YES;
+                    NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
+                    bottomConstraint.active = YES;
+                    NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
+                    rightConstraint.active = YES;
+                    return [NSArray arrayWithObjects:topConstraint, leftConstraint, bottomConstraint, rightConstraint, nil];
+                } else {
+                    NSAssert(NO, @"other参数只支持NSValue UIView Layout类型");
+                    return nil;
+                }
+            }
+        } else {
+            NSAssert(NO, @"other参数只支持UIView Layout类型");
+            return nil;
+        }
+    } else {
+        if ([other isKindOfClass:[UIView class]]) {
+            NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
+            topConstraint.active = YES;
+            NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
+            leftConstraint.active = YES;
+            NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
+            bottomConstraint.active = YES;
+            NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:other attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
+            rightConstraint.active = YES;
+            return [NSArray arrayWithObjects:topConstraint, leftConstraint, bottomConstraint, rightConstraint, nil];
+        } else if ([other isKindOfClass:[Layout class]]) {
+            if ([(Layout *)other safeAreaGuideFlag]) {
+                if (@available(iOS 11.0, *)) {
+                    NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
+                    topConstraint.active = YES;
+                    NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
+                    leftConstraint.active = YES;
+                    NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
+                    bottomConstraint.active = YES;
+                    NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:[(UIView *)[(Layout *)other layoutItem] safeAreaLayoutGuide] attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
+                    rightConstraint.active = YES;
+                    return [NSArray arrayWithObjects:topConstraint, leftConstraint, bottomConstraint, rightConstraint, nil];
+                } else {
+                    NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
+                    return nil;
+                }
+            } else {
+                NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeTop) multiplier:1.0 constant:trim.top];
+                topConstraint.active = YES;
+                NSLayoutConstraint * leftConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:trim.left];
+                leftConstraint.active = YES;
+                NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeBottom) multiplier:1.0 constant:trim.bottom];
+                bottomConstraint.active = YES;
+                NSLayoutConstraint * rightConstraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:[(Layout *)other layoutItem] attribute:(NSLayoutAttributeRight) multiplier:1.0 constant:trim.right];
+                rightConstraint.active = YES;
+                return [NSArray arrayWithObjects:topConstraint, leftConstraint, bottomConstraint, rightConstraint, nil];
+            }
+        } else {
+            NSAssert(NO, @"other参数只支持UIView Layout类型");
+            return nil;
+        }
+    }
 }
 
-#pragma mark - 小于等于约束
-- (NSArray <NSLayoutConstraint *> *)lessOrEqualTo:(id)other rate:(CGFloat)rate trim:(CGFloat)trim {
-    return [self build:other relation:(NSLayoutRelationLessThanOrEqual) rate:rate trim:trim];
+- (NSArray <NSLayoutConstraint *> *)insert:(id _Nonnull)other {
+    return [self insert:other trim:(UIEdgeInsetsZero)];
 }
 
-- (NSArray <NSLayoutConstraint *> *)lessOrEqualTo:(id)other rate:(CGFloat)rate {
-    return [self build:other relation:(NSLayoutRelationLessThanOrEqual) rate:rate trim:0.0];
-}
-
-- (NSArray <NSLayoutConstraint *> *)lessOrEqualTo:(id)other trim:(CGFloat)trim {
-    return [self build:other relation:(NSLayoutRelationLessThanOrEqual) rate:1.0 trim:trim];
-}
-
-- (NSArray <NSLayoutConstraint *> *)lessOrEqualTo:(id)other {
-    return [self build:other relation:(NSLayoutRelationLessThanOrEqual) rate:1.0 trim:0.0];
-}
-
-#pragma mark - 大于等于约束
-- (NSArray <NSLayoutConstraint *> *)greaterOrEqualTo:(id)other rate:(CGFloat)rate trim:(CGFloat)trim {
-    return [self build:other relation:(NSLayoutRelationGreaterThanOrEqual) rate:rate trim:trim];
-}
-
-- (NSArray <NSLayoutConstraint *> *)greaterOrEqualTo:(id)other rate:(CGFloat)rate {
-    return [self build:other relation:(NSLayoutRelationGreaterThanOrEqual) rate:rate trim:0.0];
-}
-
-- (NSArray <NSLayoutConstraint *> *)greaterOrEqualTo:(id)other trim:(CGFloat)trim {
-    return [self build:other relation:(NSLayoutRelationGreaterThanOrEqual) rate:1.0 trim:trim];
-}
-
-- (NSArray <NSLayoutConstraint *> *)greaterOrEqualTo:(id)other {
-    return [self build:other relation:(NSLayoutRelationGreaterThanOrEqual) rate:1.0 trim:0.0];
-}
-
-- (void)dealloc {
+- (void)clearConstraints {
+    NSArray <NSLayoutConstraint *> * constraints = [(UIView *)self.layoutItem constraints];
     
 }
 

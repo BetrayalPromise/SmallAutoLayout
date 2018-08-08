@@ -8,6 +8,7 @@
 
 #import "UIView+Layout.h"
 #import "Layout.h"
+#import <objc/runtime.h>
 
 @implementation UIView (Layout)
 
@@ -111,6 +112,15 @@
     Layout * layout = [Layout buildWithItem:self mark:NSStringFromSelector(_cmd)];
     layout.safeAreaGuideFlag = YES;
     return layout;
+}
+
+- (NSHashTable *)ownConstraints {
+    if (objc_getAssociatedObject(self, _cmd) == nil) {
+        NSHashTable * hashTable = [NSHashTable weakObjectsHashTable];
+        objc_setAssociatedObject(self, _cmd, hashTable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        return hashTable;
+    }
+    return objc_getAssociatedObject(self, _cmd);
 }
 
 @end

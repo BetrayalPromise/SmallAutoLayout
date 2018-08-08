@@ -23,14 +23,7 @@
     [self.view addSubview:v0];
     v0.backgroundColor = UIColor.redColor;
     v0.translatesAutoresizingMaskIntoConstraints = NO;
-    /// 已支持
-//    [v0.top$.left$.bottom$.right$ equalTo:self.view.safeAreaGuide$];
     
-    UIView * v1 = [[UIView alloc] initWithFrame:CGRectZero];
-    [self.view addSubview:v1];
-    v1.backgroundColor = UIColor.blueColor;
-    v1.translatesAutoresizingMaskIntoConstraints = NO;
-    [v1.size$.left$.top$ equalTo:self.view];
 }
 
 - (void)didReceiveMemoryWarning {
