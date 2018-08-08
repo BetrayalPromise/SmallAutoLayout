@@ -63,20 +63,20 @@
     other 为UIView时 self与参数拥有相同的属性
     other 为nil时 multiplier无效
  */
-- (NSLayoutConstraint *)equalTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c;
-- (NSLayoutConstraint *)equalTo:(id _Nullable)other rate:(CGFloat)rate;
-- (NSLayoutConstraint *)equalTo:(id _Nullable)other trim:(CGFloat)c;
-- (NSLayoutConstraint *)equalTo:(id _Nullable)other;
+- (NSLayoutConstraint * _Nullable)equalTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c;
+- (NSLayoutConstraint * _Nullable)equalTo:(id _Nullable)other rate:(CGFloat)rate;
+- (NSLayoutConstraint * _Nullable)equalTo:(id _Nullable)other trim:(CGFloat)c;
+- (NSLayoutConstraint * _Nullable)equalTo:(id _Nullable)other;
 
-- (NSLayoutConstraint *)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c;
-- (NSLayoutConstraint *)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate;
-- (NSLayoutConstraint *)lessOrEqualTo:(id _Nullable)other trim:(CGFloat)c;
-- (NSLayoutConstraint *)lessOrEqualTo:(id _Nullable)other;
+- (NSLayoutConstraint * _Nullable)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c;
+- (NSLayoutConstraint * _Nullable)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate;
+- (NSLayoutConstraint * _Nullable)lessOrEqualTo:(id _Nullable)other trim:(CGFloat)c;
+- (NSLayoutConstraint * _Nullable)lessOrEqualTo:(id _Nullable)other;
 
-- (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c;
-- (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)multiplier;
-- (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other trim:(CGFloat)c;
-- (NSLayoutConstraint *)greaterOrEqualTo:(id _Nullable)other;
+- (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c;
+- (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)multiplier;
+- (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other trim:(CGFloat)c;
+- (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other;
 
 /// 复合属性Size处理函数
 - (NSArray <NSLayoutConstraint *> *)size:(id _Nullable)other trim:(CGSize)trim;
