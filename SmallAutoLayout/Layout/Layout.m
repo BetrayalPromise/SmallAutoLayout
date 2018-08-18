@@ -864,9 +864,5 @@ static inline NSSet * specialSet() {
     return [self insert:other trim:(UIEdgeInsetsZero)];
 }
 
-- (void)clearConstraints {
-    NSArray <NSLayoutConstraint *> * constraints = [(UIView *)self.layoutItem constraints];
-    
-}
 
 @end

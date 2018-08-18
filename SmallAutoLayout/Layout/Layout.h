@@ -91,6 +91,4 @@
 - (NSArray <NSLayoutConstraint *> *)insert:(id _Nonnull)other;
 
 
-- (void)clearConstraints;
-
 @end
