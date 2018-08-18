@@ -37,7 +37,7 @@ yeah
 [NSLayoutConstraint constraintWithItem:view0 attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:self.view.safeAreaLayoutGuide attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:0.0];
 
 yeah
-[view0.Left equalTo:self.view.SafeAreaGuide.Left];
+[view0.left$ equalTo:self.view.safeAreaGuide$.left$];
 ```
 
 ### view0.top == self.topLayoutGuide.bottom
@@ -49,27 +49,7 @@ yeah
 [view0.top$ equalTo:self.topGudie$.bottom$];
 ```
 
-### view0.size == CGSizeMake(100, 100)
-```
-[view0.size$ equalTo:@(CGSizeMake(100, 100))];
-```
 
-### view0.center == view1.center
-```
-[view0.center$ equalTo:view1.center$];
-[view0.center$ equalTo:view1];
-```
-
-### view0.safeArea.size == view1.size
-```
-[view0.safeAreaGuide$.size$ equalTo:view1.size$];
-[view0.safeAreaGuide$.size$ equalTo:view1];
-```
-
-### view0.top == view1.top view0.left == view1.left view0.bottom == view1.bottom
-```
-[view1.top$.left$.bottom$ equalTo:view1];
-```
 
 ## Requirements
 
