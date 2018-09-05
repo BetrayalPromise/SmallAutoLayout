@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ExampleCell : UICollectionViewCell
+@interface ExampleCell : UITableViewCell
+
+- (void)configureModel:(id)model;
 
 @end

@@ -22,7 +22,7 @@
 
     UIView * v1 = [UIView new];
     [self.view addSubview:v1];
-    v1.translatesAutoresizingMaskIntoConstraints = NO;
+//    v1.translatesAutoresizingMaskIntoConstraints = NO;
     v1.backgroundColor = [UIColor redColor];
 
     if (@available(iOS 11.0, *)) {

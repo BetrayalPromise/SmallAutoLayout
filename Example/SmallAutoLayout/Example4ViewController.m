@@ -22,7 +22,7 @@
 
     UIView * v0 = [UIView new];
     [self.view addSubview:v0];
-    v0.translatesAutoresizingMaskIntoConstraints = NO;
+//    v0.translatesAutoresizingMaskIntoConstraints = NO;
     v0.backgroundColor = [UIColor redColor];
 
     [self.topGuide$.bottom$ equalTo:v0];
@@ -32,7 +32,7 @@
     
     UIView * v1 = [UIView new];
     [self.view addSubview:v1];
-    v1.translatesAutoresizingMaskIntoConstraints = NO;
+//    v1.translatesAutoresizingMaskIntoConstraints = NO;
     v1.backgroundColor = [UIColor redColor];
     
     [self.bottomGuide$.top$ equalTo:v1];

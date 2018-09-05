@@ -25,7 +25,7 @@
    
     UIView * v0 = [UIView new];
     [self.view addSubview:v0];
-    v0.translatesAutoresizingMaskIntoConstraints = NO;
+//    v0.translatesAutoresizingMaskIntoConstraints = NO;
     v0.backgroundColor = [UIColor redColor];
     if (@available(iOS 11.0, *)) {
         [v0.centerX$ equalTo:self.view.safeAreaGuide$.centerX$];

@@ -21,7 +21,7 @@
 
     UIView * v0 = [UIView new];
     [self.view addSubview:v0];
-    v0.translatesAutoresizingMaskIntoConstraints = NO;
+//    v0.translatesAutoresizingMaskIntoConstraints = NO;
     v0.backgroundColor = [UIColor redColor];
     [self.topGuide$.top$ equalTo:v0.top$];
     [v0.centerX$ equalTo:self.view.centerX$ rate:0.5];
@@ -31,7 +31,7 @@
 
     UIView * v1 = [UIView new];
     [self.view addSubview:v1];
-    v1.translatesAutoresizingMaskIntoConstraints = NO;
+//    v1.translatesAutoresizingMaskIntoConstraints = NO;
     v1.backgroundColor = [UIColor redColor];
     [v1.top$ equalTo:self.topGuide$.bottom$];
     [v1.centerX$ equalTo:self.view.centerX$ rate:1.5];
@@ -40,7 +40,7 @@
 
     UIView * v2 = [UIView new];
     [self.view addSubview:v2];
-    v2.translatesAutoresizingMaskIntoConstraints = NO;
+//    v2.translatesAutoresizingMaskIntoConstraints = NO;
     v2.backgroundColor = [UIColor redColor];
     [self.bottomGuide$.bottom$ equalTo:v2.bottom$];
     [v2.centerX$ equalTo:self.view.centerX$ rate:0.5];
@@ -49,7 +49,7 @@
 
     UIView * v3 = [UIView new];
     [self.view addSubview:v3];
-    v3.translatesAutoresizingMaskIntoConstraints = NO;
+//    v3.translatesAutoresizingMaskIntoConstraints = NO;
     v3.backgroundColor = [UIColor redColor];
     [v3.bottom$ equalTo:self.bottomGuide$.top$];
     [v3.centerX$ equalTo:self.view.centerX$ rate:1.5];

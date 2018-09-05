@@ -37,13 +37,13 @@
     
     UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectZero style:(UITableViewStylePlain)];
     [self.view addSubview:tableView];
-    tableView.translatesAutoresizingMaskIntoConstraints = NO;
+//    tableView.translatesAutoresizingMaskIntoConstraints = NO;
     tableView.delegate = self;
     tableView.dataSource = self;
     [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
     if (@available(iOS 11.0, *)) {
         [tableView.safeAreaGuide$.top$ equalTo:self.view.safeAreaGuide$.top$];
-        [tableView.safeAreaGuide$.left$ equalTo:self.view.safeAreaGuide$.left$];
+        [tableView.left$ equalTo:self.view.safeAreaGuide$.left$];
         [tableView.safeAreaGuide$.bottom$ equalTo:self.view.safeAreaGuide$.bottom$];
         [tableView.safeAreaGuide$.right$ equalTo:self.view.safeAreaGuide$.right$];
     } else {

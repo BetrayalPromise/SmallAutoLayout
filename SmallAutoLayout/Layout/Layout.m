@@ -51,6 +51,22 @@
 @implementation Layout
 
 + (instancetype)buildWithItem:(id)item mark:(NSString *)mark {
+    if ([item isKindOfClass:[UIView class]]) {
+        NSLog(@"%@", [(UIView *)item superview]);
+        if (![(UIView *)item superview]) {
+            [(UIView *)item setTranslatesAutoresizingMaskIntoConstraints:YES];
+        } else {
+            if ([[(UIView *)item superview] isKindOfClass:[UITableViewCell class]] || [[(UIView *)item superview] isKindOfClass:[UICollectionViewCell class]]) {
+                [(UIView *)item setTranslatesAutoresizingMaskIntoConstraints:YES];
+            } else {
+                [(UIView *)item setTranslatesAutoresizingMaskIntoConstraints:NO];
+            }
+        }
+    } else if ([item isKindOfClass:[UIViewController class]]) {
+        NSLog(@"%@", item);
+    } else {
+        NSAssert(NO, @"不支持的类型");
+    }
     Layout * layout = [Layout new];
     layout.mark = mark;
     layout.layoutItem = item;

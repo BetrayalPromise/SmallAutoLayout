@@ -22,7 +22,7 @@
 
     UIView * v0 = [UIView new];
     [self.view addSubview:v0];
-    v0.translatesAutoresizingMaskIntoConstraints = NO;
+//    v0.translatesAutoresizingMaskIntoConstraints = NO;
     v0.backgroundColor = [UIColor redColor];
     [v0.centerX$ equalTo:self.view.centerX$];
     [self.view.centerY$ equalTo:v0.centerY$];
