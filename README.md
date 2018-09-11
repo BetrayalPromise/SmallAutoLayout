@@ -13,7 +13,7 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-### view0.width == view1.width$
+### view0.width == view1.width
 ```obj-c
 (狗娘养的API)fuck
 [NSLayoutConstraint constraintWithItem:view0 attribute:(NSLayoutAttributeWidth) relatedBy:(NSLayoutRelationEqual) toItem:view1 attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:0.0];
@@ -31,7 +31,7 @@ yeah
 [view0.width$ equalTo:view1.width$ trim:10];
 ```
 
-### [view0.left == self.view.safeArea.left
+### view0.left == self.view.safeArea.left
 ```obj-c
 (狗娘养的API)fuck
 [NSLayoutConstraint constraintWithItem:view0 attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:self.view.safeAreaLayoutGuide attribute:(NSLayoutAttributeLeft) multiplier:1.0 constant:0.0];
