@@ -24,14 +24,6 @@
         [self.contentView addSubview:label];
         label.numberOfLines = 0;
         [self setLabel:label];
-//        [label.top$ equalTo:self.contentView.top$];
-//        [self.contentView.left$ equalTo:label];
-//        [self.contentView.bottom$ equalTo:label];
-//        [self.contentView.right$ equalTo:label];
-        
-//        [label.insert$ insert:self.contentView trim:(UIEdgeInsetsMake(10, 10, -10, -10))];
-//        [label.insert$ insert:self.contentView.insert$ trim:(UIEdgeInsetsMake(10, 10, -10, -10))];
-        
         [self.contentView.insert$ insert:label];
     }
     return self;

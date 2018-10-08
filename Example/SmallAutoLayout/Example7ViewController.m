@@ -31,15 +31,17 @@
     table.delegate = self;
     table.dataSource = self;
     [table registerClass:[ExampleCell class] forCellReuseIdentifier:NSStringFromClass([ExampleCell class])];
-    [table.top$ equalTo:self.view.safeAreaGuide$.top$];
-    [self.view.safeAreaGuide$.left$ equalTo:table];
-    [self.view.safeAreaGuide$.bottom$ equalTo:table];
-    [table.right$ equalTo:self.view.safeAreaGuide$];
-    
+    if (@available(iOS 11.0, *)) {
+        [table.top$ equalTo:self.view.safeAreaGuide$.top$];
+        [self.view.safeAreaGuide$.left$ equalTo:table];
+        [self.view.safeAreaGuide$.bottom$ equalTo:table];
+        [table.right$ equalTo:self.view.safeAreaGuide$];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _datas.count;
+//    return _datas.count;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

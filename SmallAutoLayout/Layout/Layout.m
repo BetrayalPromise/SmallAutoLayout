@@ -779,6 +779,22 @@ static inline NSSet * specialSet() {
 }
 
 - (NSArray <NSLayoutConstraint *> *)insert:(id _Nonnull)other trim:(UIEdgeInsets)trim {
+    if ([other isKindOfClass:[UIView class]]) {
+        NSLog(@"%@", [(UIView *)other superview]);
+        if (![(UIView *)other superview]) {
+            [(UIView *)other setTranslatesAutoresizingMaskIntoConstraints:YES];
+        } else {
+            if ([[(UIView *)other superview] isKindOfClass:[UITableViewCell class]] || [[(UIView *)other superview] isKindOfClass:[UICollectionViewCell class]]) {
+                [(UIView *)other setTranslatesAutoresizingMaskIntoConstraints:YES];
+            } else {
+                [(UIView *)other setTranslatesAutoresizingMaskIntoConstraints:NO];
+            }
+        }
+    } else if ([other isKindOfClass:[UIViewController class]]) {
+        NSLog(@"%@", other);
+    } else {
+        NSAssert(NO, @"不支持的类型");
+    }
     if (self.safeAreaGuideFlag) {
         if ([other isKindOfClass:[UIView class]]) {
             if (@available(iOS 11.0, *)) {
