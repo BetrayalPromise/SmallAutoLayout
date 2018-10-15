@@ -79,7 +79,6 @@
 - (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other;
 
 /// 复合属性Size处理函数
-- (NSArray <NSLayoutConstraint *> *)size:(id _Nullable)other trim:(CGSize)trim;
 - (NSArray <NSLayoutConstraint *> *)size:(id _Nullable)other;
 
 /// 复合属性Center处理函数

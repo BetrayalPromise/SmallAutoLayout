@@ -18,6 +18,7 @@
 #import "Example5ViewController.h"
 #import "Example6ViewController.h"
 #import "Example7ViewController.h"
+#import "Example8ViewController.h"
 
 @interface QMTVViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -29,7 +30,7 @@
 
 - (void)loadView {
     [super loadView];
-    _datasource = @[@"SafeArea", @"LayouGuide", @"View Center", @"View SafeArea Center", @"Default Value", @"View Size", @"View SafeArea Size", @"7"];
+    _datasource = @[@"SafeArea", @"LayouGuide", @"View Center", @"View SafeArea Center", @"Default Value", @"View Size", @"View SafeArea Size", @"Cell", @"复合属性支持"];
 }
 
 - (void)viewDidLoad {
@@ -72,35 +73,39 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
         [self.navigationController pushViewController:[[Example0ViewController new] objcetThen:^(Example0ViewController *  _Nonnull source) {
-            source.title = @"SafeArea";
+            source.title = @"SafeArea适配";
         }] animated:YES];
     } else if (indexPath.row == 1) {
         [self.navigationController pushViewController:[[Example1ViewController new] objcetThen:^(Example0ViewController *  _Nonnull source) {
-            source.title = @"LayoutGuide";
+            source.title = @"LayoutGuide适配";
         }] animated:YES];
     } else if (indexPath.row == 2) {
         [self.navigationController pushViewController:[[Example2ViewController new] objcetThen:^(Example2ViewController * _Nonnull source) {
-            source.title = @"View Center";
+            source.title = @"视图中心";
         }] animated:YES];
     } else if (indexPath.row == 3) {
         [self.navigationController pushViewController:[[Example3ViewController new] objcetThen:^(Example3ViewController * _Nonnull source) {
-            source.title = @"View SafeArea Center";
+            source.title = @"视图SafeArea中心";
         }] animated:YES];
     } else if (indexPath.row == 4) {
         [self.navigationController pushViewController:[[Example4ViewController new] objcetThen:^(Example4ViewController * _Nonnull source) {
-            source.title = @"Default Value";
+            source.title = @"缺省值处理";
         }] animated:YES];
     } else if (indexPath.row == 5) {
         [self.navigationController pushViewController:[[Example5ViewController new] objcetThen:^(Example5ViewController * _Nonnull source) {
-            source.title = @"View Size";
+            source.title = @"视图尺寸";
         }] animated:YES];
     } else if (indexPath.row == 6) {
-        [self.navigationController pushViewController:[[Example6ViewController new] objcetThen:^(Example5ViewController * _Nonnull source) {
-            source.title = @"View SafeArea Size";
+        [self.navigationController pushViewController:[[Example6ViewController new] objcetThen:^(Example6ViewController * _Nonnull source) {
+            source.title = @"视图安全区尺寸";
         }] animated:YES];
     } else if (indexPath.row == 7) {
-        [self.navigationController pushViewController:[[Example7ViewController new] objcetThen:^(Example5ViewController * _Nonnull source) {
-//            source.title = @"SafeArea Default Value";
+        [self.navigationController pushViewController:[[Example7ViewController new] objcetThen:^(Example7ViewController * _Nonnull source) {
+            source.title = @"Cell适配";
+        }] animated:YES];
+    } else if (indexPath.row == 8) {
+        [self.navigationController pushViewController:[[Example8ViewController new] objcetThen:^(Example8ViewController * _Nonnull source) {
+            source.title = @"符合属性size";
         }] animated:YES];
     }
 }
