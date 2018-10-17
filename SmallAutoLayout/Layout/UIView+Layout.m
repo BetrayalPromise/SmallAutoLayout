@@ -123,4 +123,10 @@
     return objc_getAssociatedObject(self, _cmd);
 }
 
+- (void)clearupConstraint {
+    for (NSLayoutConstraint * c in self.ownConstraints) {
+        c.active = NO;
+    }
+}
+
 @end

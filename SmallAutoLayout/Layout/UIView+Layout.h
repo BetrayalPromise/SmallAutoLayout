@@ -46,4 +46,6 @@
 
 @property (nonatomic, strong, readonly) NSHashTable <NSLayoutConstraint *> * ownConstraints;
 
+- (void)clearupConstraint;
+
 @end

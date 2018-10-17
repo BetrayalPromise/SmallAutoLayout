@@ -21,7 +21,6 @@
 
     UIView * v0 = [UIView new];
     [self.view addSubview:v0];
-//    v0.translatesAutoresizingMaskIntoConstraints = NO;
     v0.backgroundColor = [UIColor redColor];
 
     [v0.width$ equalTo:nil trim:100];
@@ -34,10 +33,8 @@
         [v0.left$ equalTo:self.view.left$];
     }
 
-
     UIView * v1 = [UIView new];
     [self.view addSubview:v1];
-//    v1.translatesAutoresizingMaskIntoConstraints = NO;
     [v1.width$ equalTo:nil trim:100];
     [v1.height$ equalTo:nil trim:100];
     v1.backgroundColor = [UIColor redColor];
@@ -51,7 +48,6 @@
 
     UIView * v2 = [UIView new];
     [self.view addSubview:v2];
-//    v2.translatesAutoresizingMaskIntoConstraints = NO;
     v2.backgroundColor = [UIColor redColor];
     [v2.width$ equalTo:nil trim:100];
     [v2.height$ equalTo:nil trim:100];
@@ -65,7 +61,6 @@
 
     UIView * v3 = [UIView new];
     [self.view addSubview:v3];
-//    v3.translatesAutoresizingMaskIntoConstraints = NO;
     v3.backgroundColor = [UIColor redColor];
     if (@available(iOS 11.0, *)) {
         [self.view.safeAreaGuide$.bottom$ equalTo:v3.bottom$];

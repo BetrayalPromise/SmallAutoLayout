@@ -18,16 +18,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIView * v = [UIView new];
-    [self.view addSubview:v];
-    v.backgroundColor = UIColor.yellowColor;
-    [v.insert$ insert:self.view trim:(UIEdgeInsetsMake(100, 20, 100, 20))];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+//    UIView * v = [UIView new];
+//    [self.view addSubview:v];
+//    v.backgroundColor = UIColor.yellowColor;
+//    [v.insert$ insert:self.view trim:(UIEdgeInsetsMake(100, 20, 100, 20))];
  
     UILabel * label = [UILabel new];
     label.backgroundColor = [UIColor redColor];
     [self.view addSubview:label];
-    [label.size$ size:@(CGSizeMake(100, 100))];
-    [label.center$ center:self.view];
+    [label.size$ sizeScope:@(CGSizeMake(100, 100))];
+    [label.size$ sizeScope:@(CGSizeMake(200, 100))];
+    [label.center$ centerIn:self.view];
 }
 
 @end
