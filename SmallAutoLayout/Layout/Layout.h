@@ -79,7 +79,7 @@
 - (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other;
 
 /// 复合属性Size处理函数
-- (NSArray <NSLayoutConstraint *> *)sizeScope:(id _Nullable)other;
+- (NSArray <NSLayoutConstraint *> *)sizeWith:(id _Nullable)other;
 
 /// 复合属性Center处理函数
 - (NSArray <NSLayoutConstraint *> *)centerIn:(id _Nullable)other trim:(CGSize)trim;
@@ -88,6 +88,5 @@
 /// 符合属性Insert
 - (NSArray <NSLayoutConstraint *> *)insertIn:(id _Nonnull)other trim:(UIEdgeInsets)trim;
 - (NSArray <NSLayoutConstraint *> *)insertIn:(id _Nonnull)other;
-
 
 @end

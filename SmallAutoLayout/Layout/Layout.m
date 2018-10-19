@@ -76,23 +76,6 @@ static inline NSSet * specialSet() {
     return [NSSet setWithObjects:@"safeAreaGuide$", @"topGuide$", @"bottomGuide$", nil];
 }
 
-#pragma - mark 约束检测
-- (void)conflictDetection {
-    id item = self.layoutItem;
-    NSLayoutAttribute attribute = [self findAttribute:self.mark];
-    if ([(UIView *)self.layoutItem ownConstraints].count != 0) {
-        NSHashTable <NSLayoutConstraint *> * hashTable = [(UIView *)self.layoutItem ownConstraints];
-        for (NSLayoutConstraint * constraint in hashTable.allObjects) {
-            /// 删除冲突的约束
-            if ((constraint.firstItem == item && constraint.firstAttribute == attribute) || (constraint.secondItem == item && constraint.secondAttribute == attribute)) {
-                if (constraint.isActive == YES) {
-                    constraint.active = NO;
-                }
-            }
-        }
-    }
-}
-
 - (NSLayoutConstraint *)make:(NSLayoutRelation)relation other:(id)other multiplier:(CGFloat)multiplier constant:(CGFloat)c {
     NSAssert(self.mark != nil, @"First item's LayoutAttribute must be exit");
     NSLayoutAttribute attribute = [self findAttribute:self.mark];
@@ -101,7 +84,6 @@ static inline NSSet * specialSet() {
     if ([set containsObject:self.mark]) {
         NSAssert(NO, @"%@没有缺省值", self.mark);
     }
-    [self conflictDetection];
     if (other == nil) {
         return [self nilHandle:relation multiplier:multiplier c:c];
     } else if ([other isKindOfClass:[NSNumber class]]) {
@@ -688,7 +670,7 @@ static inline NSSet * specialSet() {
     return [self make:NSLayoutRelationGreaterThanOrEqual other:other multiplier:1.0 constant:0.0];
 }
 
-- (NSArray <NSLayoutConstraint *> *)sizeScope:(id _Nullable)other {
+- (NSArray <NSLayoutConstraint *> *)sizeWith:(id _Nullable)other {
     if (self.safeAreaGuideFlag) {
         UIView * item = self.layoutItem;
         if ([other isKindOfClass:[UIView class]]) {

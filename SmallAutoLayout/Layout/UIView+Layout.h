@@ -34,11 +34,11 @@
 @property (nonatomic, weak, readonly) Layout * centerXMargin$;
 @property (nonatomic, weak, readonly) Layout * centerYMargin$;
 
-/// 复合属性 Size 不能使用操单个约束的函数
+/// 复合属性 Size 不能使用操单个约束的函数 width height
 @property (nonatomic, weak, readonly) Layout * size$;
-/// 复合属性 Center 不能使用操作单个约束的函数
+/// 复合属性 Center 不能使用操作单个约束的函数 centerX centerY
 @property (nonatomic, weak, readonly) Layout * center$;
-/// 复合属性 Insert 不能使用操作单个约束的函数
+/// 复合属性 Insert 不能使用操作单个约束的函数 top left bottom right
 @property (nonatomic, weak, readonly) Layout * insert$;
 
 /// 用户自定义的视图一般而言其范围和安全区范围是一样的 支持 Left Right Top Bottom Size Insert 属性

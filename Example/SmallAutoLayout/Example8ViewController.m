@@ -26,11 +26,14 @@
 //    [v.insert$ insert:self.view trim:(UIEdgeInsetsMake(100, 20, 100, 20))];
  
     UILabel * label = [UILabel new];
+    label.text = @"ADFADFADFADFA";
     label.backgroundColor = [UIColor redColor];
     [self.view addSubview:label];
-    [label.size$ sizeScope:@(CGSizeMake(100, 100))];
-    [label.size$ sizeScope:@(CGSizeMake(200, 100))];
-    [label.center$ centerIn:self.view];
+    NSLayoutConstraint * c = [label.left$ equalTo:self.view];
+    [label.centerY$ equalTo:self.view];
+//    c.active = NO;
+//    [label.left$ equalTo:self.view trim:10];
+    c.constant = 10;
 }
 
 @end
