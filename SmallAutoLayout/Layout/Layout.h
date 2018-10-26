@@ -56,37 +56,44 @@
 @property (nonatomic, copy) NSString * mark;
 + (instancetype)buildWithItem:(id)item mark:(NSString *)mark;
 
-/*
-    view自己觉得的尺寸
- 
-    other 为NSNumber时 rate参数无效
-    other 为UIView时 self与参数拥有相同的属性
-    other 为nil时 multiplier无效
- */
+
+#pragma - mark 单一构建约束 -
 - (NSLayoutConstraint * _Nullable)equalTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c;
 - (NSLayoutConstraint * _Nullable)equalTo:(id _Nullable)other rate:(CGFloat)rate;
 - (NSLayoutConstraint * _Nullable)equalTo:(id _Nullable)other trim:(CGFloat)c;
 - (NSLayoutConstraint * _Nullable)equalTo:(id _Nullable)other;
+- (NSLayoutConstraint * _Nullable)equalTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c priority:(CGFloat)priority;
+- (NSLayoutConstraint * _Nullable)equalTo:(id _Nullable)other rate:(CGFloat)rate priority:(CGFloat)priority;
+- (NSLayoutConstraint * _Nullable)equalTo:(id _Nullable)other trim:(CGFloat)c priority:(CGFloat)priority;
+- (NSLayoutConstraint * _Nullable)equalTo:(id _Nullable)other priority:(CGFloat)priority;
 
 - (NSLayoutConstraint * _Nullable)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c;
 - (NSLayoutConstraint * _Nullable)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate;
 - (NSLayoutConstraint * _Nullable)lessOrEqualTo:(id _Nullable)other trim:(CGFloat)c;
 - (NSLayoutConstraint * _Nullable)lessOrEqualTo:(id _Nullable)other;
+- (NSLayoutConstraint * _Nullable)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c priority:(CGFloat)priority;
+- (NSLayoutConstraint * _Nullable)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate priority:(CGFloat)priority;
+- (NSLayoutConstraint * _Nullable)lessOrEqualTo:(id _Nullable)other trim:(CGFloat)c priority:(CGFloat)priority;
+- (NSLayoutConstraint * _Nullable)lessOrEqualTo:(id _Nullable)other priority:(CGFloat)priority;
 
 - (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c;
 - (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)multiplier;
 - (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other trim:(CGFloat)c;
 - (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other;
+- (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c priority:(CGFloat)priority;
+- (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)rate priority:(CGFloat)priority;
+- (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other trim:(CGFloat)c priority:(CGFloat)priority;
+- (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other priority:(CGFloat)priority;
 
-/// 复合属性Size处理函数
+#pragma - mark 复合构建约束 -
 - (NSArray <NSLayoutConstraint *> *)sizeWith:(id _Nullable)other;
 
-/// 复合属性Center处理函数
 - (NSArray <NSLayoutConstraint *> *)centerIn:(id _Nullable)other trim:(CGSize)trim;
 - (NSArray <NSLayoutConstraint *> *)centerIn:(id _Nullable)other;
 
-/// 符合属性Insert
 - (NSArray <NSLayoutConstraint *> *)insertIn:(id _Nonnull)other trim:(UIEdgeInsets)trim;
 - (NSArray <NSLayoutConstraint *> *)insertIn:(id _Nonnull)other;
+
+#pragma - mark -
 
 @end

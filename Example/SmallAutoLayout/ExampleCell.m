@@ -26,7 +26,6 @@
         [self setLabel:label];
 //        [self.contentView.insert$ insert:label trim:(UIEdgeInsetsMake(-10, -10, -10, -10))];
         [label.insert$ insertIn:self.contentView trim:(UIEdgeInsetsMake(10, 10, 10, 10))];
-        [label.top$ equalTo:self.contentView trim:30];
     }
     return self;
 }
