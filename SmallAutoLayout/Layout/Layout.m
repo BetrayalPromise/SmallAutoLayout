@@ -76,7 +76,7 @@ static inline NSSet * specialSet() {
     return [NSSet setWithObjects:@"safeAreaGuide$", @"topGuide$", @"bottomGuide$", nil];
 }
 
-- (NSLayoutConstraint *)make:(NSLayoutRelation)relation other:(id)other multiplier:(CGFloat)multiplier constant:(CGFloat)c {
+- (NSLayoutConstraint *)make:(NSLayoutRelation)relation other:(id)other multiplier:(CGFloat)multiplier constant:(CGFloat)c priority:(CGFloat)priority {
     NSAssert(self.mark != nil, @"First item's LayoutAttribute must be exit");
     NSLayoutAttribute attribute = [self findAttribute:self.mark];
     NSAssert(attribute != NSLayoutAttributeNotAnAttribute, @"First item's LayoutAttribute must be exit");
@@ -85,13 +85,13 @@ static inline NSSet * specialSet() {
         NSAssert(NO, @"%@没有缺省值", self.mark);
     }
     if (other == nil) {
-        return [self nilHandle:relation multiplier:multiplier c:c];
+        return [self nilHandle:relation multiplier:multiplier c:c priority:priority];
     } else if ([other isKindOfClass:[NSNumber class]]) {
-        return [self numberHandle:relation other:(NSNumber *)other c:c];
+        return [self numberHandle:relation other:(NSNumber *)other c:c priority:priority];
     } else if ([other isKindOfClass:[UIView class]]) {
-        return [self viewHandle:relation other:other multiplier:multiplier c:c];
+        return [self viewHandle:relation other:other multiplier:multiplier c:c priority:priority];
     } else if ([other isKindOfClass:[Layout class]]) {
-        return [self layouHandle:relation other:other multiplier:multiplier c:c];
+        return [self layouHandle:relation other:other multiplier:multiplier c:c priority:priority];
     } else {
         NSAssert(NO, @"Only Support nil, UIView, NSNumber");
         return nil;
@@ -99,7 +99,7 @@ static inline NSSet * specialSet() {
 }
 
 #pragma - mark 处理other为nil的情况
-- (NSLayoutConstraint *)nilHandle:(NSLayoutRelation)relation multiplier:(CGFloat)multiplier c:(CGFloat)c  {
+- (NSLayoutConstraint *)nilHandle:(NSLayoutRelation)relation multiplier:(CGFloat)multiplier c:(CGFloat)c priority:(CGFloat)priority {
     if ([self.layoutItem isKindOfClass:[UIViewController class]]) {
         NSAssert(NO, @"设置控制器的topLayoutGuide bottomLayoutGuide是不生效的");
         return nil;
@@ -109,6 +109,7 @@ static inline NSSet * specialSet() {
             if ([self.mark isEqualToString:@"width$"]) {
                 if (@available(iOS 11.0, *)) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
+                    constraint.priority = priority;
                     constraint.active = YES;
                     __weak typeof(constraint) weakConstraint = constraint;
                     [[(UIView *)self.layoutItem ownConstraints] addObject:weakConstraint];
@@ -120,6 +121,7 @@ static inline NSSet * specialSet() {
             } else if ([self.mark isEqualToString:@"height$"]) {
                 if (@available(iOS 11.0, *)) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
+                    constraint.priority = priority;
                     constraint.active = YES;
                     __weak typeof(constraint) weakConstraint = constraint;
                     [[(UIView *)self.layoutItem ownConstraints] addObject:weakConstraint];
@@ -136,12 +138,14 @@ static inline NSSet * specialSet() {
             //            处理非安全区
             if ([self.mark isEqualToString:@"width$"]) {
                 NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
+                constraint.priority = priority;
                 constraint.active = YES;
                 __weak typeof(constraint) weakConstraint = constraint;
                 [[(UIView *)self.layoutItem ownConstraints] addObject:weakConstraint];
                 return constraint;
             } else if ([self.mark isEqualToString:@"height$"]) {
                 NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:multiplier constant:c];
+                constraint.priority = priority;
                 constraint.active = YES;
                 __weak typeof(constraint) weakConstraint = constraint;
                 [[(UIView *)self.layoutItem ownConstraints] addObject:weakConstraint];
@@ -154,7 +158,7 @@ static inline NSSet * specialSet() {
     }
 }
 #pragma - mark 处理other为NSNumber的情况
-- (NSLayoutConstraint *)numberHandle:(NSLayoutRelation)relation other:(NSNumber *)other c:(CGFloat)c {
+- (NSLayoutConstraint *)numberHandle:(NSLayoutRelation)relation other:(NSNumber *)other c:(CGFloat)c priority:(CGFloat)priority {
     if ([self.layoutItem isKindOfClass:[UIViewController class]]) {
         NSAssert(NO, @"设置控制器的topLayoutGuide bottomLayoutGuide是不生效的");
         return nil;
@@ -163,6 +167,7 @@ static inline NSSet * specialSet() {
             if ([self.mark isEqualToString:@"width$"]) {
                 if (@available(iOS 11.0, *)) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
+                    constraint.priority = priority;
                     constraint.active = YES;
                     __weak typeof(constraint) weakConstraint = constraint;
                     [[(UIView *)self.layoutItem ownConstraints] addObject:weakConstraint];
@@ -174,6 +179,7 @@ static inline NSSet * specialSet() {
             } else if ([self.mark isEqualToString:@"height$"]) {
                 if (@available(iOS 11.0, *)) {
                     NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:[(UIView *)self.layoutItem safeAreaLayoutGuide] attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
+                    constraint.priority = priority;
                     constraint.active = YES;
                     __weak typeof(constraint) weakConstraint = constraint;
                     [[(UIView *)self.layoutItem ownConstraints] addObject:weakConstraint];
@@ -190,12 +196,14 @@ static inline NSSet * specialSet() {
             //            处理非安全区
             if ([self.mark isEqualToString:@"width$"]) {
                 NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeWidth) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
+                constraint.priority = priority;
                 constraint.active = YES;
                 __weak typeof(constraint) weakConstraint = constraint;
                 [[(UIView *)self.layoutItem ownConstraints] addObject:weakConstraint];
                 return constraint;
             } else if ([self.mark isEqualToString:@"height$"]) {
                 NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.layoutItem attribute:(NSLayoutAttributeHeight) relatedBy:(relation) toItem:nil attribute:(NSLayoutAttributeNotAnAttribute) multiplier:1.0 constant:[(NSNumber *)other floatValue] + c];
+                constraint.priority = priority;
                 constraint.active = YES;
                 __weak typeof(constraint) weakConstraint = constraint;
                 [[(UIView *)self.layoutItem ownConstraints] addObject:weakConstraint];
@@ -208,7 +216,7 @@ static inline NSSet * specialSet() {
     }
 }
 #pragma - mark 处理other为UIView的情况
-- (NSLayoutConstraint *)viewHandle:(NSLayoutRelation)relation other:(UIView *)other multiplier:(CGFloat)multiplier c:(CGFloat)c {
+- (NSLayoutConstraint *)viewHandle:(NSLayoutRelation)relation other:(UIView *)other multiplier:(CGFloat)multiplier c:(CGFloat)c priority:(CGFloat)priority {
     if ([self.layoutItem isKindOfClass:[UIViewController class]]) {
         UIViewController * item0 = self.layoutItem;
         NSLayoutAttribute attr0 = [self findAttribute:self.mark];
@@ -216,6 +224,7 @@ static inline NSSet * specialSet() {
         NSLayoutAttribute attr1 = attr0;
         if (self.topLayoutGuideFlag && !self.bottomLayoutGuideFlag) {
             NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.topLayoutGuide attribute:attr0 relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
+            constraint.priority = priority;
             constraint.active = YES;
             __weak typeof(constraint) weakConstraint = constraint;
             [[(UIView *)self.layoutItem ownConstraints] addObject:weakConstraint];
@@ -223,6 +232,7 @@ static inline NSSet * specialSet() {
             return constraint;
         } else if (!self.topLayoutGuideFlag && self.bottomLayoutGuideFlag) {
             NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.bottomLayoutGuide attribute:attr0 relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
+            constraint.priority = priority;
             constraint.active = YES;
             __weak typeof(constraint) weakConstraint = constraint;
             [[(UIView *)self.layoutItem ownConstraints] addObject:weakConstraint];
@@ -235,6 +245,7 @@ static inline NSSet * specialSet() {
     } else if ([self.layoutItem isKindOfClass:[UIView class]]) {
         if (@available(iOS 11.0, *)) {
             NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:self.safeAreaGuideFlag == YES ? [(UIView *)self.layoutItem safeAreaLayoutGuide] : self.layoutItem attribute:[self findAttribute:self.mark] relatedBy:(relation) toItem:other attribute:[self findAttribute:[self mark]] multiplier:multiplier constant:c];
+            constraint.priority = priority;
             constraint.active = YES;
             __weak typeof(constraint) weakConstraint = constraint;
             [[(UIView *)self.layoutItem ownConstraints] addObject:weakConstraint];
@@ -250,7 +261,7 @@ static inline NSSet * specialSet() {
     }
 }
 #pragma - mark 处理other为Layout的情况
-- (NSLayoutConstraint *)layouHandle:(NSLayoutRelation)relation other:(Layout *)other multiplier:(CGFloat)multiplier c:(CGFloat)c {
+- (NSLayoutConstraint *)layouHandle:(NSLayoutRelation)relation other:(Layout *)other multiplier:(CGFloat)multiplier c:(CGFloat)c priority:(CGFloat)priority {
     if ([self.layoutItem isKindOfClass:[UIView class]] && [[(Layout *)other layoutItem] isKindOfClass:[UIView class]]) {
         if (@available(iOS 11.0, *)) {
             id item0 = self.safeAreaGuideFlag == YES ? [(UIView *)self.layoutItem safeAreaLayoutGuide] : self.layoutItem;
@@ -258,6 +269,7 @@ static inline NSSet * specialSet() {
             NSLayoutAttribute attr0 = [self findAttribute:self.mark];
             NSLayoutAttribute attr1 = [self findAttribute:[(Layout *)other mark]] == NSLayoutAttributeNotAnAttribute ? attr0 : [self findAttribute:[(Layout *)other mark]];
             NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0 attribute:attr0 relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
+            constraint.priority = priority;
             constraint.active = YES;
             __weak typeof(constraint) weakConstraint = constraint;
             [[(UIView *)self.layoutItem ownConstraints] addObject:weakConstraint];
@@ -275,6 +287,7 @@ static inline NSSet * specialSet() {
             NSLayoutAttribute attr1 = [self findAttribute:[(Layout *)other mark]] == NSLayoutAttributeNotAnAttribute ? attr0 : [self findAttribute:[(Layout *)other mark]];
             if (self.topLayoutGuideFlag && !self.bottomLayoutGuideFlag) {
                 NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.topLayoutGuide attribute:(attr0) relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
+                constraint.priority = priority;
                 constraint.active = YES;
                 __weak typeof(constraint) weakConstraint = constraint;
                 [[(UIView *)self.layoutItem ownConstraints] addObject:weakConstraint];
@@ -282,6 +295,7 @@ static inline NSSet * specialSet() {
                 return constraint;
             } else if (!self.topLayoutGuideFlag && self.bottomLayoutGuideFlag) {
                 NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.bottomLayoutGuide attribute:(attr0) relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
+                constraint.priority = priority;
                 constraint.active = YES;
                 __weak typeof(constraint) weakConstraint = constraint;
                 [[(UIView *)self.layoutItem ownConstraints] addObject:weakConstraint];
@@ -303,6 +317,7 @@ static inline NSSet * specialSet() {
             NSLayoutAttribute attr1 = [self findAttribute:self.mark];
             if ([(Layout *)other topLayoutGuideFlag] && ![(Layout *)other bottomLayoutGuideFlag]) {
                 NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.topLayoutGuide attribute:(attr0) relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
+                constraint.priority = priority;
                 constraint.active = YES;
                 __weak typeof(constraint) weakConstraint = constraint;
                 [[(UIView *)self.layoutItem ownConstraints] addObject:weakConstraint];
@@ -310,6 +325,7 @@ static inline NSSet * specialSet() {
                 return constraint;
             } else if (![(Layout *)other topLayoutGuideFlag] && [(Layout *)other bottomLayoutGuideFlag]) {
                 NSLayoutConstraint * constraint = [NSLayoutConstraint constraintWithItem:item0.bottomLayoutGuide attribute:(attr0) relatedBy:(relation) toItem:item1 attribute:attr1 multiplier:multiplier constant:c];
+                constraint.priority = priority;
                 constraint.active = YES;
                 __weak typeof(constraint) weakConstraint = constraint;
                 [[(UIView *)self.layoutItem ownConstraints] addObject:weakConstraint];
@@ -623,51 +639,99 @@ static inline NSSet * specialSet() {
 }
 
 - (NSLayoutConstraint *)equalTo:(id)other rate:(CGFloat)rate trim:(CGFloat)c {
-    return [self make:(NSLayoutRelationEqual) other:other multiplier:rate constant:c];
+    return [self make:(NSLayoutRelationEqual) other:other multiplier:rate constant:c priority:1000];
 }
 
 - (NSLayoutConstraint *)equalTo:(id)other rate:(CGFloat)rate {
-    return [self make:(NSLayoutRelationEqual) other:other multiplier:rate constant:0.0];
+    return [self make:(NSLayoutRelationEqual) other:other multiplier:rate constant:0.0 priority:1000];
 }
 
 - (NSLayoutConstraint *)equalTo:(id)other trim:(CGFloat)c {
-    return [self make:(NSLayoutRelationEqual) other:other multiplier:1.0 constant:c];
+    return [self make:(NSLayoutRelationEqual) other:other multiplier:1.0 constant:c priority:1000];
 }
 
 - (NSLayoutConstraint *)equalTo:(id)other {
-    return [self make:(NSLayoutRelationEqual) other:other multiplier:1.0 constant:0.0];
+    return [self make:(NSLayoutRelationEqual) other:other multiplier:1.0 constant:0.0 priority:1000];
+}
+
+- (NSLayoutConstraint * _Nullable)equalTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c priority:(CGFloat)priority {
+    return [self make:NSLayoutRelationEqual other:other multiplier:rate constant:c priority:priority];
+}
+
+- (NSLayoutConstraint * _Nullable)equalTo:(id _Nullable)other rate:(CGFloat)rate priority:(CGFloat)priority {
+    return [self make:NSLayoutRelationEqual other:other multiplier:rate constant:0.0 priority:priority];
+}
+
+- (NSLayoutConstraint * _Nullable)equalTo:(id _Nullable)other trim:(CGFloat)c priority:(CGFloat)priority {
+    return [self make:NSLayoutRelationEqual other:other multiplier:1.0 constant:c priority:priority];
+}
+
+- (NSLayoutConstraint * _Nullable)equalTo:(id _Nullable)other priority:(CGFloat)priority {
+    return [self make:NSLayoutRelationEqual other:other multiplier:1.0 constant:0.0 priority:priority];
 }
 
 - (NSLayoutConstraint *)lessOrEqualTo:(id)other rate:(CGFloat)rate trim:(CGFloat)c {
-    return [self make:(NSLayoutRelationLessThanOrEqual) other:other multiplier:rate constant:c];
+    return [self make:(NSLayoutRelationLessThanOrEqual) other:other multiplier:rate constant:c priority:1000];
 }
 
 - (NSLayoutConstraint *)lessOrEqualTo:(id)other rate:(CGFloat)rate {
-    return [self make:NSLayoutRelationLessThanOrEqual other:other multiplier:rate constant:0.0];
+    return [self make:NSLayoutRelationLessThanOrEqual other:other multiplier:rate constant:0.0 priority:1000];
 }
 
 - (NSLayoutConstraint *)lessOrEqualTo:(id)other trim:(CGFloat)c {
-    return [self make:(NSLayoutRelationLessThanOrEqual) other:other multiplier:1.0 constant:c];
+    return [self make:(NSLayoutRelationLessThanOrEqual) other:other multiplier:1.0 constant:c priority:1000];
 }
 
 - (NSLayoutConstraint *)lessOrEqualTo:(id)other {
-    return [self make:NSLayoutRelationLessThanOrEqual other:other multiplier:1.0 constant:0.0];
+    return [self make:NSLayoutRelationLessThanOrEqual other:other multiplier:1.0 constant:0.0 priority:1000];
+}
+
+- (NSLayoutConstraint * _Nullable)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c priority:(CGFloat)priority {
+    return [self make:(NSLayoutRelationLessThanOrEqual) other:other multiplier:rate constant:c priority:priority];
+}
+
+- (NSLayoutConstraint * _Nullable)lessOrEqualTo:(id _Nullable)other rate:(CGFloat)rate priority:(CGFloat)priority {
+    return [self make:(NSLayoutRelationLessThanOrEqual) other:other multiplier:rate constant:0.0 priority:priority];
+}
+
+- (NSLayoutConstraint * _Nullable)lessOrEqualTo:(id _Nullable)other trim:(CGFloat)c priority:(CGFloat)priority {
+    return [self make:(NSLayoutRelationLessThanOrEqual) other:other multiplier:1.0 constant:c priority:priority];
+}
+
+- (NSLayoutConstraint * _Nullable)lessOrEqualTo:(id _Nullable)other priority:(CGFloat)priority {
+    return [self make:(NSLayoutRelationLessThanOrEqual) other:other multiplier:1.0 constant:0.0 priority:priority];
 }
 
 - (NSLayoutConstraint *)greaterOrEqualTo:(id)other rate:(CGFloat)rate trim:(CGFloat)c {
-    return [self make:(NSLayoutRelationGreaterThanOrEqual) other:other multiplier:rate constant:c];
+    return [self make:(NSLayoutRelationGreaterThanOrEqual) other:other multiplier:rate constant:c priority:1000];
 }
 
 - (NSLayoutConstraint *)greaterOrEqualTo:(id)other rate:(CGFloat)rate {
-    return [self make:(NSLayoutRelationGreaterThanOrEqual) other:other multiplier:rate constant:0.0];
+    return [self make:(NSLayoutRelationGreaterThanOrEqual) other:other multiplier:rate constant:0.0 priority:1000];
 }
 
 - (NSLayoutConstraint *)greaterOrEqualTo:(id)other trim:(CGFloat)c {
-    return [self make:NSLayoutRelationGreaterThanOrEqual other:other multiplier:1.0 constant:c];
+    return [self make:NSLayoutRelationGreaterThanOrEqual other:other multiplier:1.0 constant:c priority:1000];
 }
 
 - (NSLayoutConstraint *)greaterOrEqualTo:(id)other {
-    return [self make:NSLayoutRelationGreaterThanOrEqual other:other multiplier:1.0 constant:0.0];
+    return [self make:NSLayoutRelationGreaterThanOrEqual other:other multiplier:1.0 constant:0.0 priority:1000];
+}
+
+- (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)rate trim:(CGFloat)c priority:(CGFloat)priority {
+    return [self make:(NSLayoutRelationGreaterThanOrEqual) other:other multiplier:rate constant:c priority:priority];
+}
+
+- (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other rate:(CGFloat)rate priority:(CGFloat)priority {
+    return [self make:(NSLayoutRelationGreaterThanOrEqual) other:other multiplier:rate constant:0.0 priority:priority];
+}
+
+- (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other trim:(CGFloat)c priority:(CGFloat)priority {
+    return [self make:(NSLayoutRelationGreaterThanOrEqual) other:other multiplier:1.0 constant:c priority:priority];
+}
+
+- (NSLayoutConstraint * _Nullable)greaterOrEqualTo:(id _Nullable)other priority:(CGFloat)priority {
+    return [self make:(NSLayoutRelationGreaterThanOrEqual) other:other multiplier:1.0 constant:0.0 priority:priority];
 }
 
 - (NSArray <NSLayoutConstraint *> *)sizeWith:(id _Nullable)other {
