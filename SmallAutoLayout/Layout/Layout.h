@@ -87,13 +87,17 @@
 
 #pragma - mark 复合构建约束 -
 - (NSArray <NSLayoutConstraint *> *)sizeWith:(id _Nullable)other;
+- (NSArray <NSLayoutConstraint *> *)sizeWith:(id _Nullable)other priority:(CGFloat)priority;
 
 - (NSArray <NSLayoutConstraint *> *)centerIn:(id _Nullable)other trim:(CGSize)trim;
 - (NSArray <NSLayoutConstraint *> *)centerIn:(id _Nullable)other;
+- (NSArray <NSLayoutConstraint *> *)centerIn:(id _Nullable)other trim:(CGSize)trim priority:(CGFloat)priority;
+- (NSArray <NSLayoutConstraint *> *)centerIn:(id _Nullable)other priority:(CGFloat)priority;
 
 - (NSArray <NSLayoutConstraint *> *)insertIn:(id _Nonnull)other trim:(UIEdgeInsets)trim;
 - (NSArray <NSLayoutConstraint *> *)insertIn:(id _Nonnull)other;
-
+- (NSArray <NSLayoutConstraint *> *)insertIn:(id _Nonnull)other trim:(UIEdgeInsets)trim priority:(CGFloat)priority;
+- (NSArray <NSLayoutConstraint *> *)insertIn:(id _Nonnull)other priority:(CGFloat)priority;
 #pragma - mark -
 
 @end

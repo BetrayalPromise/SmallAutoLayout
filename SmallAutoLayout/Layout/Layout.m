@@ -735,12 +735,16 @@ static inline NSSet * specialSet() {
 }
 
 - (NSArray <NSLayoutConstraint *> *)sizeWith:(id _Nullable)other {
+    return [self sizeWith:other priority:1000];
+}
+
+- (NSArray <NSLayoutConstraint *> *)sizeWith:(id _Nullable)other priority:(CGFloat)priority {
     if (self.safeAreaGuideFlag) {
         UIView * item = self.layoutItem;
         if ([other isKindOfClass:[UIView class]]) {
             if (@available(iOS 11.0, *)) {
-                NSLayoutConstraint * w = [item.safeAreaGuide$.width$ equalTo:other];
-                NSLayoutConstraint * h = [item.safeAreaGuide$.height$ equalTo:other];
+                NSLayoutConstraint * w = [item.safeAreaGuide$.width$ equalTo:other priority:priority];
+                NSLayoutConstraint * h = [item.safeAreaGuide$.height$ equalTo:other priority:priority];
                 return [NSArray arrayWithObjects:w, h, nil];
             } else {
                 NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
@@ -748,8 +752,8 @@ static inline NSSet * specialSet() {
             }
         } else if ([other isKindOfClass:[self class]]) {
             if (@available(iOS 11.0, *)) {
-                NSLayoutConstraint * w = [item.safeAreaGuide$.width$ equalTo:[(Layout *)other width$]];
-                NSLayoutConstraint * h = [item.safeAreaGuide$.height$ equalTo:[(Layout *)other height$]];
+                NSLayoutConstraint * w = [item.safeAreaGuide$.width$ equalTo:[(Layout *)other width$] priority:priority];
+                NSLayoutConstraint * h = [item.safeAreaGuide$.height$ equalTo:[(Layout *)other height$] priority:priority];
                 return [NSArray arrayWithObjects:w, h, nil];
             } else {
                 NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
@@ -758,8 +762,8 @@ static inline NSSet * specialSet() {
         } else if ([other isKindOfClass:[NSValue class]]) {
             CGSize size = [other CGSizeValue];
             if (@available(iOS 11.0, *)) {
-                NSLayoutConstraint * w = [item.safeAreaGuide$.width$ equalTo:@(size.width)];
-                NSLayoutConstraint * h = [item.safeAreaGuide$.height$ equalTo:@(size.height)];
+                NSLayoutConstraint * w = [item.safeAreaGuide$.width$ equalTo:@(size.width) priority:priority];
+                NSLayoutConstraint * h = [item.safeAreaGuide$.height$ equalTo:@(size.height) priority:priority];
                 return [NSArray arrayWithObjects:w, h, nil];
             } else {
                 NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
@@ -770,17 +774,17 @@ static inline NSSet * specialSet() {
         }
     } else {
         if ([other isKindOfClass:[UIView class]]) {
-            NSLayoutConstraint * w = [self.width$ equalTo:other];
-            NSLayoutConstraint * h = [self.height$ equalTo:other];
+            NSLayoutConstraint * w = [self.width$ equalTo:other priority:priority];
+            NSLayoutConstraint * h = [self.height$ equalTo:other priority:priority];
             return [NSArray arrayWithObjects:w, h, nil];
         } else if ([other isKindOfClass:[self class]]) {
-            NSLayoutConstraint * w = [self.width$ equalTo:[(Layout *)other width$]];
-            NSLayoutConstraint * h = [self.height$ equalTo:[(Layout *)other height$]];
+            NSLayoutConstraint * w = [self.width$ equalTo:[(Layout *)other width$] priority:priority];
+            NSLayoutConstraint * h = [self.height$ equalTo:[(Layout *)other height$] priority:priority] ;
             return [NSArray arrayWithObjects:w, h, nil];
         } else if ([other isKindOfClass:[NSValue class]]) {
             CGSize size = [other CGSizeValue];
-            NSLayoutConstraint * w = [self.width$ equalTo:@(size.width)];
-            NSLayoutConstraint * h = [self.height$ equalTo:@(size.height)];
+            NSLayoutConstraint * w = [self.width$ equalTo:@(size.width) priority:priority];
+            NSLayoutConstraint * h = [self.height$ equalTo:@(size.height) priority:priority];
             return [NSArray arrayWithObjects:w, h, nil];
         } else {
             return nil;
@@ -789,12 +793,16 @@ static inline NSSet * specialSet() {
 }
 
 - (NSArray <NSLayoutConstraint *> *)centerIn:(id _Nullable)other trim:(CGSize)trim {
+    return [self centerIn:other trim:trim priority:1000];
+}
+
+- (NSArray <NSLayoutConstraint *> *)centerIn:(id _Nullable)other trim:(CGSize)trim priority:(CGFloat)priority {
     if (self.safeAreaGuideFlag) {
         UIView * item = self.layoutItem;
         if ([other isKindOfClass:[UIView class]]) {
             if (@available(iOS 11.0, *)) {
-                NSLayoutConstraint * x = [item.safeAreaGuide$.centerX$ equalTo:other trim:trim.height];
-                NSLayoutConstraint * y = [item.safeAreaGuide$.centerY$ equalTo:other trim:trim.width];
+                NSLayoutConstraint * x = [item.safeAreaGuide$.centerX$ equalTo:other trim:trim.height priority:priority];
+                NSLayoutConstraint * y = [item.safeAreaGuide$.centerY$ equalTo:other trim:trim.width priority:priority];
                 return [NSArray arrayWithObjects:x, y, nil];
             } else {
                 NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
@@ -802,8 +810,8 @@ static inline NSSet * specialSet() {
             }
         } else if ([other isKindOfClass:[self class]]) {
             if (@available(iOS 11.0, *)) {
-                NSLayoutConstraint * x = [item.safeAreaGuide$.centerX$ equalTo:[(Layout *)other centerX$] trim:trim.width];
-                NSLayoutConstraint * y = [item.safeAreaGuide$.centerY$ equalTo:[(Layout *)other centerY$] trim:trim.height];
+                NSLayoutConstraint * x = [item.safeAreaGuide$.centerX$ equalTo:[(Layout *)other centerX$] trim:trim.width priority:priority];
+                NSLayoutConstraint * y = [item.safeAreaGuide$.centerY$ equalTo:[(Layout *)other centerY$] trim:trim.height priority:priority];
                 return [NSArray arrayWithObjects:x, y, nil];
             } else {
                 NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
@@ -812,8 +820,8 @@ static inline NSSet * specialSet() {
         } else if ([other isKindOfClass:[NSValue class]]) {
             CGSize size = [other CGSizeValue];
             if (@available(iOS 11.0, *)) {
-                NSLayoutConstraint * x = [item.safeAreaGuide$.centerX$ equalTo:@(size.height) trim:trim.height];
-                NSLayoutConstraint * y = [item.safeAreaGuide$.centerY$ equalTo:@(size.width) trim:trim.width];
+                NSLayoutConstraint * x = [item.safeAreaGuide$.centerX$ equalTo:@(size.height) trim:trim.height priority:priority];
+                NSLayoutConstraint * y = [item.safeAreaGuide$.centerY$ equalTo:@(size.width) trim:trim.width priority:priority];
                 return [NSArray arrayWithObjects:x, y, nil];
             } else {
                 NSAssert(NO, @"安全区API需要系统版本为11.0及其以上才可使用");
@@ -825,17 +833,17 @@ static inline NSSet * specialSet() {
         }
     } else {
         if ([other isKindOfClass:[UIView class]]) {
-            NSLayoutConstraint * x = [self.centerX$ equalTo:other trim:trim.height];
-            NSLayoutConstraint * y = [self.centerY$ equalTo:other trim:trim.width];
+            NSLayoutConstraint * x = [self.centerX$ equalTo:other trim:trim.height priority:priority];
+            NSLayoutConstraint * y = [self.centerY$ equalTo:other trim:trim.width priority:priority];
             return [NSArray arrayWithObjects:x, y, nil];
         } else if ([other isKindOfClass:[self class]]) {
-            NSLayoutConstraint * x = [self.centerX$ equalTo:[(Layout *)other centerX$] trim:trim.width];
-            NSLayoutConstraint * y = [self.centerY$ equalTo:[(Layout *)other centerY$] trim:trim.height];
+            NSLayoutConstraint * x = [self.centerX$ equalTo:[(Layout *)other centerX$] trim:trim.width priority:priority];
+            NSLayoutConstraint * y = [self.centerY$ equalTo:[(Layout *)other centerY$] trim:trim.height priority:priority];
             return [NSArray arrayWithObjects:x, y, nil];
         } else if ([other isKindOfClass:[NSValue class]]) {
             CGSize size = [other CGSizeValue];
-            NSLayoutConstraint * x = [self.centerX$ equalTo:@(size.height) trim:trim.height];
-            NSLayoutConstraint * y = [self.centerY$ equalTo:@(size.width) trim:trim.width];
+            NSLayoutConstraint * x = [self.centerX$ equalTo:@(size.height) trim:trim.height priority:priority];
+            NSLayoutConstraint * y = [self.centerY$ equalTo:@(size.width) trim:trim.width priority:priority];
             return [NSArray arrayWithObjects:x, y, nil];
         }  else {
             NSAssert(NO, @"parameter must be (UIView | Layout) type");
@@ -848,30 +856,42 @@ static inline NSSet * specialSet() {
     return [self centerIn:other trim:(CGSizeZero)];
 }
 
+- (NSArray <NSLayoutConstraint *> *)centerIn:(id _Nullable)other priority:(CGFloat)priority {
+    return [self centerIn:other trim:CGSizeZero priority:priority];
+}
+
 - (NSArray <NSLayoutConstraint *> *)insertIn:(id _Nonnull)other trim:(UIEdgeInsets)trim {
+    return [self insertIn:other trim:trim priority:1000];
+}
+
+- (NSArray <NSLayoutConstraint *> *)insertIn:(id _Nonnull)other {
+    return [self insertIn:other trim:(UIEdgeInsetsZero)];
+}
+
+- (NSArray <NSLayoutConstraint *> *)insertIn:(id _Nonnull)other trim:(UIEdgeInsets)trim priority:(CGFloat)priority {
     if (self.safeAreaGuideFlag) {
         UIView * item = self.layoutItem;
         if (@available(iOS 11.0, *)) {
-            NSLayoutConstraint * top = [item.safeAreaGuide$.top$ equalTo:other trim:trim.top];
-            NSLayoutConstraint * left = [item.safeAreaGuide$.left$ equalTo:other trim:trim.left];
-            NSLayoutConstraint * bottom = [item.safeAreaGuide$.bottom$ equalTo:other trim:-trim.bottom];
-            NSLayoutConstraint * right = [item.safeAreaGuide$.right$ equalTo:other trim:-trim.right];
+            NSLayoutConstraint * top = [item.safeAreaGuide$.top$ equalTo:other trim:trim.top priority:priority];
+            NSLayoutConstraint * left = [item.safeAreaGuide$.left$ equalTo:other trim:trim.left priority:priority];
+            NSLayoutConstraint * bottom = [item.safeAreaGuide$.bottom$ equalTo:other trim:-trim.bottom priority:priority];
+            NSLayoutConstraint * right = [item.safeAreaGuide$.right$ equalTo:other trim:-trim.right priority:priority];
             return [NSArray arrayWithObjects:top, left, bottom, right, nil];
         } else {
             NSAssert(NO, @"parameter must be (UIView | Layout) type");
             return nil;
         }
     } else {
-        NSLayoutConstraint * top = [self.top$ equalTo:other trim:trim.top];
-        NSLayoutConstraint * left = [self.left$ equalTo:other trim:trim.left];
-        NSLayoutConstraint * bottom = [self.bottom$ equalTo:other trim:-trim.bottom];
-        NSLayoutConstraint * right = [self.right$ equalTo:other trim:-trim.right];
+        NSLayoutConstraint * top = [self.top$ equalTo:other trim:trim.top priority:priority];
+        NSLayoutConstraint * left = [self.left$ equalTo:other trim:trim.left priority:priority];
+        NSLayoutConstraint * bottom = [self.bottom$ equalTo:other trim:-trim.bottom priority:priority];
+        NSLayoutConstraint * right = [self.right$ equalTo:other trim:-trim.right priority:priority];
         return [NSArray arrayWithObjects:top, left, bottom, right, nil];
     }
 }
 
-- (NSArray <NSLayoutConstraint *> *)insertIn:(id _Nonnull)other {
-    return [self insertIn:other trim:(UIEdgeInsetsZero)];
+- (NSArray <NSLayoutConstraint *> *)insertIn:(id _Nonnull)other priority:(CGFloat)priority {
+    return [self insertIn:other trim:(UIEdgeInsetsZero) priority:priority];
 }
 
 @end
